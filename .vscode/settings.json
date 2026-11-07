@@ -1,0 +1,53 @@
+{
+  // New chats start with manual permissions: never Allow all or Autopilot for this work.
+  "chat.permissions.default": "default",
+  "chat.tools.global.autoApprove": false,
+
+  // VS Code shows every agent edit and waits for your approval. That approval is how you
+  // agree to what the modernization-guide writes in docs/. To skip the prompts for docs/
+  // only, add  "docs/**": true  here.
+  "chat.tools.edits.autoApprove": {
+    "**/*": false
+  },
+
+  // Ask before every terminal command (only the structure-scaffolder has a terminal).
+  "chat.tools.terminal.enableAutoApprove": false,
+
+  // Never auto-accept pending edits after a countdown, and show which files changed.
+  "chat.editing.autoAcceptDelay": 0,
+  "chat.checkpoints.showFileChanges": true,
+
+  // The /mod-... commands are agent skills.
+  "chat.useAgentSkills": true,
+
+  // Discovery runs many code-scout calls in one turn. Raise the per-turn request limit so it
+  // doesn't stop with "Continue?". If VS Code shows this as a user-only setting, set it in
+  // your user settings instead.
+  "chat.agent.maxRequests": 60,
+
+  // Show the nested legacy/ and modern/ repositories in Source Control.
+  "git.autoRepositoryDetection": true,
+  "git.repositoryScanMaxDepth": 1,
+
+  // Keep build output and binaries out of search, so agents read less.
+  "search.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/target": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/out": true,
+    "**/node_modules": true,
+    "**/packages": true,
+    "**/vendor": true,
+    "**/__pycache__": true,
+    "**/.gradle": true,
+    "**/.vs": true,
+    "**/.idea": true,
+    "**/*.dll": true,
+    "**/*.exe": true,
+    "**/*.pdb": true,
+    "**/*.jar": true,
+    "**/*.class": true
+  }
+}

@@ -1,0 +1,9 @@
+# Client repositories: separate Git repos nested in the workspace, never part of the kit
+/legacy/
+/modern/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
