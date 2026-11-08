@@ -7,10 +7,10 @@ disable-model-invocation: true
 
 # /mod-legacy-report — Explain the legacy system
 
-**Requires agent: `guide`.** Under another agent, stop and ask the developer to switch.
+**Requires agent: `Guide`.** Under another agent, stop and ask the developer to switch.
 
 Explain the system to a developer who doesn't know it, from what `docs/` records. Never ask
-the developer anything, never read `legacy/` and never call a scout: what the records don't
+the developer anything, never read `legacy/` and never call a Scout: what the records don't
 hold goes under Pending analysis. (Outside this command, the developer can ask you to look
 in the code.)
 
@@ -160,7 +160,7 @@ first.
 | Components without Technology ✓ or Dependencies ✓, or with retries left | `system.md § Discovery progress` | `/mod-discover` |
 | Binary sources (Readability `binary`) | component files | export the text under `legacy/`, then `/mod-discover <component>` |
 | Unresolved links (target `? <hint>`) | `system.md § Dependencies` | the question that names it |
-| OPEN questions | `questions.md` | answer them to the guide in chat |
-| What discovery doesn't record: business rules, data schemas, screens, runtime behaviour | — | ask the guide about the component; it reads the code |
+| OPEN questions | `questions.md` | answer them to the Guide in chat |
+| What discovery doesn't record: business rules, data schemas, screens, runtime behaviour | — | ask the Guide about the component; it reads the code |
 
 The last row explains why features and flows are inferred. Always include it.

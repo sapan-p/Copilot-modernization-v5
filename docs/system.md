@@ -4,7 +4,7 @@
 
 ## Architecture in brief
 
-_Not discovered yet. Select the **guide** and run `/mod-discover`._
+_Not discovered yet. Select the **Guide** and run `/mod-discover`._
 
 ## Components
 

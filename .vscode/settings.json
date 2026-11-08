@@ -4,13 +4,13 @@
   "chat.tools.global.autoApprove": false,
 
   // VS Code shows every agent edit and waits for your approval. That approval is how you
-  // agree to what the guide writes in docs/. To skip the prompts for docs/
+  // agree to what the Guide writes in docs/. To skip the prompts for docs/
   // only, add  "docs/**": true  here.
   "chat.tools.edits.autoApprove": {
     "**/*": false
   },
 
-  // Ask before every terminal command (only the scaffolder has a terminal).
+  // Ask before every terminal command (only the Scaffolder has a terminal).
   "chat.tools.terminal.enableAutoApprove": false,
 
   // Never auto-accept pending edits after a countdown, and show which files changed.
@@ -20,7 +20,7 @@
   // The /mod-... commands are agent skills.
   "chat.useAgentSkills": true,
 
-  // Discovery runs many scout calls in one turn. Raise the per-turn request limit so it
+  // Discovery runs many Scout calls in one turn. Raise the per-turn request limit so it
   // doesn't stop with "Continue?". If VS Code shows this as a user-only setting, set it in
   // your user settings instead.
   "chat.agent.maxRequests": 60,

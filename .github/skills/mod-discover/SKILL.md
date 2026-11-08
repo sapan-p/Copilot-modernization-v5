@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # /mod-discover — Components, technologies and dependencies
 
-**Requires agent: `guide`.** Under another agent, stop and ask the developer to
+**Requires agent: `Guide`.** Under another agent, stop and ask the developer to
 switch.
 
 **You lead.** Never ask the developer anything during this command. Write `docs/` as you go.
@@ -31,13 +31,13 @@ README)".
 
 ## Step 1 — Components
 
-**a. Census.** One scout brief over all of `legacy/`:
+**a. Census.** One Scout brief over all of `legacy/`:
 - LOOK FOR: every marker in technology-signals.md § 1 Markers;
 - RETURN: `folder | marker files | count`.
 
 For a very large repository, split it by top-level folder (at most 3 briefs in parallel).
 
-**b. Decide the components** (your reasoning, no scout):
+**b. Decide the components** (your reasoning, no Scout):
 - each project is a component: a .NET project, an Access or Excel VBA file (or its text
   export), a VB6 project, a database project or SQL script set, an SSIS or report project,
   a web front-end package, or a folder of scripts or jobs that runs as one unit;
@@ -126,16 +126,16 @@ the other components' side (risk if wrong: H)".
 ## Never loop, never stop
 
 - Each unknown gets up to **three** retries, automatically. Never ask the developer whether
-  to retry. Each retry is a new scout brief that changes the approach: narrower folders,
+  to retry. Each retry is a new Scout brief that changes the approach: narrower folders,
   other patterns, the other side of the link. Unknowns that share a folder can share one
   retry brief. Still unknown after the third retry → a question with a working assumption →
   the next item.
-- Retries count toward the run's scout calls. If the run's calls run out while an unknown
+- Retries count toward the run's Scout calls. If the run's calls run out while an unknown
   still has retries left, note it and its retries left in § Discovery progress; the next
   run picks it up.
-- A scout report with something under "Not covered" gets one follow-up brief. What still
+- A Scout report with something under "Not covered" gets one follow-up brief. What still
   doesn't fit waits for the next run.
-- About 15 scout calls per run at most. When you reach that, write what you have, update
+- About 15 Scout calls per run at most. When you reach that, write what you have, update
   § Discovery progress, and end with the chat summary.
 - Never ask the developer, and never wait for an answer.
 
