@@ -90,7 +90,7 @@ replacing the previous one. It starts with:
    in 3–6 sentences.
 4. **Projects and the dependency tree:**
    - the components table: component · kind · technology and version · layer · entry point
-     · tests · readability;
+     · tests · readability · suggested approach;
    - the layered dependency graph, and the text tree from `system.md`;
    - the most used components (fan-in) and the ones that depend on the most (fan-out);
    - each cycle in plain words: its members, and why it matters.
@@ -107,7 +107,7 @@ replacing the previous one. It starts with:
    shares as producer → path → consumer; schedules and CLI launches; then the integration
    diagram.
 8. **Features and flows:** capabilities per component (inferred from what it exposes, its
-   entry points and its forms, views or controllers), as a mindmap when there are 3 or more
+   entry points and its forms, views or controllers, and the file roles in § Files), as a mindmap when there are 3 or more
    components; then 1–3 key end-to-end flows as sequence diagrams, picked from chains that
    cross several components or resources (a scheduler starts an exe that reads a share and
    writes the database).
@@ -137,6 +137,7 @@ For `<component>`, from its file and the rows of `system.md` that name it:
 - the neighbourhood diagram: what it depends on, what uses it, and its resources;
 - the data and files it reads and writes;
 - its layer, any cycle it's in, its modernization signals and its open questions;
+- its suggested approach and why, and its logic-heavy files (§ Suggested approach, § Files);
 - where to start reading its code.
 
 ## Flow
@@ -158,9 +159,10 @@ first.
 | Check | Found in | Close with |
 |---|---|---|
 | Components without Technology ✓ or Dependencies ✓, or with retries left | `system.md § Discovery progress` | `/mod-discover` |
+| Components without a deep pass (Deep not ✓) | `system.md § Discovery progress` | `/mod-discover-comp` |
 | Binary sources (Readability `binary`) | component files | export the text under `legacy/`, then `/mod-discover <component>` |
 | Unresolved links (target `? <hint>`) | `system.md § Dependencies` | the question that names it |
 | OPEN questions | `questions.md` | answer them to the Guide in chat |
-| What discovery doesn't record: business rules, data schemas, screens, runtime behaviour | — | ask the Guide about the component; it reads the code |
+| What discovery doesn't record: business rules, data schemas, screens, runtime behaviour | — | `/mod-discover-comp <component> "<what>"` |
 
 The last row explains why features and flows are inferred. Always include it.

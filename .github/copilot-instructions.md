@@ -10,7 +10,8 @@ build, one component at a time.
 - `modern/`: the new code and its tests.
 - `docs/`: what we know, written by the `Guide`:
   - `system.md`: the whole solution on one page. Read it first;
-  - `components/<component>.md`: one self-contained file per component;
+  - `components/<component>.md`: one self-contained file per component, with its files and
+    suggested approach once `/mod-discover-comp` has read it;
   - `questions.md`: the question bank;
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per
     component;

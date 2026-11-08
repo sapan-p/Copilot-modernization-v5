@@ -16,6 +16,7 @@ modernizing it piece by piece.
 | Command | Agent | What it does |
 |---|---|---|
 | `/mod-discover` | Guide | Finds every component and its technology, then every dependency between them, and writes `docs/`. Run it again to continue a large repo; `/mod-discover <component>` redoes one component |
+| `/mod-discover-comp` | Guide | Deep discovery, one component at a time: reads every file, finds what `/mod-discover` missed (wrapped or runtime-built links, DFS and shares, queues, external executables and CLI calls, dynamic SQL), maps where the logic lives and what blocks a port, and suggests an approach: Port, Rewrite, Split or Keep. Nothing continues with the next component; `/mod-discover-comp <component> "<what>"` runs any focused analysis you ask for |
 | `/mod-legacy-report` | Guide | Explains the system in detail, with diagrams: what it's for, projects and the dependency tree, technologies and support status, data, integrations, features and flows, risks, where to start, and what's still pending. With no argument it writes `docs/legacy-report.md`; a topic (`summary`, `tech`, `data`…), a component, `flow "<process>"` or a question is answered in chat |
 | `/mod-modern-report` | Guide | Explains the migration in detail, with diagrams: what the new system is for, its target, the plan of execution, progress per component and wave, how old and new run side by side, risks, what's pending and the next steps. Before anything is planned it suggests a plan from the legacy layers. With no argument it writes `docs/modern-report.md`; a topic (`target`, `plan`, `progress`…), a component, `wave <n>`, `flow "<process>"` or a question is answered in chat |
 
@@ -32,7 +33,10 @@ code .
 In Copilot Chat, select **Guide** and type `/mod-discover`. It doesn't ask you
 anything: approve its edits to `docs/` as they come.
 
-Then run `/mod-legacy-report` and open `docs/legacy-report.md` in Markdown preview
+Then run `/mod-discover-comp` until every component has a suggested approach. Each run
+reads the next components file by file.
+
+Run `/mod-legacy-report` and open `docs/legacy-report.md` in Markdown preview
 (Ctrl+Shift+V) to see the whole system with its diagrams. It works any time, even while
 discovery is still going.
 
@@ -48,7 +52,9 @@ you want to see the progress.
   components and their technologies, shared resources (databases, shares, queues), every
   dependency, a dependency graph and tree, and layers for slicing the modernization.
 - `docs/components/<component>.md`: one self-contained file per component, so you can pick
-  any one and work on it alone.
+  any one and work on it alone. After `/mod-discover-comp` it also holds its files, where
+  the logic lives, and a suggested approach (Port, Rewrite, Split or Keep) with its
+  reasons.
 - `docs/questions.md`: everything the code couldn't tell, each with a working assumption.
   Answer them whenever you can; the work never waits.
 - `docs/legacy-report.md`: the system explained for a newcomer, with Mermaid diagrams,

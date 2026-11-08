@@ -10,8 +10,11 @@ _Not discovered yet. Select the **Guide** and run `/mod-discover`._
 
 One file per component in [components/](components/).
 
-| Component | Kind | Technology | Path | Layer |
-|---|---|---|---|---|
+| Component | Kind | Technology | Path | Layer | Approach |
+|---|---|---|---|---|---|
+
+Approach: suggested by `/mod-discover-comp` (Port · Rewrite · Split · Keep, with its
+confidence); decided in [modern.md](modern.md).
 
 ## Resources
 
@@ -57,5 +60,5 @@ through shared resources don't count here; they are hotspots.
 
 ## Discovery progress
 
-| Component | Technology | Dependencies | Notes |
-|---|---|---|---|
+| Component | Technology | Dependencies | Deep | Notes |
+|---|---|---|---|---|

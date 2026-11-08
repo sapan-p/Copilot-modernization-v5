@@ -136,6 +136,8 @@ Only when § Plan is empty. Built from `system.md § Layers`, § Cycles and § H
 - then leaf first: lower layers before the components that depend on them, 3–6 components
   per wave;
 - the members of a cycle move in the same wave;
+- a Port component can move early; a Rewrite or Split one needs its logic specified
+  first, so give it room in its wave (the approach from `system.md § Components`);
 - a resource written by several components needs its side-by-side approach decided before
   its first writer moves.
 
@@ -145,6 +147,8 @@ Give each wave its components, why now, and a suggested "done when".
 
 For `<component>` (a legacy component, or a modern part named in § Progress):
 - what it does (from its component file), and what replaces it;
+- its suggested approach (§ Suggested approach), and whether a decision in `modern.md`
+  confirms it;
 - its status, evidence and wave, and whether it's ready or blocked, and by what;
 - the neighbourhood diagram, coloured by status;
 - the decisions that affect it, how it runs side by side with legacy, and its open questions;
@@ -166,6 +170,8 @@ row per item: what's missing · why it helps · what to tell the Guide.
 | Check | Example of what to tell the Guide |
 |---|---|
 | Target areas without a decision | "Data stays on SQL Server, because…" |
+| Components without a suggested approach | run `/mod-discover-comp <component>` |
+| Suggested approaches not decided yet | "orders-core: port, as suggested" |
 | Legacy components in no wave, or with no modern part | "orders-winforms goes in wave 2, as `modern/src/Orders.Web`" |
 | Waves without "side by side" or "done when" | "Wave 1 is done when the new pricing API serves the web app in test" |
 | Built or live without evidence | "orders-core tests passed today, 42 of 42" |
