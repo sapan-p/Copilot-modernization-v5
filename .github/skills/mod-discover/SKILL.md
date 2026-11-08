@@ -120,8 +120,8 @@ the other components' side (risk if wrong: H)".
 - the architecture in 4–6 plain sentences;
 - counts: components by kind, links by mechanism group, resources, layers, cycles;
 - the H-risk questions (at most 5) and the total open;
-- what's next: "`/mod-discover` continues with <what>", or "Discovery complete: pick a
-  component to deep-dive".
+- what's next: "`/mod-discover` continues with <what>", or "Discovery complete:
+  `/mod-legacy-report` explains the whole system".
 
 ## Never loop, never stop
 

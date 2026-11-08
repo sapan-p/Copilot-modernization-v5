@@ -16,6 +16,7 @@ modernizing it piece by piece.
 | Command | Agent | What it does |
 |---|---|---|
 | `/mod-discover` | guide | Finds every component and its technology, then every dependency between them, and writes `docs/`. Run it again to continue a large repo; `/mod-discover <component>` redoes one component |
+| `/mod-legacy-report` | guide | Explains the system in detail, with diagrams: what it's for, projects and the dependency tree, technologies and support status, data, integrations, features and flows, risks, where to start, and what's still pending. With no argument it writes `docs/legacy-report.md`; a topic (`summary`, `tech`, `data`…), a component, `flow "<process>"` or a question is answered in chat |
 
 ## Start
 
@@ -30,6 +31,10 @@ code .
 In Copilot Chat, select **guide** and type `/mod-discover`. It doesn't ask you
 anything: approve its edits to `docs/` as they come.
 
+Then run `/mod-legacy-report` and open `docs/legacy-report.md` in Markdown preview
+(Ctrl+Shift+V) to see the whole system with its diagrams. It works any time, even while
+discovery is still going.
+
 ## What you get
 
 - `docs/system.md`: the solution on one page. The architecture in plain words, the
@@ -39,6 +44,8 @@ anything: approve its edits to `docs/` as they come.
   any one and work on it alone.
 - `docs/questions.md`: everything the code couldn't tell, each with a working assumption.
   Answer them whenever you can; the work never waits.
+- `docs/legacy-report.md`: the system explained for a newcomer, with Mermaid diagrams,
+  from `/mod-legacy-report`.
 
 ## Sources Copilot can't read
 
@@ -52,7 +59,7 @@ example VBA modules and queries) anywhere under `legacy/`, then run `/mod-discov
 ```text
 <project>-workspace/
 ├── .github/      3 agents · skills (/mod-… commands) · instructions
-├── docs/         system.md · components/ · questions.md
+├── docs/         system.md · components/ · questions.md · legacy-report.md
 ├── legacy/       the legacy repo (separate Git repo; read-only for agents)
 └── modern/       the new code (separate Git repo)
 ```

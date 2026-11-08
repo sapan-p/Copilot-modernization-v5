@@ -11,7 +11,9 @@ build, one component at a time.
 - `docs/`: what we know, written by the `guide`:
   - `system.md`: the whole solution on one page. Read it first;
   - `components/<component>.md`: one self-contained file per component;
-  - `questions.md`: the question bank.
+  - `questions.md`: the question bank;
+  - `legacy-report.md`: the system explained in detail, with diagrams.
+    `/mod-legacy-report` regenerates it; never edit it by hand.
 
 Search only the folders a request needs.
 
