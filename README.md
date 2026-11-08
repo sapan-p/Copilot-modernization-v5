@@ -7,15 +7,15 @@ modernizing it piece by piece.
 
 | Agent | Role |
 |---|---|
-| **modernization-guide** | Leads. Decides what to look at, reasons over what's found, explains it, and keeps `docs/` |
-| **code-scout** | Reads the legacy code fast and cheaply for the Guide, and reports facts with citations |
-| **structure-scaffolder** | Builds the new system, only inside `modern/` |
+| **guide** | Leads. Decides what to look at, reasons over what's found, explains it, and keeps `docs/` |
+| **scout** | Reads the legacy code fast and cheaply for the Guide, and reports facts with citations |
+| **scaffolder** | Builds the new system, only inside `modern/` |
 
 ## Commands
 
 | Command | Agent | What it does |
 |---|---|---|
-| `/mod-discover` | modernization-guide | Finds every component and its technology, then every dependency between them, and writes `docs/`. Run it again to continue a large repo; `/mod-discover <component>` redoes one component |
+| `/mod-discover` | guide | Finds every component and its technology, then every dependency between them, and writes `docs/`. Run it again to continue a large repo; `/mod-discover <component>` redoes one component |
 
 ## Start
 
@@ -27,7 +27,7 @@ git clone <new-code repo url> modern     # or: mkdir modern
 code .
 ```
 
-In Copilot Chat, select **modernization-guide** and type `/mod-discover`. It doesn't ask you
+In Copilot Chat, select **guide** and type `/mod-discover`. It doesn't ask you
 anything: approve its edits to `docs/` as they come.
 
 ## What you get

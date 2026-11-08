@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # /mod-discover — Components, technologies and dependencies
 
-**Requires agent: `modernization-guide`.** Under another agent, stop and ask the developer to
+**Requires agent: `guide`.** Under another agent, stop and ask the developer to
 switch.
 
 **You lead.** Never ask the developer anything during this command. Write `docs/` as you go.

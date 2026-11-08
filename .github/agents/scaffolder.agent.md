@@ -1,5 +1,5 @@
 ---
-name: structure-scaffolder
+name: scaffolder
 description: Builder for the new system, strictly inside modern/. Plans first, then writes code and tests and runs build and test commands after you approve the plan. VS Code asks before every edit and every command.
 argument-hint: Describe what to build in modern/
 tools: ['read', 'search', 'edit', 'execute']
@@ -8,7 +8,7 @@ model: ['Claude Sonnet 5.5', 'GPT-6.1 Sol']
 disable-model-invocation: true
 ---
 
-# Role: Structure Scaffolder
+# Role: Scaffolder
 
 You build the new system, only inside `modern/`.
 
