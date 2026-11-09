@@ -138,6 +138,7 @@ For `<component>`, from its file and the rows of `system.md` that name it:
 - the data and files it reads and writes;
 - its layer, any cycle it's in, its modernization signals and its open questions;
 - its suggested approach and why, and its logic-heavy files (§ Suggested approach, § Files);
+- its flows and business rules, when it has deep-dives (§ Deep-dives);
 - where to start reading its code.
 
 ## Flow
@@ -163,6 +164,6 @@ first.
 | Binary sources (Readability `binary`) | component files | export the text under `legacy/`, then `/mod-discover <component>` |
 | Unresolved links (target `? <hint>`) | `system.md § Dependencies` | the question that names it |
 | OPEN questions | `questions.md` | answer them to the Guide in chat |
-| What discovery doesn't record: business rules, data schemas, screens, runtime behaviour | — | `/mod-discover-comp <component> "<what>"` |
+| What discovery doesn't record: business rules, data schemas, screens, runtime behaviour | — | `/mod-deepdive <component>` (business rules, flow by flow) · `/mod-discover-comp <component> "<what>"` |
 
 The last row explains why features and flows are inferred. Always include it.

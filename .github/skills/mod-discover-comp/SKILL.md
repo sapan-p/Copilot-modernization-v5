@@ -29,7 +29,8 @@ that isn't a component: list the 3 closest names and stop.
 
 - The component's file in `docs/components/`, and its rows in `docs/system.md`.
 - The OPEN questions in `docs/questions.md`, so you don't log duplicates.
-- `docs/modern.md § Target and decisions`: the approach depends on the target.
+- `docs/target.md` (draft or accepted) and `docs/modern.md § Target and decisions`: the
+  approach depends on the target.
 - [deep-signals.md](deep-signals.md), and the mechanisms in
   [communication-catalog.md](../mod-discover/communication-catalog.md).
 
@@ -76,7 +77,7 @@ A Scout report with something under "Not covered" gets one follow-up brief. Each
 
 ## 4. Suggest the approach
 
-Use the target in `docs/modern.md`. With no target decided, assume the closest supported
+Use the target in `docs/target.md` or `docs/modern.md`. With no target chosen yet, assume the closest supported
 stack for the same kind (.NET Framework → .NET 10, desktop stays desktop, web → ASP.NET
 Core, VBA / VB6 / Access → C# on .NET 10), say so, and log it as a question once for the
 whole bank (§ Unknowns become questions).
@@ -120,7 +121,7 @@ As soon as a component is checked:
 - the suggested approach, its confidence, the 2–3 reasons, and the blocker count;
 - the logic-heavy files (top 3), and the new questions, H first;
 - next: "`/mod-discover-comp` continues with `<component>`", or "Every component has a suggested
-  approach".
+  approach: `/mod-deepdive <component>` plans its migration".
 
 ## Focused analysis
 

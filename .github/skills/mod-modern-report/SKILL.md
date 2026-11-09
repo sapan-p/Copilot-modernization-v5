@@ -41,7 +41,10 @@ A chat answer ends with the next step it affects and the information it lacked (
 
 ## Read
 
-- `docs/modern.md`, `docs/system.md`, and the OPEN rows of `docs/questions.md`.
+- `docs/modern.md`, `docs/target.md`, `docs/system.md`, and the OPEN rows of
+  `docs/questions.md`.
+- The deep-dive plans in `docs/deepdive/` (their Status columns) for the components in
+  scope.
 - The component files a section needs (search across `docs/components/` for the rows you
   need when there are more than about 15).
 - [diagrams.md](diagrams.md) and the rules in
@@ -60,7 +63,8 @@ Each mismatch is a pending row: "tell the Guide to correct § Progress".
 
 - **Records first.** Every fact comes from `docs/` (or the check above) and keeps its
   evidence. Never mark progress the records don't show.
-- **Decided or suggested.** What `modern.md` holds is decided. Anything you propose (a
+- **Decided or suggested.** What `modern.md` and an ACCEPTED `target.md` hold is decided;
+  a DRAFT target is shown as a draft. Anything you propose (a
   plan, a next step, a target option) is marked **SUGGESTED** and is never written into
   `modern.md`. The developer adopts it by telling the Guide ("use the suggested plan").
 - **Rests on a question:** a statement that depends on an OPEN question ends with
@@ -78,10 +82,12 @@ Each mismatch is a pending row: "tell the Guide to correct § Progress".
   recorded in § Plan.
 - **Blocked:** not ready, or one of its H-risk questions is OPEN. Say by what.
 - **Next steps,** first match wins:
-  1. no target decisions → decide the target, area by area;
+  1. no accepted target or solution → `/mod-target <your stack>`, or accept the draft;
   2. no plan → agree a plan (the suggested one, or your own);
   3. components that are building → finish them;
-  4. ready components of the current wave (the lowest wave not done), lowest layer first;
+  4. ready components of the current wave (the lowest wave not done), lowest layer first:
+     with no deep-dive plan → `/mod-deepdive <component>`; with one → its next step for
+     the Scaffolder;
   5. the next wave's foundation work, then its ready components.
 
 ## The full report
@@ -101,15 +107,17 @@ replacing the previous one. It starts with:
    the last 5 updates from § Progress.
 2. **What the new system is for:** what the legacy system does (from `system.md § Architecture
    in brief`), what the new one replaces and keeps, and why (from the decisions).
-3. **Target:** the decisions by area; the areas still undecided; the target architecture
-   diagram.
+3. **Target:** the stack by layer from `target.md` (and its status), the verdict and
+   complexity counts, the capability gaps, the other decisions, the areas still undecided,
+   and the target architecture diagram.
 4. **Plan of execution:**
    - the waves table with a progress bar per wave, "why now" and "done when"; the gantt when
      the waves have dates;
    - the migration map;
    - no plan recorded → a **SUGGESTED** plan (below) and the decisions it needs.
 5. **Progress made:** one row per component: status · modern part · evidence · ready or
-   blocked by what; built and live first. Then the mismatches with `modern/`.
+   blocked by what; plan steps done of total when it has a deep-dive plan; built and live
+   first. Then the mismatches with `modern/`.
 6. **Coexistence:** what still runs on legacy, the bridges between old and new (a shared
    database written by both, adapters, facades) and the coexistence diagram for the 1–2
    flows most affected.
@@ -147,9 +155,9 @@ Give each wave its components, why now, and a suggested "done when".
 
 For `<component>` (a legacy component, or a modern part named in § Progress):
 - what it does (from its component file), and what replaces it;
-- its suggested approach (§ Suggested approach), and whether a decision in `modern.md`
-  confirms it;
+- its suggested approach, and its verdict and complexity in `target.md § 6`;
 - its status, evidence and wave, and whether it's ready or blocked, and by what;
+- its deep-dive plan, and the steps done of total;
 - the neighbourhood diagram, coloured by status;
 - the decisions that affect it, how it runs side by side with legacy, and its open questions;
 - its next step.
@@ -169,8 +177,9 @@ row per item: what's missing · why it helps · what to tell the Guide.
 
 | Check | Example of what to tell the Guide |
 |---|---|
-| Target areas without a decision | "Data stays on SQL Server, because…" |
+| No accepted target, or layers `undecided` in it | run `/mod-target`, or answer its questions |
 | Components without a suggested approach | run `/mod-discover-comp <component>` |
+| Components in the current wave without a deep-dive plan | run `/mod-deepdive <component>` |
 | Suggested approaches not decided yet | "orders-core: port, as suggested" |
 | Legacy components in no wave, or with no modern part | "orders-winforms goes in wave 2, as `modern/src/Orders.Web`" |
 | Waves without "side by side" or "done when" | "Wave 1 is done when the new pricing API serves the web app in test" |

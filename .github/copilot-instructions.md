@@ -13,6 +13,8 @@ build, one component at a time.
   - `components/<component>.md`: one self-contained file per component, with its files and
     suggested approach once `/mod-discover-comp` has read it;
   - `questions.md`: the question bank;
+  - `target.md`: the target stack and feasibility plan, accepted by the developer;
+  - `deepdive/<component>….md`: the migration plans the Scaffolder builds from;
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per
     component;
   - `legacy-report.md` and `modern-report.md`: the legacy system and the migration
