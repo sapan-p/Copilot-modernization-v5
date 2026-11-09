@@ -111,7 +111,8 @@ On a change, update the plan, show only what changed, and ask again. Without the
 2. Run restore, build and test. Quote the lines of output that show the result.
 3. A failure: fix it inside `modern/` and run again, at most three focused attempts. Still
    failing → stop and report it with the output; never weaken a test or skip a project.
-4. Skeleton only: no business logic, no data access, no code copied from legacy.
+4. Skeleton only: no business logic, no data access, no code copied from legacy. Comment
+   the stubs as `.github/instructions/modern-code.instructions.md` says.
 5. `git -C modern status` (read-only) to show what changed.
 
 ## 6. Finish and record

@@ -43,7 +43,8 @@ With more than about 15 components, search across `docs/components/` for the lin
 (`**Plan:**`, the § Order of work rows) rather than reading every file.
 
 **Check against `modern/`** (file search only): a component's project in `modern/` the
-records show as not started; the modern files of a step not marked done (unrecorded work).
+records show as not started; the modern files of a step not marked done (unrecorded work);
+and the markers in each component's code, counted by kind (search `\b(TODO|RECHECK|BLOCKED|WAITS)\(`).
 
 ## 1. Stages and next actions
 
@@ -70,8 +71,9 @@ A component can also be:
   (`system.md § Dependencies`) that isn't built, live or kept and isn't reached through an
   adapter in `modern.md § Plan`; an item's Needs; an OPEN H-risk question; a parked
   (`partial`) step. Say by what, and what unblocks it;
-- **in need of attention:** steps marked `re-check` or `partial`, unrecorded work in
-  `modern/`, or records that don't match `modern/`.
+- **in need of attention:** steps marked `re-check` or `partial`, markers in its code
+  (`BLOCKED` and `RECHECK` first), unrecorded work in `modern/`, or records that don't
+  match `modern/`.
 
 **Ready:** not yet building, and not blocked.
 

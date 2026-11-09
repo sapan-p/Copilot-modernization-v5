@@ -65,10 +65,11 @@ and put what you find first in § 2:
   tests), then review it (§ 5) like a new step;
 - **your own edits:** changed files of accepted steps. Run their tests, and offer to record
   them as a rework by the developer;
-- **answered:** a `TODO(Q-###)` marker whose question is now ANSWERED, or a step marked
-  `re-check: Q-### answered`. Offer a follow-up (a rework): apply the answer to the code
+- **answered:** a marker naming a question that's now ANSWERED (`TODO`, `RECHECK` or
+  `BLOCKED` with its `Q-###`), or a step marked `re-check: Q-### answered`. Offer a follow-up (a rework): apply the answer to the code
   and its tests, and remove the marker;
-- **no longer waiting:** a component or step under **Waits for** that's now built. Offer a
+- **no longer waiting:** a component or step under **Waits for**, or named by a `WAITS`
+  marker, that's now built. Offer a
   follow-up that switches to it.
 
 ## 2. The next step
@@ -102,7 +103,7 @@ Show, from the plan and the recipe:
 - **the changes or the design,** as the recipe says;
 - **the tests, written first:** ported, planned (with their IDs) and added. Every expected
   value comes from the legacy code, cited, or as the plan works it out. List the `run legacy`
-  ones for the developer to confirm on a legacy run;
+  ones for the developer to confirm on a legacy run (each gets a `RECHECK` marker);
 - **packages:** only those `skeleton.md` records, or one the developer chooses now (2–4
   options, ★ first with its reason, and its licence);
 - **commands,** each starting with `Set-Location "<workspace>/modern/…";`: the build, this
@@ -116,8 +117,11 @@ ask again. Without the tool, ask "Reply `run`, or say what to change, or `cancel
 ## 4. Build (only after Run plan)
 
 1. Build the step as its recipe says, tests first.
-2. Where the code rests on a question, add `TODO(Q-###): <working assumption>` in the target
-   language's comment syntax.
+2. **Comment as you write,** as [modern-code.instructions.md](../../instructions/modern-code.instructions.md) says: a header on each new
+   file, a comment where each rule is enforced, where legacy behaviour is kept on purpose,
+   and where the port or a decision changed something, a comment on each test, and a
+   marker with its ID wherever something is unresolved (`TODO`, `RECHECK`, `BLOCKED`,
+   `WAITS`).
 3. **Build and test:** the build, this step's tests, then the whole test projects, so nothing
    built earlier breaks. Quote the lines that show each result.
 4. **A failing test:** fix the code, never the test. At most three focused attempts; then
@@ -133,7 +137,8 @@ Nothing is recorded yet. Show:
 - the tests: passed and failed by kind, quoting the lines;
 - what the recipe adds to the review;
 - the questions it rests on, the new ones with their working assumptions; for a `partial`
-  step, what's left.
+  step, what's left;
+- the markers added and removed, each with what makes it go away.
 
 Then ask with `askQuestions` (header "Review"):
 - **Accept the changes** (★ when every test passes);
@@ -164,6 +169,7 @@ For callers:  <project file · namespace (was <legacy>) · what changed for call
 Waits for:    <component or step: how it's reached until it's built | —>
 Choices:      <implementation details chosen, and why | —>
 Questions:    <each new question as a row in questions.md's columns; an existing one: Q-### + this component | —>
+Markers:      <added: TODO(Q-031), WAITS(orders-core) · removed: RECHECK(F02-T6) | —>
 Progress:     <k> of <n> items done · <item>: <k> of <n> steps | component built: every item done, the whole test projects pass (<n> tests)
 ```
 
@@ -232,7 +238,8 @@ Then ask with `askQuestions` (header "Stuck"):
   `Pricing.cs:38` does";
 - **another fix,** when there is one;
 - **Keep it as a decision,** when the difference is acceptable (a behaviour change, § 7);
-- **Park it:** a question with the evidence, the step `partial`, and on to the next ready step;
+- **Park it:** a question with the evidence, the step `partial`, a `BLOCKED(Q-###)` marker
+  where the code stops, and on to the next ready step;
 - **Re-plan:** `/mod-deepdive <component> change "<what>"`.
 
 A fix the developer chooses is their decision, not a loop. Without the tool, number the

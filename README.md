@@ -101,6 +101,10 @@ what's done in plain words ("orders-core is built, all tests pass") and it recor
   (the map, how each file moves, the order of work), `port.md` (port steps and unit tests),
   `flows/01-<flow>/` (`logic.md`, `sdd.md`, `tdd.md`) and `screens/01-<screen>.md`, only
   the ones the component needs.
+- In `modern/`, code commented with where it came from, the rules it enforces and what was
+  kept from legacy on purpose, plus a marker wherever something is unresolved: `TODO(Q-###)`,
+  `RECHECK(…)`, `BLOCKED(…)`, `WAITS(…)`. Find them all with the regex search
+  `\b(TODO|RECHECK|BLOCKED|WAITS)\(`.
 
 ## Sources Copilot can't read
 

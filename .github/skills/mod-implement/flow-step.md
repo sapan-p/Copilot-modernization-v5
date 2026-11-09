@@ -46,7 +46,9 @@ flow in a chat; after that, its build steps as a table.
    test asserts too little) and report it. Strengthen a test that asserts too little; never
    weaken one.
 2. **Green:** write the code that makes them pass, following the design. Where a rule is
-   enforced, a short comment names it by its flow ID (`// F02-R3: credit limit`).
+   enforced, a comment names it by its flow ID, in business words, with its legacy line
+   (`// F02-R3: over the credit limit → ON HOLD (legacy OrderService.cs:88)`), as
+   [modern-code.instructions.md](../../instructions/modern-code.instructions.md) says.
 3. **Tidy up:** with the tests green, remove duplication and make the names say what the rules
    say. The behaviour doesn't change; run the tests again.
 

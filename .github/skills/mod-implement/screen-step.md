@@ -35,7 +35,9 @@ another component's screens `outside`
 ## Build (§ 4)
 
 Rebuild the screen the target's own way: never translate UI code line by line, and never
-leave a business rule only in the UI.
+leave a business rule only in the UI. Comment it in its markup's own syntax (`@* *@`,
+`<!-- -->`), as [modern-code.instructions.md](../../instructions/modern-code.instructions.md)
+says: which legacy screen it rebuilds, and which backend piece each action calls.
 
 ## Review (§ 5)
 

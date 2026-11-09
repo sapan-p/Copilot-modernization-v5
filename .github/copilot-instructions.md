@@ -7,7 +7,8 @@ build, one component at a time.
 ## Layout
 
 - `legacy/`: the legacy repository. Read-only for every agent.
-- `modern/`: the new code and its tests.
+- `modern/`: the new code and its tests, commented as
+  `.github/instructions/modern-code.instructions.md` says.
 - `docs/`: what we know, written by the `Guide`:
   - `system.md`: the whole solution on one page. Read it first;
   - `components/<component>/`: one folder per component, everything about it in one place:

@@ -52,7 +52,10 @@ wait on it, each with its status, one subgraph per level, following the
 ## Build (§ 4)
 
 1. **Tests first:** write the ported, planned and added tests.
-2. **Port the files** with exactly the planned changes.
+2. **Port the files** with exactly the planned changes. Comment them as
+   [modern-code.instructions.md](../../instructions/modern-code.instructions.md) says: a
+   header naming the legacy file and the step, a `Port change` comment at each change, and a
+   `Kept from legacy` comment where odd-looking code stays as it is.
 3. **A failing test:** compare the modern lines with the legacy lines they came from, and fix
    the port.
 

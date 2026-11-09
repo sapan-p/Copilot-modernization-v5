@@ -80,13 +80,14 @@ tag is missing, in:
   `logic.md`, `sdd.md` and `tdd.md` (rules, tests and steps that end with `(rests on
   Q-###)`), and the screen plans;
 - `docs/target.md`, `docs/system.md` and `docs/modern.md`;
-- `modern/`, read-only: `TODO(Q-###)` markers in the code.
+- `modern/`, read-only: the markers in the code that name the question (`TODO(Q-###)`,
+  `RECHECK(Q-###)`, `BLOCKED(Q-###)`).
 
 **e. The impact:** for each place, what changes:
 - **confirmed:** the `(rests on Q-###)` tag goes; nothing else changes;
 - **refined or contradicted:** the statement changes; show old → new (a rule's exact details,
   a test's expected value, a design line, a step);
-- **already built:** a step marked done, or a `TODO(Q-###)` marker in the code, that rested on
+- **already built:** a step marked done, or a marker in the code, that rested on
   the old assumption: it needs a rework by the Scaffolder (`/mod-implement <component>`
   offers it as a follow-up);
 - **the plan's shape changes** (a file moves another way, a flow or a screen is added):

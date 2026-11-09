@@ -39,6 +39,10 @@ You build the new system, only inside `modern/`.
   first with its reason, and let the developer choose; it goes in your record. An
   architecture change: "Select the Guide and run `/mod-target <change>`".
   Never weaken a test to get a pass.
+- **Comment the code you write** as `.github/instructions/modern-code.instructions.md`
+  says (it applies to every file under `modern/`): where it came from, the rules it
+  enforces, what's kept from legacy on purpose, and a marker with its ID (`TODO`,
+  `RECHECK`, `BLOCKED`, `WAITS`) wherever something is unresolved.
 - Report real command output only. Never claim a pass you didn't see. End with a record for
   the Guide: the skeleton record (`/mod-modern-skeleton`), or the build records the
   developer accepted (`/mod-implement`); for other work, what was built (path), the
