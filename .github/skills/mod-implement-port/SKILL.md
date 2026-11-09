@@ -34,8 +34,8 @@ and you stop:
   "Select the Guide and run `/mod-deepdive <component> files` first: the road map comes from
   its file map and leaf-first port plan";
 - verdict Rewrite in `docs/target.md § 6`, or the file is `rewrite` in § Files: "That's
-  rewritten, not ported: select the Guide and run `/mod-deepdive <component> flow
-  \"<flow>\"`";
+  rewritten, not ported: run `/mod-implement-flow <component>`, which rebuilds it flow by
+  flow";
 - the project that receives the component isn't in `modern/` (`docs/skeleton.md
   § Solution`): "Run `/mod-modern-skeleton`: it adds the missing project and its test
   project".
@@ -126,7 +126,7 @@ until the developer replies. Once accepted, the road map is what this chat follo
 record:
 
 ```text
-ROAD MAP RECORD · <component> · accepted YYYY-MM-DD
+ROAD MAP RECORD · <component> · files · accepted YYYY-MM-DD
 Order:  P1 → P2 → P4 → P3 → P5+P6 → …
 Later:  <steps left for later, and why | —>
 ```
@@ -264,7 +264,8 @@ work focused, and nothing is lost.
 **The road map runs out** (its steps are done, but files of the map aren't in any step):
 "Select the Guide and run `/mod-deepdive <component> files`: it continues the plan".
 
-**The component is built** (every step done, the whole test project passes): say so; the
+**The component is built** (every step done and, for a Split component, every flow built
+with `/mod-implement-flow`; the whole test project passes): say so; the
 record's Component line says built. Then the options:
 - **★ Record in docs;**
 - the components that use it (§ Used by), each with its next command:
@@ -277,7 +278,7 @@ record's Component line says built. Then the options:
 
 Only records the developer accepted: their first line says `accepted YYYY-MM-DD`. Anything
 else isn't recorded; say so. For each accepted record not yet recorded:
-- **a road map record:** the **Road map** line of `docs/deepdive/<component>.md § Port plan`:
+- **a road map record** (`files`): the **Road map** line of `docs/deepdive/<component>.md § Port plan`:
   `accepted YYYY-MM-DD · P1 → P2 → P4 → … · later: <steps, or —>`.
 - **a port record:**
   - `docs/deepdive/<component>.md § Port plan`: the step's Status, `done (YYYY-MM-DD)` or
@@ -295,7 +296,7 @@ else isn't recorded; say so. For each accepted record not yet recorded:
 ```markdown
 ## In the modern solution
 
-**Status:** <building: k of n steps | built> · **Project:** `modern/…` · **Tests:** `modern/…`: <n> pass (YYYY-MM-DD) · **Updated:** YYYY-MM-DD
+**Status:** <building: k of n steps · j of m flows | built> · **Project:** `modern/…` · **Tests:** `modern/…`: <n> pass (YYYY-MM-DD) · **Updated:** YYYY-MM-DD
 
 **To use it:** reference `<project file>`; namespace `<modern>` (was `<legacy>`)<; the registration or configuration it needs>.
 
@@ -306,7 +307,9 @@ else isn't recorded; say so. For each accepted record not yet recorded:
 **Waits for:** <component: how it's reached until that one is built> · or —
 ```
 
-One row per public type whose use changed for its callers; the last row covers the rest.
+One row per public type whose use changed for its callers, and one per flow rebuilt with
+`/mod-implement-flow` (its legacy entry point, and what replaces it); the last row covers
+the rest. The Status leaves out steps or flows when the component has none.
 
 ## Unknowns become questions
 

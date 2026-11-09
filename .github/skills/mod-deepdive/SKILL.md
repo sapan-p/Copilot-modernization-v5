@@ -167,8 +167,8 @@ the design, tests and build steps to the same file.
 - **Chat summary** (not saved; at most 15 lines): what was written, the counts (flows, files
   by level, steps, rules, tests), the rules that disagree or look like defects, the new
   questions (H first), and the next step: a port plan → "select the Scaffolder and run
-  `/mod-implement-port <component>`"; a flow → "the Scaffolder builds from
-  `docs/deepdive/<file>`"; or what continues this plan.
+  `/mod-implement-port <component>`"; a flow → "select the Scaffolder and run
+  `/mod-implement-flow <component>`"; or what continues this plan.
 
 ## Unknowns become questions
 

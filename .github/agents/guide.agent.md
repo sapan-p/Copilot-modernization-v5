@@ -84,10 +84,10 @@ deep-dive mode, the next step.
   one in the chat that isn't recorded yet:
   - a skeleton record: write `docs/skeleton.md` from it, in its sections. `target.md`
     stays as accepted; the differences are listed in `skeleton.md`;
-  - a road map or port record: as
+  - a road map, port or flow record, only when its first line says `accepted`: as
     [/mod-implement-port § What the Guide records](../skills/mod-implement-port/SKILL.md#what-the-guide-records)
-    says, and only when its first line says `accepted`: the road map, the step's status,
-    the new questions, the component's § In the modern solution and
-    `docs/modern.md § Progress`;
-  - a plan step: mark it `done (YYYY-MM-DD)` in its `docs/deepdive/` file, and update
-    `docs/modern.md § Progress`.
+    and
+    [/mod-implement-flow § What the Guide records](../skills/mod-implement-flow/SKILL.md#what-the-guide-records)
+    say: the road map, the step's status, the new questions, the component's § In the
+    modern solution and `docs/modern.md § Progress`;
+  - other work reported built: `docs/modern.md § Progress`, with its evidence.

@@ -27,6 +27,8 @@ Add § Deep-dives after § Suggested approach if it isn't there, with one line p
 | Flow | Trigger | Start file | Files (start → leaves) | Data and external calls | Plan |
 |---|---|---|---|---|---|
 
+**Flow road map:** —
+
 ## File map
 
 <the file map diagram>
@@ -60,6 +62,9 @@ with `/mod-implement-port <component>`.
 - **Step:** `P0` (the new project and test project, when needed), then `P1`, `P2`…
 - **Changes:** the blockers and their replacements, the project and namespace changes.
 - **Needs:** earlier steps, other components (ported, or still referenced as they are), fakes.
+- **Flow road map:** the order of the flows the developer accepted in `/mod-implement-flow`:
+  `accepted YYYY-MM-DD · "<flow>" → "<flow>" (B1 → B3 → B2) → … · later: <flows, or —>`,
+  set by the Guide.
 - **Road map:** the order of the steps the developer accepted in `/mod-implement-port`:
   `accepted YYYY-MM-DD · P1 → P2 → P4 → … · later: <steps, or —>`, set by the Guide.
 - **Status:** `to do` · `done (YYYY-MM-DD)` · `partial (YYYY-MM-DD): <what's left>
@@ -126,7 +131,8 @@ zones, culture and number formats, null or empty, ordering, collation>
 
 ## Build steps
 
-Tests first: each step writes its tests, then the code that makes them pass.
+Tests first: each step writes its tests, then the code that makes them pass. The Scaffolder
+builds them with `/mod-implement-flow <component> "<flow>"`.
 
 | Step | What to build (in `modern/`) | Tests | Needs | Status |
 |---|---|---|---|---|
