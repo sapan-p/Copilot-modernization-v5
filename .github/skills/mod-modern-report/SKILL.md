@@ -1,6 +1,6 @@
 ---
 name: mod-modern-report
-description: "Any time. Explains the migration to the new system in detail, with Mermaid diagrams: what the new system is for, its target, the plan of execution, the progress made, how old and new run side by side, what's pending and what to do next. Before anything is planned it suggests a plan from the legacy layers, and it always names the information that's still missing. With no argument it writes the whole picture to docs/modern-report.md; a topic, a component, a wave, a flow or a question is answered in chat. Reads docs/ and checks it against modern/."
+description: "Any time. Explains the migration to the new system in detail, with Mermaid diagrams: what the new system is for, its target, the plan of execution, the progress made, how old and new run side by side, what's pending and what to do next. Before anything is planned it suggests a plan from the legacy layers, and it always names the information that's still missing. With no argument it writes the whole picture to docs/reports/modern-report.md; a topic, a component, a wave, a flow or a question is answered in chat. Reads docs/ and checks it against modern/."
 argument-hint: "nothing = full report · summary · target · plan · progress · coexistence · pending · risks · <component> · wave <n> · flow \"<process>\" · \"<question>\""
 disable-model-invocation: true
 ---
@@ -24,7 +24,7 @@ nor a component name is a question.
 
 | Argument | What you give | Where |
 |---|---|---|
-| nothing or `all` | Sections 1–9 | `docs/modern-report.md`, then the chat summary |
+| nothing or `all` | Sections 1–9 | `docs/reports/modern-report.md`, then the chat summary |
 | `summary` | Section 1 and the next steps, about one screen | chat |
 | `target` | Sections 2–3 | chat |
 | `plan` | Section 4 | chat |
@@ -43,8 +43,8 @@ A chat answer ends with the next step it affects and the information it lacked (
 
 - `docs/modern.md`, `docs/target.md`, `docs/skeleton.md`, `docs/system.md`, and the OPEN
   rows of `docs/questions.md`.
-- The deep-dive plans in `docs/deepdive/` (their Status columns) for the components in
-  scope.
+- The deep-dive plans in each component's folder (`deepdive.md § Order of work`, its
+  statuses) for the components in scope.
 - The component files a section needs (search across `docs/components/` for the rows you
   need when there are more than about 15). Their § In the modern solution says what's
   ported, how other components use it, and what it still waits for.
@@ -88,16 +88,15 @@ Each mismatch is a pending row: "tell the Guide to correct § Progress".
   3. no plan → agree a plan (the suggested one, or your own);
   4. components that are building → finish them;
   5. ready components of the current wave (the lowest wave not done), lowest layer first:
-     with no deep-dive plan → `/mod-deepdive <component>`; with a port plan → Scaffolder:
-     `/mod-implement-port <component>`; with a flow plan → Scaffolder:
-     `/mod-implement-flow <component>`; with screens to rebuild → Scaffolder:
-     `/mod-implement-ui <component>`;
+     with no accepted deep-dive plan → `/mod-deepdive <component>`; with one →
+     Scaffolder: `/mod-implement <component>`;
   6. the next wave's foundation work, then its ready components.
 
 ## The full report
 
-`docs/modern-report.md` is generated: write it whole in one edit at the end of the run,
-replacing the previous one. It starts with:
+`docs/reports/modern-report.md` is generated: write it whole in one edit at the end of the
+run, replacing the previous one. Its links start from `docs/reports/`: `../modern.md`,
+`../components/<component>/component.md`. It starts with:
 
 ```markdown
 # <system name, or "The new system"> — migration report
@@ -129,12 +128,13 @@ replacing the previous one. It starts with:
    - the next 3–5 steps in order (§ Derived facts), each with who does it and its command or
      what to tell the Guide;
    - what's left, by wave;
-   - blockers, including port steps left `partial` and the questions they rest on;
+   - blockers, including steps left `partial` (parked) and the questions they rest on;
    - missing information (below).
 8. **Risks:** shared writes while old and new coexist, cycles not yet planned, legacy that
    stays live on out-of-support technology, modern parts without tests, decisions resting on
    H-risk questions. Each with why it matters and its evidence.
-9. **Sources:** links to `modern.md`, `system.md`, the component files and `questions.md`.
+9. **Sources:** links to `../modern.md`, `../system.md`, the component files and
+   `../questions.md`.
 
 **Chat summary** after writing (at most 15 lines): the link to the file, the progress line,
 the current wave, the next 3 steps, the top 3 risks, and "Open it in Markdown preview
@@ -162,7 +162,8 @@ For `<component>` (a legacy component, or a modern part named in § Progress):
   it (§ In the modern solution);
 - its suggested approach, and its verdict and complexity in `target.md § 6`;
 - its status, evidence and wave, and whether it's ready or blocked, and by what;
-- its deep-dive plan, the steps done of total, and the next steps on its accepted road map;
+- its plan: how its files move, the items done of total in its order of work, and the next
+  ones;
 - the neighbourhood diagram, coloured by status;
 - the decisions that affect it, how it runs side by side with legacy, and its open questions;
 - its next step.

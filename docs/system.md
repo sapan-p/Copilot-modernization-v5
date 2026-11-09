@@ -8,7 +8,8 @@ _Not discovered yet. Select the **Guide** and run `/mod-discover`._
 
 ## Components
 
-One file per component in [components/](components/).
+One folder per component in [components/](components/): `component.md` (what discovery
+found), then its plans (`deepdive.md`, `port.md`, `flows/`, `screens/`) once it's planned.
 
 | Component | Kind | Technology | Path | Layer | Approach |
 |---|---|---|---|---|---|

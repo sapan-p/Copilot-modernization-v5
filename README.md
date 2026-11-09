@@ -19,12 +19,10 @@ modernizing it piece by piece.
 | `/mod-discover-comp` | Guide | Deep discovery, one component at a time: reads every file, finds what `/mod-discover` missed (wrapped or runtime-built links, DFS and shares, queues, external executables and CLI calls, dynamic SQL), maps where the logic lives and what blocks a port, and suggests an approach: Port, Rewrite, Split or Keep. Nothing continues with the next component; `/mod-discover-comp <component> "<what>"` runs any focused analysis you ask for |
 | `/mod-target` | Guide | You give the target stack; it asks only the stack questions it needs (clickable, never picks for you) and writes a feasibility plan of at most 150 lines in `docs/target.md`: goals and constraints, legacy to target per layer, construct mapping, the target structure for the Scaffolder, port decisions, a verdict and complexity per component, and capability gaps. Then it asks you to accept or change it. Once accepted, it shows the proposed modern solution (projects, references, where each legacy component goes) to accept or change, and gives clear next-step options. Needed before `/mod-deepdive`. `/mod-target <change request>` revises it |
 | `/mod-modern-skeleton` | Scaffolder | Builds the solution skeleton in `modern/` from the accepted architecture, with you: names and scope, then every implementation detail (package manager, test frameworks, linters, build settings), each suggested with a recommendation for you to choose. Plans first, acts after you choose Run plan (generators, projects, test projects, references, entry-point stubs, then restore, build and test), and records the skeleton as built in `docs/skeleton.md`. Never changes the architecture; ask for changes at any point |
-| `/mod-deepdive` | Guide | Plans a component's migration: maps its execution flows and files from the start file down to the leaves, then asks one thing: file by file or one flow at a time. File by file writes a leaf-first port plan with unit tests; a flow gets its business rules (logic map), design (SDD), test scenarios (TDD) and build steps. `/mod-deepdive <component> <screen \| file \| class.method>` walks through one item and extracts its business rules |
-| `/mod-implement-port` | Scaffolder | Ports a component to `modern/` file by file. It checks that `/mod-deepdive` planned it, then proposes the road map: the file execution path, leaf first, in stages, with the file dependencies, for you to accept or change. Then step by step along it: it keeps the logic and changes only what the target needs, ports the legacy tests and adds the plan's unit tests, builds and tests, and asks you to accept the changes or ask for more. Only what you accept is recorded (the **Record in docs** button), including how the components that use it reach it. Never touches another component's files; unknowns become questions |
-| `/mod-implement-flow` | Scaffolder | Rebuilds a component one flow at a time, test first, for code that can't be ported as it is (VBA to C#, desktop screens to the web). It checks that `/mod-deepdive` planned its flows, then proposes the road map: the order of the flows and each flow's execution path with its build steps, for you to accept or change. Each build step follows the flow plan's rules, design (SDD) and tests (TDD): the tests first and failing, then the code until they pass, then a tidy-up. You accept the changes or ask for more, and only what you accept is recorded. Unknowns become questions |
-| `/mod-implement-ui` | Scaffolder | Rebuilds a component's screens in the target UI technology (WinForms, WPF, MVC views, VBA or Access forms → the new UI). Give the component and any instructions of your own. It checks that `/mod-deepdive` mapped it, then proposes the road map: the screens in order and how they open each other, for you to accept or change. For each screen it splits the legacy code into what stays in the UI and what goes to the backend (rules, data, integrations), reuses what's built, builds the missing backend test first, then the screen and its tests. You check it side by side with legacy and accept the changes or ask for more; only what you accept is recorded. Unknowns become questions |
-| `/mod-legacy-report` | Guide | Explains the system in detail, with diagrams: what it's for, projects and the dependency tree, technologies and support status, data, integrations, features and flows, risks, where to start, and what's still pending. With no argument it writes `docs/legacy-report.md`; a topic (`summary`, `tech`, `data`…), a component, `flow "<process>"` or a question is answered in chat |
-| `/mod-modern-report` | Guide | Explains the migration in detail, with diagrams: what the new system is for, its target, the plan of execution, progress per component and wave, how old and new run side by side, risks, what's pending and the next steps. Before anything is planned it suggests a plan from the legacy layers. With no argument it writes `docs/modern-report.md`; a topic (`target`, `plan`, `progress`…), a component, `wave <n>`, `flow "<process>"` or a question is answered in chat |
+| `/mod-deepdive` | Guide | Plans a component's migration: maps its files and numbered flows, then decides how each file moves (port the code, rebuild its logic through a flow, rebuild the screen, or keep it) and the order of work, for you to accept or change. Then it writes the plans that apply, with intense care for the legacy behaviour: `port.md` (port steps, unit tests, the runtime differences that could change behaviour), a numbered folder per rebuilt flow (`logic.md` with every method on its path read whole, `sdd.md`, `tdd.md` with the build steps), and a plan per screen (its inventory and UI/backend split). `/mod-deepdive <component> change "<what>"` re-plans |
+| `/mod-implement` | Scaffolder | Builds a component in `modern/`, step by step, from its accepted plan. It picks the next step from the order of work, whatever its kind (port a file, build a flow test first, rebuild a screen), says why, plans it, builds it after you choose Run plan, and asks you to accept the changes or ask for more; only what you accept is recorded. At any point, ask in plain words: change this step, rework or revert an accepted one, change a behaviour, fix what's wrong, or re-plan. When it's stuck, it shows what it tried and lets you choose the way out |
+| `/mod-legacy-report` | Guide | Explains the system in detail, with diagrams: what it's for, projects and the dependency tree, technologies and support status, data, integrations, features and flows, risks, where to start, and what's still pending. With no argument it writes `docs/reports/legacy-report.md`; a topic (`summary`, `tech`, `data`…), a component, `flow "<process>"` or a question is answered in chat |
+| `/mod-modern-report` | Guide | Explains the migration in detail, with diagrams: what the new system is for, its target, the plan of execution, progress per component and wave, how old and new run side by side, risks, what's pending and the next steps. Before anything is planned it suggests a plan from the legacy layers. With no argument it writes `docs/reports/modern-report.md`; a topic (`target`, `plan`, `progress`…), a component, `wave <n>`, `flow "<process>"` or a question is answered in chat |
 
 ## Start
 
@@ -42,7 +40,7 @@ anything: approve its edits to `docs/` as they come.
 Then run `/mod-discover-comp` until every component has a suggested approach. Each run
 reads the next components file by file.
 
-Run `/mod-legacy-report` and open `docs/legacy-report.md` in Markdown preview
+Run `/mod-legacy-report` and open `docs/reports/legacy-report.md` in Markdown preview
 (Ctrl+Shift+V) to see the whole system with its diagrams. It works any time, even while
 discovery is still going.
 
@@ -56,26 +54,15 @@ implementation details with you (it suggests, you choose), shows its plan, and b
 skeleton in `modern/` once you choose Run plan. VS Code asks you to approve every command
 and edit. The **Record in docs** button then has the Guide write `docs/skeleton.md`.
 
-Then plan each component with `/mod-deepdive <component>`. It maps the component's flows
-and files, asks whether to migrate file by file or one flow at a time, and writes the plan
-the Scaffolder builds from in `docs/deepdive/`.
+Then plan each component with `/mod-deepdive <component>`. It maps the component, decides how
+each file moves (ported, rebuilt through a flow, or a rebuilt screen) and the order of work,
+and asks you to accept the plan or change it. Then it writes the plans that apply, reading
+every method on each flow's path so the new system keeps the legacy behaviour exactly.
 
-For a component planned file by file, select **Scaffolder** and run
-`/mod-implement-port <component>`. It proposes the road map, the order to port the files in,
-leaf first, for you to accept or change. Then for each step you approve its plan, it ports
-the files with their tests, and you accept the changes or ask for more. **Record in docs**
-has the Guide record only what you accepted.
-
-For a component rebuilt flow by flow, select **Scaffolder** and run
-`/mod-implement-flow <component>`. It proposes the road map, the order of the flows and
-each flow's build steps, for you to accept or change. Each step writes the tests first,
-then the code that makes them pass; you accept the changes or ask for more.
-
-For screens moving to a new UI technology, select **Scaffolder** and run
-`/mod-implement-ui <component>`, adding any instructions of your own ("one page per tab").
-It proposes the road map of screens, splits each screen's code into UI and backend, builds
-the missing backend test first and then the screen, and asks you to check it side by side
-with the legacy screen before you accept it.
+Then select **Scaffolder** and run `/mod-implement <component>`. It picks the next step
+from the order of work and says why; you approve its plan, it builds the step with its
+tests, and you accept the changes or ask for more. Ask for a change, a fix or a re-plan in
+plain words at any point. **Record in docs** has the Guide record only what you accepted.
 
 `/mod-modern-report` shows the migration and its progress at any time. Tell the Guide
 what's done in plain words ("orders-core is built, all tests pass") and it records it in
@@ -86,24 +73,25 @@ what's done in plain words ("orders-core is built, all tests pass") and it recor
 - `docs/system.md`: the solution on one page. The architecture in plain words, the
   components and their technologies, shared resources (databases, shares, queues), every
   dependency, a dependency graph and tree, and layers for slicing the modernization.
-- `docs/components/<component>.md`: one self-contained file per component, so you can pick
-  any one and work on it alone. After `/mod-discover-comp` it also holds its files, where
+- `docs/components/<component>/`: everything about one component, so you can pick any one
+  and work on it alone. `component.md` is what discovery found. After `/mod-discover-comp` it also holds its files, where
   the logic lives, and a suggested approach (Port, Rewrite, Split or Keep) with its
   reasons. Once ported, it says how other components use its modern part.
 - `docs/questions.md`: everything the code couldn't tell, each with a working assumption.
   Answer them whenever you can; the work never waits.
-- `docs/legacy-report.md`: the system explained for a newcomer, with Mermaid diagrams,
+- `docs/reports/legacy-report.md`: the system explained for a newcomer, with Mermaid diagrams,
   from `/mod-legacy-report`.
 - `docs/target.md`: the target stack and feasibility plan you accepted, from `/mod-target`.
 - `docs/skeleton.md`: the modern solution as built, with its implementation choices and the
   commands to build, test and run it.
 - `docs/modern.md`: the new system: target and decisions, the plan in waves, and the
   progress of each component.
-- `docs/modern-report.md`: the migration explained, with progress, a migration map and
+- `docs/reports/modern-report.md`: the migration explained, with progress, a migration map and
   the next steps, from `/mod-modern-report`.
-- `docs/deepdive/`: one migration plan per component or flow, from `/mod-deepdive`: a
-  file map and a leaf-first port plan with unit tests, or a flow's business rules, design
-  (SDD), tests (TDD) and build steps.
+- `docs/components/<component>/`: the migration plans, from `/mod-deepdive`: `deepdive.md`
+  (the map, how each file moves, the order of work), `port.md` (port steps and unit tests),
+  `flows/01-<flow>/` (`logic.md`, `sdd.md`, `tdd.md`) and `screens/01-<screen>.md`, only
+  the ones the component needs.
 
 ## Sources Copilot can't read
 
@@ -117,7 +105,8 @@ example VBA modules and queries) anywhere under `legacy/`, then run `/mod-discov
 ```text
 <project>-workspace/
 ├── .github/      3 agents · skills (/mod-… commands) · instructions
-├── docs/         system.md · components/ · questions.md · target.md · skeleton.md · deepdive/ · modern.md · 2 reports
+├── docs/         system.md · questions.md · target.md · skeleton.md · modern.md · reports/ ·
+│                 components/<component>/ (component.md · deepdive.md · port.md · flows/ · screens/)
 ├── legacy/       the legacy repo (separate Git repo; read-only for agents)
 └── modern/       the new code (separate Git repo)
 ```

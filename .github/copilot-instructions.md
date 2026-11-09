@@ -10,18 +10,22 @@ build, one component at a time.
 - `modern/`: the new code and its tests.
 - `docs/`: what we know, written by the `Guide`:
   - `system.md`: the whole solution on one page. Read it first;
-  - `components/<component>.md`: one self-contained file per component, with its files and
-    suggested approach once `/mod-discover-comp` has read it, and how to use its modern
-    part once it's ported;
+  - `components/<component>/`: one folder per component, everything about it in one place:
+    - `component.md`: self-contained: what discovery found, its files and suggested
+      approach once `/mod-discover-comp` has read it, and how to use its modern part once
+      it's built;
+    - `deepdive.md`: its map (file map, numbered flows), how each file moves, and the
+      order of work the Scaffolder follows (`/mod-implement`);
+    - `port.md`: the port steps and unit tests, when files are ported;
+    - `flows/<nn>-<flow>/`: one folder per rebuilt flow: `logic.md`, `sdd.md`, and
+      `tdd.md` with the build steps;
+    - `screens/<nn>-<screen>.md`: one plan per screen, when the UI technology changes;
   - `questions.md`: the question bank;
   - `target.md`: the target stack and feasibility plan, accepted by the developer;
   - `skeleton.md`: the modern solution as built, and its implementation choices;
-  - `deepdive/<component>….md`: the migration plans, with their accepted road maps, that the
-    Scaffolder builds from (`/mod-implement-port`, `/mod-implement-flow`,
-    `/mod-implement-ui`);
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per
     component;
-  - `legacy-report.md` and `modern-report.md`: the legacy system and the migration
+  - `reports/`: `legacy-report.md` and `modern-report.md`, the legacy system and the migration
     explained in detail, with diagrams. `/mod-legacy-report` and `/mod-modern-report`
     regenerate them; never edit them by hand.
 

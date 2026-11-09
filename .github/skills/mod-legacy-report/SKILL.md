@@ -1,6 +1,6 @@
 ---
 name: mod-legacy-report
-description: "Any time after /mod-discover has started. Explains the legacy system in detail, with Mermaid diagrams, to a developer who doesn't know it: what it is for, the projects and their dependency tree, technologies and their support status, data, integrations and the boundary, features and flows, risks, and where to start - then what analysis is still pending. With no argument it writes the whole picture to docs/legacy-report.md; a topic, a component, a flow or a question is answered in chat. Reads docs/ only."
+description: "Any time after /mod-discover has started. Explains the legacy system in detail, with Mermaid diagrams, to a developer who doesn't know it: what it is for, the projects and their dependency tree, technologies and their support status, data, integrations and the boundary, features and flows, risks, and where to start - then what analysis is still pending. With no argument it writes the whole picture to docs/reports/legacy-report.md; a topic, a component, a flow or a question is answered in chat. Reads docs/ only."
 argument-hint: "nothing = full report · summary · projects · tech · data · integrations · features · risks · start · pending · <component> · flow \"<process>\" · \"<question>\""
 disable-model-invocation: true
 ---
@@ -25,7 +25,7 @@ topic nor a component name is a question.
 
 | Argument | What you give | Where |
 |---|---|---|
-| nothing or `all` | Sections 1–12 | `docs/legacy-report.md`, then the chat summary |
+| nothing or `all` | Sections 1–12 | `docs/reports/legacy-report.md`, then the chat summary |
 | `summary` | Sections 1–3 and the top 5 pending items, about one screen | chat |
 | `projects` | Section 4 | chat |
 | `tech` | Section 5 | chat |
@@ -71,8 +71,9 @@ component files it used.
 
 ## The full report
 
-`docs/legacy-report.md` is generated: write it whole in one edit at the end of the run,
-replacing the previous one. It starts with:
+`docs/reports/legacy-report.md` is generated: write it whole in one edit at the end of the
+run, replacing the previous one. Its links start from `docs/reports/`: `../system.md`,
+`../components/<component>/component.md`. It starts with:
 
 ```markdown
 # <system name, or "The legacy system"> — legacy report
@@ -123,7 +124,8 @@ replacing the previous one. It starts with:
     - the tricky areas, and why;
     - the first components to study, and why.
 11. **Pending analysis:** below.
-12. **Sources:** links to `system.md`, every component file and `questions.md`.
+12. **Sources:** links to `../system.md`, every `../components/<component>/component.md`
+    and `../questions.md`.
 
 **Chat summary** after writing (at most 15 lines): the link to the file, the architecture in
 3–5 sentences, the numbers line, the top 3 risks, the top 3 pending items, and "Open it in

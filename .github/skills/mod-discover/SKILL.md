@@ -65,9 +65,10 @@ queries, forms, macros> as text anywhere under `legacy/`, then run `/mod-discove
 the other components' side (risk if wrong: H)".
 
 **d. Write**, batch by batch, as soon as the batch is checked:
-- `docs/components/<component>.md`: create it in the format below, with Identity,
+- `docs/components/<component>/component.md`: create it in the format below, with Identity,
   Technology and Modernization signals filled in;
-- `docs/system.md`: a row in § Components, and Technology ✓ in § Discovery progress;
+- `docs/system.md`: a row in § Components (its name links to
+  `components/<component>/component.md`), and Technology ✓ in § Discovery progress;
 - `docs/questions.md`: the new questions.
 
 ## Step 2 — Dependencies
@@ -149,7 +150,7 @@ next ID follows the highest `Q-###` there.
 `orders_mvc[orders-mvc]` for a component, `orders_db[(Orders DB)]` for a database,
 `exports_share{{\\srv\exports}}` for any other resource, and `a -->|mechanism| b` for a link.
 
-**Component file** `docs/components/<component>.md`. Every value cites its evidence; leave
+**Component file** `docs/components/<component>/component.md`. Every value cites its evidence; leave
 out a row that has nothing to say:
 
 ```markdown

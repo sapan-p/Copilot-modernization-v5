@@ -27,7 +27,8 @@ that isn't a component: list the 3 closest names and stop.
 
 ## Read
 
-- The component's file in `docs/components/`, and its rows in `docs/system.md`.
+- The component's `docs/components/<component>/component.md`, and its rows in
+  `docs/system.md`.
 - The OPEN questions in `docs/questions.md`, so you don't log duplicates.
 - `docs/target.md` (draft or accepted) and `docs/modern.md § Target and decisions`: the
   approach depends on the target.
