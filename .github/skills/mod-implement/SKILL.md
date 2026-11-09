@@ -213,6 +213,7 @@ Accept → record.
 | "undo P3" | **revert** | delete the files the step created and restore the ones it changed, never with a git command. List what depends on it first |
 | a question ("why does it round like this?") | a question | answer from the plan and the legacy lines; change nothing |
 | an answer to an open question ("Q-031: it's 10%") | an answer | the Guide records answers, and works out everything else they change: "Select the Guide and run `/mod-answer Q-031: <answer>`". This step goes on with the working assumption, or with the answer when the developer says so, noted under Changes |
+| "pause", "switch to orders-web" | **pause** | finish or leave the current step: ★ **Review it now** · **Leave it for later** (its files stay in `modern/`, named in the pause record, and the next run reviews them) · **Discard it**. Then show this chat's unrecorded records and a pause record ([/mod-track § 5](../mod-track/SKILL.md#5-pause-and-switch)), ask to accept it, and say: "Choose **Record in docs**: the Guide records them and takes you to `<component>`" |
 | a problem outside the code: a missing SDK, a failed restore, a database it can't reach | an environment problem | say what's wrong and what to do; change no code; offer **Retry** |
 
 Never weaken a test. An expected value changes only for a decision the developer confirmed,

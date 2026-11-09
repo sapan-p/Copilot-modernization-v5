@@ -23,6 +23,7 @@ modernizing it piece by piece.
 | `/mod-implement` | Scaffolder | Builds a component in `modern/`, step by step, from its accepted plan. It picks the next step from the order of work, whatever its kind (port a file, build a flow test first, rebuild a screen), says why, plans it, builds it after you choose Run plan, and asks you to accept the changes or ask for more; only what you accept is recorded. At any point, ask in plain words: change this step, rework or revert an accepted one, change a behaviour, fix what's wrong, or re-plan. When it's stuck, it shows what it tried and lets you choose the way out |
 | `/mod-legacy-report` | Guide | Explains the system in detail, with diagrams: what it's for, projects and the dependency tree, technologies and support status, data, integrations, features and flows, risks, where to start, and what's still pending. With no argument it writes `docs/reports/legacy-report.md`; a topic (`summary`, `tech`, `data`…), a component, `flow "<process>"` or a question is answered in chat |
 | `/mod-modern-report` | Guide | Explains the migration in detail, with diagrams: what the new system is for, its target, the plan of execution, progress per component and wave, how old and new run side by side, risks, what's pending and the next steps. Before anything is planned it suggests a plan from the legacy layers. With no argument it writes `docs/reports/modern-report.md`; a topic (`target`, `plan`, `progress`…), a component, `wave <n>`, `flow "<process>"` or a question is answered in chat |
+| `/mod-track` | Guide | Tracks the whole migration, day to day: which stage each component is in, what's in progress, paused, blocked or needs attention, and the next action for each, with who does it and exactly what to type. The board, one component, or just `next`. Working on several components? `pause` or `switch <component>` records where the work stopped (once you accept) and takes you to the next task; picking it up later starts exactly there. `how` suggests a routine |
 | `/mod-answer` | Guide | Answers the question bank, any time. With nothing after it, lists the open questions grouped by who can answer them, ready to answer now or to send on. Give an answer by its ID or in plain words (a pasted e-mail works too): it explains what the answer means, what it changes (rules, plans, tests, built code) and what it suggests, and records it only after you accept |
 
 ## Start
@@ -37,6 +38,10 @@ code .
 
 In Copilot Chat, select **Guide** and type `/mod-discover`. It doesn't ask you
 anything: approve its edits to `docs/` as they come.
+
+From then on, start each session with `/mod-track`: where every component stands, what's
+paused, and exactly what to do next. Before switching to another component, say "pause"
+so where you stopped is recorded.
 
 Then run `/mod-discover-comp` until every component has a suggested approach. Each run
 reads the next components file by file.
@@ -88,8 +93,8 @@ what's done in plain words ("orders-core is built, all tests pass") and it recor
 - `docs/target.md`: the target stack and feasibility plan you accepted, from `/mod-target`.
 - `docs/skeleton.md`: the modern solution as built, with its implementation choices and the
   commands to build, test and run it.
-- `docs/modern.md`: the new system: target and decisions, the plan in waves, and the
-  progress of each component.
+- `docs/modern.md`: the new system: target and decisions, the plan in waves, the progress
+  of each component, and paused work.
 - `docs/reports/modern-report.md`: the migration explained, with progress, a migration map and
   the next steps, from `/mod-modern-report`.
 - `docs/components/<component>/`: the migration plans, from `/mod-deepdive`: `deepdive.md`

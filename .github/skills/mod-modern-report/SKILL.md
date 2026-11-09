@@ -78,19 +78,9 @@ Each mismatch is a pending row: "tell the Guide to correct § Progress".
 
 ## Derived facts
 
-- **Ready:** a component that isn't started is ready when everything it depends on (in
-  `system.md § Dependencies`) is built, live or kept, or is reached through an adapter
-  recorded in § Plan.
-- **Blocked:** not ready, or one of its H-risk questions is OPEN. Say by what.
-- **Next steps,** first match wins:
-  1. no accepted target or solution → `/mod-target <your stack>`, or accept the draft;
-  2. `docs/skeleton.md` not BUILT → Scaffolder: `/mod-modern-skeleton`;
-  3. no plan → agree a plan (the suggested one, or your own);
-  4. components that are building → finish them;
-  5. ready components of the current wave (the lowest wave not done), lowest layer first:
-     with no accepted deep-dive plan → `/mod-deepdive <component>`; with one →
-     Scaffolder: `/mod-implement <component>`;
-  6. the next wave's foundation work, then its ready components.
+The stages, **ready**, **blocked**, **paused**, and the **next steps** (first match wins)
+are as [/mod-track § 1](../mod-track/SKILL.md#1-stages-and-next-actions) defines them:
+one set of rules for both commands.
 
 ## The full report
 

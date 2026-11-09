@@ -39,3 +39,11 @@ One row per legacy component in the plan.
 - kept: stays legacy (say why in Evidence).
 
 Evidence for built and live is a test run (date, result), a commit or a pull request.
+
+## Work in progress
+
+Paused work, so it can be picked up exactly where it stopped. `/mod-track` records a row
+when you pause, and it goes when the work carries on.
+
+| Component | Stopped at | In `modern/`, not accepted | Next | Note | Since |
+|---|---|---|---|---|---|

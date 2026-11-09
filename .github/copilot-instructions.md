@@ -24,7 +24,7 @@ build, one component at a time.
   - `target.md`: the target stack and feasibility plan, accepted by the developer;
   - `skeleton.md`: the modern solution as built, and its implementation choices;
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per
-    component;
+    component, and paused work (`/mod-track`);
   - `reports/`: `legacy-report.md` and `modern-report.md`, the legacy system and the migration
     explained in detail, with diagrams. `/mod-legacy-report` and `/mod-modern-report`
     regenerate them; never edit them by hand.

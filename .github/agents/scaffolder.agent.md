@@ -9,7 +9,7 @@ disable-model-invocation: true
 handoffs:
   - label: Record in docs
     agent: Guide
-    prompt: Record in docs/ the Scaffolder's records above that aren't recorded yet (skeleton or build records).
+    prompt: Record in docs/ the Scaffolder's records above that aren't recorded yet (skeleton, build or pause records).
     send: true
 ---
 
