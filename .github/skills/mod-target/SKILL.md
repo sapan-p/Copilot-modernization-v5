@@ -1,7 +1,7 @@
 ---
 name: mod-target
-description: "You give the target stack; the Guide builds a feasibility plan from what discovery recorded. It asks only the stack questions it needs (clickable, never picks for you), then writes docs/target.md, at most 150 lines: goals and constraints, legacy to target per layer, construct mapping, the target structure for the Scaffolder, port decisions, a verdict and complexity per component, and capability gaps. Then it asks whether you accept the plan or want a change. Once accepted, it shows the proposed modern solution (projects, references, where each legacy component goes) for you to accept or change, and gives clear options for the next step. Both must be accepted before /mod-deepdive."
-argument-hint: "[your target stack | change request]"
+description: "You give the target stack; the Guide builds a feasibility plan from what discovery recorded. It asks only the stack questions it needs (clickable, never picks for you), then writes docs/target.md, at most 150 lines: goals and constraints, legacy to target per layer, construct mapping, the target structure for the Scaffolder, port decisions, a verdict and complexity per component, and capability gaps. Then it asks whether you accept the plan or want a change. Once accepted, it shows the proposed modern solution (projects, references, where each legacy component goes) for you to accept or change, and gives clear options for the next step. Both must be accepted before /mod-deepdive. When the stack is already decided and modern/ already holds the solution (a skeleton or more), it reads that solution instead and records it as the target: the stack, the structure and the implementation choices it already makes. No new solution is planned or built."
+argument-hint: "[your target stack | existing | change request]"
 disable-model-invocation: true
 ---
 
@@ -16,7 +16,8 @@ or ask for a change. `/mod-deepdive` needs it accepted.
 Values in `<ANGLE BRACKETS>` come from the text after the command.
 
 - **`docs/target.md` is NOT STARTED:** the text is the target stack ("Blazor Server + ASP.NET
-  Core 10 API + EF Core + SQL Server"). Nothing given → ask for it (§ 2).
+  Core 10 API + EF Core + SQL Server"), or `existing` when `modern/` already holds the
+  solution. Nothing given → look in `modern/`, then ask (§ 2).
 - **It is DRAFT or ACCEPTED:** the text is a change request (§ 7). Nothing given → the step
   still open: a DRAFT plan → § 5; a solution not accepted yet → § 6; both accepted → the
   plan's summary and the next-step options (§ 6).
@@ -32,17 +33,65 @@ without a deep pass (`/mod-discover-comp`) are still planned, marked "discovery 
   approach. With more than about 15 components, search across `docs/components/` for those
   rows instead of opening every file.
 - The OPEN questions in `docs/questions.md`.
-- `docs/target.md`, to keep its sections and table columns.
+- `docs/target.md` and `docs/skeleton.md`, to keep their sections and table columns.
+- What `modern/` holds (file search only).
 - [deep-signals.md](../mod-discover-comp/deep-signals.md) § 1 (platform) and § 2 (port
   blockers).
 
-## 2. Ask only the stack questions you need
+## 2. The stack: from the developer, or from an existing solution
 
-1. Map the developer's stack text onto the layers the legacy system has: UI (desktop or web),
-   API and services, business logic, data access, database, batch and jobs, messaging, files
-   and shares, reports, identity. Add hosting.
-2. For each layer with no clear choice in the text, ask with `askQuestions` (header "Target",
-   at most 4 questions per call):
+**a. An existing solution?** Look in `modern/` (file search: `*.sln`, `*.slnx`, project files,
+`package.json`, `pom.xml`). When it holds a solution, or the developer says the stack is
+decided and the solution is ready (`/mod-target existing`), ask with `askQuestions` (header
+"Start"), unless their text already says:
+- **Use it as the target** (★ when their text names no other stack): read it (b) and record
+  it. No new solution is planned or built;
+- **Plan a new target:** the code in `modern/` stays, and the plan says what happens to it.
+
+Without the tool, number the options and stop until the developer replies. A solution kept
+somewhere else: "Put it in `modern/` (clone its repository there), then run `/mod-target
+existing`", and stop.
+
+**b. Read the existing solution,** when it's the target. Read-only Scout briefs over
+`modern/`, at most 3 in parallel:
+
+```text
+GOAL:     the existing modern solution, for the target plan
+WHERE:    modern/ (skip bin, obj, node_modules, packages, dist)
+LOOK FOR: the solution files and their projects; each project's kind, target framework,
+          output type, project and package references; front-end package.json (framework,
+          versions, scripts, lockfile); test projects and their frameworks; shared build
+          files (Directory.Build.props, Directory.Packages.props, global.json, .editorconfig);
+          hosting files (Dockerfile, compose, pipelines); startup code (Program.cs and the
+          like): authentication, data access, logging; config keys, never values; code beyond
+          a skeleton (domain types, controllers, pages, migrations)
+READ:     project, build and startup files whole
+RETURN:   project | kind | framework | references | packages that decide a layer | path:line;
+          setting | value | path:line; code beyond a skeleton | what | path:line
+LIMIT:    the files above; list what's left
+```
+
+Check the citations, then work out:
+- **the stack per layer,** each with its evidence (`modern/…:line`), and whether its versions
+  are supported (LTS or STS);
+- **the structure:** the solution tree, each project's kind, framework, references and test
+  project, the naming conventions it follows, and the architecture its references show (layers,
+  clean architecture);
+- **the implementation choices it already makes:** test frameworks, package management, SDK
+  pin, build settings, front-end package manager and tools;
+- **the commands** its files show for restore, build, test and run (not run);
+- **code beyond a skeleton:** features or domain code already there, and the legacy
+  components it seems to cover (inferred);
+- **where it differs from the developer's text:** a framework or version the text names
+  differently. Show both, and the developer chooses which stands.
+
+**c. Ask only the stack questions you need.**
+1. Map the stack (the developer's text, or the existing solution) onto the layers the legacy
+   system has: UI (desktop or web), API and services, business logic, data access, database,
+   batch and jobs, messaging, files and shares, reports, identity. Add hosting.
+2. For each layer with no clear choice, ask with `askQuestions` (header "Target", at most 4
+   questions per call). With an existing solution, that's only the layers it doesn't cover
+   (legacy batch jobs or reports with no place in it, for example):
    - 2–4 realistic options that fit the rest of the stack, each with a one-line reason and its
      main risk;
    - `keep` (the legacy one stays) or `retire` where they apply, and "Don't know";
@@ -85,7 +134,9 @@ Write `docs/target.md` with Status DRAFT, keeping its sections and columns:
    folders; the projects table (name · kind · framework · references · the legacy
    components it receives · its test project), so every component lands somewhere or
    says why not; then the naming conventions (solution and project names, root
-   namespace, folders). At most about 40 lines. Implementation details are left to
+   namespace, folders). With an existing solution: the solution as it is, each project
+   `exists`, its own naming conventions, and a project marked `to add` only for
+   components no existing project fits. At most about 40 lines. Implementation details are left to
    `/mod-modern-skeleton`. This is what the Scaffolder builds, and the P0 step of every port plan. It's accepted on its
    own, right after the plan (§ 6).
 5. **Port decisions:** the cross-cutting choices, each proposed with a reason: behaviour parity
@@ -142,7 +193,10 @@ Without the tool, ask "Reply `accept`, or say what to change", and stop.
 ## 6. The modern solution, then the next step
 
 Right after the plan is accepted, show the developer the solution the Scaffolder will build,
-from § 4 of the plan, and what `modern/` already holds (file search only):
+from § 4 of the plan, and what `modern/` already holds (file search only). With an existing
+solution, it's that solution as it is, plus what the reading found (§ 2b): the
+implementation choices, the commands, the code beyond a skeleton, and the projects
+`to add`:
 - **the tree:** `modern/` down to each project's top folders, each project marked `new` or
   `exists`;
 - **the projects:** name · kind · framework · references · the legacy components it receives ·
@@ -165,6 +219,11 @@ Without the tool, ask "Reply `accept`, or say what to change", and stop.
   ACCEPTED. A change of technology or framework changes the target itself: § 7.
 - **On accept:** `docs/target.md` gets **Solution:** accepted YYYY-MM-DD, and
   `docs/modern.md § Target and decisions` a row "Modern solution accepted: target.md § 4".
+- **On accept, with an existing solution:** **Solution:** accepted YYYY-MM-DD (existing),
+  and write `docs/skeleton.md` from the reading, in its sections: **Status:** EXISTING;
+  the implementation choices it makes (Why: `found in modern/<file>:line`); the solution
+  tree and projects; the commands, marked "not run yet"; and what differs from § 4 (the
+  projects `to add`, or "nothing"). No new solution is created.
 
 **Next step.** Say in one line what's now decided, then ask with `askQuestions` (header "Next
 step"), the recommended option first (★). Each option says what happens and exactly what to
@@ -172,8 +231,9 @@ do:
 
 | Option | What to do |
 |---|---|
-| **Build the solution skeleton** (★ when `docs/skeleton.md` isn't BUILT) | Select **Scaffolder** in the chat's agent picker and type `/mod-modern-skeleton`. It settles the names and implementation details with you, shows its plan, and waits for Run plan |
-| **Deep-dive the first component** (★ when the skeleton is built) | `/mod-deepdive <component>`, run here. Name it: the lowest layer, a Port, the lowest complexity |
+| **Build the solution skeleton** (★ when `docs/skeleton.md` is NOT BUILT) | Select **Scaffolder** in the chat's agent picker and type `/mod-modern-skeleton`. It settles the names and implementation details with you, shows its plan, and waits for Run plan |
+| **Check the existing solution** (★ when `docs/skeleton.md` is EXISTING with projects `to add`, no test projects, or no commands found) | Select **Scaffolder** and type `/mod-modern-skeleton`. It creates nothing that's there: it adds only the projects marked `to add`, then restores, builds and tests the whole solution and records it BUILT |
+| **Deep-dive the first component** (★ when the skeleton is BUILT, or EXISTING with nothing to add) | `/mod-deepdive <component>`, run here. Name it: the lowest layer, a Port, the lowest complexity |
 | **See the whole migration** | `/mod-modern-report`, run here: where things stand, a suggested wave plan, what's missing |
 | **Stop here** | Nothing now; `/mod-target` shows these options again later |
 
@@ -231,6 +291,8 @@ Never block the plan. Stack choices are the only thing you ask the developer.
 | A capability whose need is unclear (is the local printing still used?) | Functional | Business | "still needed (risk M)" |
 | A verdict or complexity driver that rests on an unknown | Technical | Developer | the more cautious verdict |
 | Licensing or company standards that decide a choice | Operations | Ops · Vendor | "no restriction (risk M)" |
+| A project in an existing solution whose role neither its name nor its references explain | Technical | Developer | "it stays as it is, and no legacy component goes to it (risk L)" |
+| Code beyond a skeleton in an existing solution whose legacy counterpart can't be told | Functional | Developer | "it's new work, not a migrated component (risk L)" |
 
 **Questions:** add rows in the format at the top of `docs/questions.md`. The next ID follows
 the highest `Q-###` there. Write each so the person asked can answer without the code.

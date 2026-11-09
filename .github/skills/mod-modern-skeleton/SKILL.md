@@ -31,6 +31,10 @@ name, projects or "foundation only" answers those questions (§ 3) in advance.
 - What `modern/` holds now: list it. Never overwrite a file without listing it as a change.
 - Already built (`skeleton.md` is BUILT, or `modern/` has the solution): compare it with § 4
   and offer only what's missing or different.
+- `skeleton.md` is EXISTING (`/mod-target` recorded a solution that was already there):
+  create nothing that's there. Add only the projects § 4 marks `to add`, ask only the
+  details `skeleton.md` doesn't record, then restore, build and test the whole solution,
+  and record it BUILT.
 
 ## 2. Check the tools
 

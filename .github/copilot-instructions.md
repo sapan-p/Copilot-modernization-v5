@@ -23,7 +23,8 @@ build, one component at a time.
     - `screens/<nn>-<screen>.md`: one plan per screen, when the UI technology changes;
   - `questions.md`: the question bank; answers go in with `/mod-answer`;
   - `target.md`: the target stack and feasibility plan, accepted by the developer;
-  - `skeleton.md`: the modern solution as built, and its implementation choices;
+  - `skeleton.md`: the modern solution as built (or as found, when it already existed), and
+    its implementation choices;
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per
     component, and paused work (`/mod-track`);
   - `reports/`: `legacy-report.md` and `modern-report.md`, the legacy system and the migration

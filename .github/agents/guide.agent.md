@@ -48,7 +48,7 @@ history, so every call carries a brief:
 
 ```text
 GOAL:     <one sentence>
-WHERE:    <folders or files under legacy/>
+WHERE:    <folders or files under legacy/, or modern/ when the skill's brief says so>
 LOOK FOR: <what, using the patterns in the skill's reference file>
 RETURN:   <table columns>
 LIMIT:    <max rows or files>; stop and list what's left when you reach it

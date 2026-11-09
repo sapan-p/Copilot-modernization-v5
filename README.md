@@ -53,6 +53,10 @@ Run `/mod-legacy-report` and open `docs/reports/legacy-report.md` in Markdown pr
 (Ctrl+Shift+V) to see the whole system with its diagrams. It works any time, even while
 discovery is still going.
 
+Already have the new solution (the stack decided, a skeleton or more)? Put it in `modern/`
+and run `/mod-target existing`: it reads that solution and records it as the target, and no
+new solution is created.
+
 When you're ready to modernize, run `/mod-target <your target stack>`. It asks only the
 stack questions it needs, writes the feasibility plan in `docs/target.md`, and asks you
 to accept it or change it. Then it shows the modern solution it proposes, for you to

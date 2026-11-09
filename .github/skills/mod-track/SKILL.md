@@ -50,7 +50,8 @@ and the markers in each component's code, counted by kind (search `\b(TODO|RECHE
 
 `/mod-modern-report` uses these rules too. The migration first passes three gates: discovery
 (every component found: `system.md § Discovery progress`), the target (`target.md`
-ACCEPTED, and its Solution accepted) and the skeleton (`skeleton.md` BUILT). Each component
+ACCEPTED, and its Solution accepted) and the skeleton (`skeleton.md` BUILT, or EXISTING: a solution that was already there,
+recorded by `/mod-target`). Each component
 then moves through its stages:
 
 | Stage | The records show | Next action |
@@ -80,7 +81,8 @@ A component can also be:
 **The next action overall,** first match wins:
 1. discovery isn't finished → Guide: `/mod-discover`;
 2. no accepted target or solution → Guide: `/mod-target <your stack>`, or accept the draft;
-3. the skeleton isn't built → Scaffolder: `/mod-modern-skeleton`;
+3. the skeleton isn't built or recorded → Scaffolder: `/mod-modern-skeleton`, or Guide:
+   `/mod-target existing` when `modern/` already holds the solution;
 4. no plan in waves (`modern.md § Plan`) → agree one: `/mod-modern-report plan` suggests it;
 5. a building or paused component that needs attention → that first;
 6. building or paused components → finish them, the most recently worked on first;
@@ -91,7 +93,8 @@ A component can also be:
 ## 2. The board
 
 Show, in chat:
-- **the gates:** `Discovery ✓ 14 components · Target ✓ accepted 2026-11-09 · Skeleton ✓ built 2026-11-09`;
+- **the gates:** `Discovery ✓ 14 components · Target ✓ accepted 2026-11-09 · Skeleton ✓ built 2026-11-09`
+  (`Skeleton ✓ existing, not checked` until `/mod-modern-skeleton` builds and tests it);
 - **the progress line:** `▓▓▓░░░░░░░ 3 of 12 components built · 2 building · 1 paused · 4 ready · 2 blocked · 2 kept`.
   Count components, not effort; kept ones are left out of the total;
 - **paused and in progress:** each with where it stopped and its next action;

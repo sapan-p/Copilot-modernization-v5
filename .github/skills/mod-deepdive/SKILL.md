@@ -67,7 +67,7 @@ the 3 closest names and stop.
   § Resources used.
 - `docs/target.md`: § 2 the technologies (the UI technology above all), § 3 construct
   mapping, § 4 structure, § 5 port decisions, and this component's verdict in § 6.
-- `docs/skeleton.md`, when it's built: the projects' paths as built and the test frameworks
+- `docs/skeleton.md`, when it's BUILT or EXISTING: the projects' paths as built and the test frameworks
   chosen.
 - Its rows in `docs/system.md` and `docs/modern.md` (decisions, plan), and this component's
   rows in `docs/questions.md`: OPEN ones, and ANSWERED ones, which can change a rule.
