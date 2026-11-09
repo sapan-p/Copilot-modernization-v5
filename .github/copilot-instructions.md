@@ -11,7 +11,8 @@ build, one component at a time.
 - `docs/`: what we know, written by the `Guide`:
   - `system.md`: the whole solution on one page. Read it first;
   - `components/<component>.md`: one self-contained file per component, with its files and
-    suggested approach once `/mod-discover-comp` has read it;
+    suggested approach once `/mod-discover-comp` has read it, and how to use its modern
+    part once it's ported;
   - `questions.md`: the question bank;
   - `target.md`: the target stack and feasibility plan, accepted by the developer;
   - `skeleton.md`: the modern solution as built, and its implementation choices;

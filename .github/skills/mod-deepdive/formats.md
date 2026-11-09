@@ -6,7 +6,8 @@ say. Every fact cites `path:line`.
 
 ## In the component file
 
-Add § Deep-dives after § Suggested approach if it isn't there, with one line per plan:
+Add § Deep-dives after § Suggested approach if it isn't there, with one line per plan
+(`/mod-implement-port` later adds § In the modern solution after it):
 
 ```markdown
 ## Deep-dives
@@ -38,7 +39,10 @@ that use each other share a level.
 
 ## Port plan
 
-Leaf first. A step is done when its unit tests pass in `modern/`.
+Leaf first. A step is done when its unit tests pass in `modern/`. The Scaffolder ports it
+with `/mod-implement-port <component>`.
+
+**Road map:** —
 
 | Step | Legacy files | Modern files | Changes | Needs | Status |
 |---|---|---|---|---|---|
@@ -56,7 +60,10 @@ Leaf first. A step is done when its unit tests pass in `modern/`.
 - **Step:** `P0` (the new project and test project, when needed), then `P1`, `P2`…
 - **Changes:** the blockers and their replacements, the project and namespace changes.
 - **Needs:** earlier steps, other components (ported, or still referenced as they are), fakes.
-- **Status:** `to do` · `done (YYYY-MM-DD)`.
+- **Road map:** the order of the steps the developer accepted in `/mod-implement-port`:
+  `accepted YYYY-MM-DD · P1 → P2 → P4 → … · later: <steps, or —>`, set by the Guide.
+- **Status:** `to do` · `done (YYYY-MM-DD)` · `partial (YYYY-MM-DD): <what's left>
+  (Q-###)`, set by the Guide from the Scaffolder's accepted records.
 - **Test:** the step and a number (`P3.2`). **Scenario:** happy · boundary · negative · error.
 - **Expect:** what the legacy code does. **From:** where that's coded.
 - **Check:** `code` (read from the code) · `run legacy` (rounding, dates, money or data:

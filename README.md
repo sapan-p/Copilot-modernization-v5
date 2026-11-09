@@ -20,6 +20,7 @@ modernizing it piece by piece.
 | `/mod-target` | Guide | You give the target stack; it asks only the stack questions it needs (clickable, never picks for you) and writes a feasibility plan of at most 150 lines in `docs/target.md`: goals and constraints, legacy to target per layer, construct mapping, the target structure for the Scaffolder, port decisions, a verdict and complexity per component, and capability gaps. Then it asks you to accept or change it. Once accepted, it shows the proposed modern solution (projects, references, where each legacy component goes) to accept or change, and gives clear next-step options. Needed before `/mod-deepdive`. `/mod-target <change request>` revises it |
 | `/mod-modern-skeleton` | Scaffolder | Builds the solution skeleton in `modern/` from the accepted architecture, with you: names and scope, then every implementation detail (package manager, test frameworks, linters, build settings), each suggested with a recommendation for you to choose. Plans first, acts after you choose Run plan (generators, projects, test projects, references, entry-point stubs, then restore, build and test), and records the skeleton as built in `docs/skeleton.md`. Never changes the architecture; ask for changes at any point |
 | `/mod-deepdive` | Guide | Plans a component's migration: maps its execution flows and files from the start file down to the leaves, then asks one thing: file by file or one flow at a time. File by file writes a leaf-first port plan with unit tests; a flow gets its business rules (logic map), design (SDD), test scenarios (TDD) and build steps. `/mod-deepdive <component> <screen \| file \| class.method>` walks through one item and extracts its business rules |
+| `/mod-implement-port` | Scaffolder | Ports a component to `modern/` file by file. It checks that `/mod-deepdive` planned it, then proposes the road map: the file execution path, leaf first, in stages, with the file dependencies, for you to accept or change. Then step by step along it: it keeps the logic and changes only what the target needs, ports the legacy tests and adds the plan's unit tests, builds and tests, and asks you to accept the changes or ask for more. Only what you accept is recorded (the **Record in docs** button), including how the components that use it reach it. Never touches another component's files; unknowns become questions |
 | `/mod-legacy-report` | Guide | Explains the system in detail, with diagrams: what it's for, projects and the dependency tree, technologies and support status, data, integrations, features and flows, risks, where to start, and what's still pending. With no argument it writes `docs/legacy-report.md`; a topic (`summary`, `tech`, `data`…), a component, `flow "<process>"` or a question is answered in chat |
 | `/mod-modern-report` | Guide | Explains the migration in detail, with diagrams: what the new system is for, its target, the plan of execution, progress per component and wave, how old and new run side by side, risks, what's pending and the next steps. Before anything is planned it suggests a plan from the legacy layers. With no argument it writes `docs/modern-report.md`; a topic (`target`, `plan`, `progress`…), a component, `wave <n>`, `flow "<process>"` or a question is answered in chat |
 
@@ -57,6 +58,12 @@ Then plan each component with `/mod-deepdive <component>`. It maps the component
 and files, asks whether to migrate file by file or one flow at a time, and writes the plan
 the Scaffolder builds from in `docs/deepdive/`.
 
+For a component planned file by file, select **Scaffolder** and run
+`/mod-implement-port <component>`. It proposes the road map, the order to port the files in,
+leaf first, for you to accept or change. Then for each step you approve its plan, it ports
+the files with their tests, and you accept the changes or ask for more. **Record in docs**
+has the Guide record only what you accepted.
+
 `/mod-modern-report` shows the migration and its progress at any time. Tell the Guide
 what's done in plain words ("orders-core is built, all tests pass") and it records it in
 `docs/modern.md`.
@@ -69,7 +76,7 @@ what's done in plain words ("orders-core is built, all tests pass") and it recor
 - `docs/components/<component>.md`: one self-contained file per component, so you can pick
   any one and work on it alone. After `/mod-discover-comp` it also holds its files, where
   the logic lives, and a suggested approach (Port, Rewrite, Split or Keep) with its
-  reasons.
+  reasons. Once ported, it says how other components use its modern part.
 - `docs/questions.md`: everything the code couldn't tell, each with a working assumption.
   Answer them whenever you can; the work never waits.
 - `docs/legacy-report.md`: the system explained for a newcomer, with Mermaid diagrams,

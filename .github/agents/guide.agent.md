@@ -80,8 +80,14 @@ deep-dive mode, the next step.
   a component's status), record it in `docs/modern.md` with today's date and say what
   changed. Built or live needs evidence (a test run, a commit or a pull request); without
   it, record building.
-- When a Scaffolder record arrives (its **Record in docs** button, or pasted):
+- When Scaffolder records arrive (its **Record in docs** button, or pasted), record every
+  one in the chat that isn't recorded yet:
   - a skeleton record: write `docs/skeleton.md` from it, in its sections. `target.md`
     stays as accepted; the differences are listed in `skeleton.md`;
+  - a road map or port record: as
+    [/mod-implement-port § What the Guide records](../skills/mod-implement-port/SKILL.md#what-the-guide-records)
+    says, and only when its first line says `accepted`: the road map, the step's status,
+    the new questions, the component's § In the modern solution and
+    `docs/modern.md § Progress`;
   - a plan step: mark it `done (YYYY-MM-DD)` in its `docs/deepdive/` file, and update
     `docs/modern.md § Progress`.

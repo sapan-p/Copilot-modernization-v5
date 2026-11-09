@@ -3,9 +3,10 @@
 **Updated:** — · Kept by the Guide from what you decide and build. The legacy side is in
 [system.md](system.md); `/mod-modern-report` explains both together.
 
-`/mod-target` writes the target rows when you accept [target.md](target.md). For anything
-else, tell the Guide in plain words and it records it here, for example: "use the
-suggested plan", "orders-core is built, all tests pass".
+`/mod-target` writes the target rows when you accept [target.md](target.md), and the
+Scaffolder's **Record in docs** button records what it builds. For anything else, tell the
+Guide in plain words and it records it here, for example: "use the suggested plan",
+"orders-core is built, all tests pass".
 
 ## Target and decisions
 

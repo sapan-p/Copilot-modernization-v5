@@ -46,7 +46,8 @@ A chat answer ends with the next step it affects and the information it lacked (
 - The deep-dive plans in `docs/deepdive/` (their Status columns) for the components in
   scope.
 - The component files a section needs (search across `docs/components/` for the rows you
-  need when there are more than about 15).
+  need when there are more than about 15). Their § In the modern solution says what's
+  ported, how other components use it, and what it still waits for.
 - [diagrams.md](diagrams.md) and the rules in
   [../mod-legacy-report/diagrams.md](../mod-legacy-report/diagrams.md#rules-for-every-diagram)
   before you draw.
@@ -87,8 +88,9 @@ Each mismatch is a pending row: "tell the Guide to correct § Progress".
   3. no plan → agree a plan (the suggested one, or your own);
   4. components that are building → finish them;
   5. ready components of the current wave (the lowest wave not done), lowest layer first:
-     with no deep-dive plan → `/mod-deepdive <component>`; with one → its next step for
-     the Scaffolder;
+     with no deep-dive plan → `/mod-deepdive <component>`; with a port plan → Scaffolder:
+     `/mod-implement-port <component>`; with a flow plan → its next build step for the
+     Scaffolder;
   6. the next wave's foundation work, then its ready components.
 
 ## The full report
@@ -126,7 +128,7 @@ replacing the previous one. It starts with:
    - the next 3–5 steps in order (§ Derived facts), each with who does it and its command or
      what to tell the Guide;
    - what's left, by wave;
-   - blockers;
+   - blockers, including port steps left `partial` and the questions they rest on;
    - missing information (below).
 8. **Risks:** shared writes while old and new coexist, cycles not yet planned, legacy that
    stays live on out-of-support technology, modern parts without tests, decisions resting on
@@ -155,10 +157,11 @@ Give each wave its components, why now, and a suggested "done when".
 ## Component view
 
 For `<component>` (a legacy component, or a modern part named in § Progress):
-- what it does (from its component file), and what replaces it;
+- what it does (from its component file), what replaces it, and how other components use
+  it (§ In the modern solution);
 - its suggested approach, and its verdict and complexity in `target.md § 6`;
 - its status, evidence and wave, and whether it's ready or blocked, and by what;
-- its deep-dive plan, and the steps done of total;
+- its deep-dive plan, the steps done of total, and the next steps on its accepted road map;
 - the neighbourhood diagram, coloured by status;
 - the decisions that affect it, how it runs side by side with legacy, and its open questions;
 - its next step.
