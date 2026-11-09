@@ -264,9 +264,9 @@ work focused, and nothing is lost.
 **The road map runs out** (its steps are done, but files of the map aren't in any step):
 "Select the Guide and run `/mod-deepdive <component> files`: it continues the plan".
 
-**The component is built** (every step done and, for a Split component, every flow built
-with `/mod-implement-flow`; the whole test project passes): say so; the
-record's Component line says built. Then the options:
+**The component is built** (every step done and, for a Split component, every flow and
+screen built with `/mod-implement-flow` and `/mod-implement-ui`; the whole test project
+passes): say so; the record's Component line says built. Then the options:
 - **★ Record in docs;**
 - the components that use it (§ Used by), each with its next command:
   `/mod-implement-port <component>` when it has a port plan, or the Guide's
@@ -296,7 +296,7 @@ else isn't recorded; say so. For each accepted record not yet recorded:
 ```markdown
 ## In the modern solution
 
-**Status:** <building: k of n steps · j of m flows | built> · **Project:** `modern/…` · **Tests:** `modern/…`: <n> pass (YYYY-MM-DD) · **Updated:** YYYY-MM-DD
+**Status:** <building: k of n steps · j of m flows · s of t screens | built> · **Project:** `modern/…` · **Tests:** `modern/…`: <n> pass (YYYY-MM-DD) · **Updated:** YYYY-MM-DD
 
 **To use it:** reference `<project file>`; namespace `<modern>` (was `<legacy>`)<; the registration or configuration it needs>.
 
@@ -307,9 +307,11 @@ else isn't recorded; say so. For each accepted record not yet recorded:
 **Waits for:** <component: how it's reached until that one is built> · or —
 ```
 
-One row per public type whose use changed for its callers, and one per flow rebuilt with
-`/mod-implement-flow` (its legacy entry point, and what replaces it); the last row covers
-the rest. The Status leaves out steps or flows when the component has none.
+One row per public type whose use changed for its callers, one per flow rebuilt with
+`/mod-implement-flow` (its legacy entry point, and what replaces it), and one per screen
+rebuilt with `/mod-implement-ui` (the legacy screen, the new one, how to open it); the last
+row covers the rest. The Status leaves out steps, flows or screens the component doesn't
+have.
 
 ## Unknowns become questions
 

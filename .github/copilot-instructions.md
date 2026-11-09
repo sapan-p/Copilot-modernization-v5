@@ -17,7 +17,8 @@ build, one component at a time.
   - `target.md`: the target stack and feasibility plan, accepted by the developer;
   - `skeleton.md`: the modern solution as built, and its implementation choices;
   - `deepdive/<component>….md`: the migration plans, with their accepted road maps, that the
-    Scaffolder builds from (`/mod-implement-port`, `/mod-implement-flow`);
+    Scaffolder builds from (`/mod-implement-port`, `/mod-implement-flow`,
+    `/mod-implement-ui`);
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per
     component;
   - `legacy-report.md` and `modern-report.md`: the legacy system and the migration

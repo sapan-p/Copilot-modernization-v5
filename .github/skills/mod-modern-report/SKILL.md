@@ -90,7 +90,8 @@ Each mismatch is a pending row: "tell the Guide to correct § Progress".
   5. ready components of the current wave (the lowest wave not done), lowest layer first:
      with no deep-dive plan → `/mod-deepdive <component>`; with a port plan → Scaffolder:
      `/mod-implement-port <component>`; with a flow plan → Scaffolder:
-     `/mod-implement-flow <component>`;
+     `/mod-implement-flow <component>`; with screens to rebuild → Scaffolder:
+     `/mod-implement-ui <component>`;
   6. the next wave's foundation work, then its ready components.
 
 ## The full report

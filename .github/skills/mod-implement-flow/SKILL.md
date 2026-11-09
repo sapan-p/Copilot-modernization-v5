@@ -246,7 +246,7 @@ Waits for:   <component: how it's reached until it's built | —>
 Choices:     <implementation details chosen in this step, and why | —>
 Questions:   <each new question as a row in questions.md's columns; an existing one: Q-### + this component | —>
 Flow:        <k> of <n> steps done | built: every step done, every test passes
-Component:   <j> of <m> flows built | built: every flow built (and every port step done), the whole test project passes (<n> tests)
+Component:   <j> of <m> flows built | built: every flow built (and every port step and screen it has), the whole test project passes (<n> tests)
 ```
 
 Number new questions after the highest `Q-###` in `docs/questions.md` and any used earlier in
@@ -276,7 +276,7 @@ work focused, and nothing is lost.
 - **Review and commit:** look at `git -C modern diff`, then commit it yourself.
 
 **The component is built** (every flow built and, for a Split component, every port step
-done; the whole test project passes): say so; the record's Component line says built. Then
+and screen done; the whole test project passes): say so; the record's Component line says built. Then
 the options: **★ Record in docs**; the components that use it (§ Used by), each with its next
 command, first the ones whose **Waits for** names this component; **Review and commit.**
 

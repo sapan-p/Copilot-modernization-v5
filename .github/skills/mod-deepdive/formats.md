@@ -65,6 +65,9 @@ with `/mod-implement-port <component>`.
 - **Flow road map:** the order of the flows the developer accepted in `/mod-implement-flow`:
   `accepted YYYY-MM-DD · "<flow>" → "<flow>" (B1 → B3 → B2) → … · later: <flows, or —>`,
   set by the Guide.
+- **§ Screens:** added after § Port plan (or § File map) when the developer accepts a road
+  map in `/mod-implement-ui`; its format is in
+  [/mod-implement-ui § What the Guide records](../mod-implement-ui/SKILL.md#what-the-guide-records).
 - **Road map:** the order of the steps the developer accepted in `/mod-implement-port`:
   `accepted YYYY-MM-DD · P1 → P2 → P4 → … · later: <steps, or —>`, set by the Guide.
 - **Status:** `to do` · `done (YYYY-MM-DD)` · `partial (YYYY-MM-DD): <what's left>
