@@ -36,6 +36,8 @@ the plan needs the accepted target and solution" and stop. If the component has 
 - The component's file: § Identity, § Files, § Suggested approach, § Depends on, § Used by.
 - `docs/target.md`: its structure (§ 4), construct mapping (§ 3), port decisions (§ 5)
   and this component's verdict (§ 6).
+- `docs/skeleton.md`, when it's built: the projects' paths as built and the test
+  frameworks chosen.
 - Its rows in `docs/system.md`, `docs/modern.md` (decisions, plan) and the OPEN questions
   in `docs/questions.md`.
 - [formats.md](formats.md), and the diagram rules in
@@ -107,13 +109,13 @@ the mode and the link to the plan), then continue with § 3 or § 4 in the same 
 ## 3. File by file: the port plan
 
 In `docs/deepdive/<component>.md § Port plan`:
-- **Step 0,** if `modern/` doesn't have them yet (file search only): the new project and its
-  test project, as in `target.md § 4`.
+- **Step 0,** if `modern/` doesn't have them yet (file search only; `/mod-modern-skeleton`
+  normally built them): the new project and its test project, as in `target.md § 4`.
 - **Then leaf first:** level 0 before level 1, and so on up to the start files. A step is one
   file, or a few that go together (a class and its partial or designer file, a cycle); at
   most about 5 files.
 - **Each step:** the legacy files, the modern files (same relative path inside the project
-  that `target.md § 4` gives it), the changes (the blockers and replacements in
+  that `skeleton.md`, or else `target.md § 4`, gives it), the changes (the blockers and replacements in
   § Suggested approach, the construct mapping and port decisions in `target.md`, project
   and namespace changes), what it needs (earlier steps, other components, fakes).
 - **Unit tests for each step:** for each public member, at least the happy path, the

@@ -41,8 +41,8 @@ A chat answer ends with the next step it affects and the information it lacked (
 
 ## Read
 
-- `docs/modern.md`, `docs/target.md`, `docs/system.md`, and the OPEN rows of
-  `docs/questions.md`.
+- `docs/modern.md`, `docs/target.md`, `docs/skeleton.md`, `docs/system.md`, and the OPEN
+  rows of `docs/questions.md`.
 - The deep-dive plans in `docs/deepdive/` (their Status columns) for the components in
   scope.
 - The component files a section needs (search across `docs/components/` for the rows you
@@ -83,12 +83,13 @@ Each mismatch is a pending row: "tell the Guide to correct § Progress".
 - **Blocked:** not ready, or one of its H-risk questions is OPEN. Say by what.
 - **Next steps,** first match wins:
   1. no accepted target or solution → `/mod-target <your stack>`, or accept the draft;
-  2. no plan → agree a plan (the suggested one, or your own);
-  3. components that are building → finish them;
-  4. ready components of the current wave (the lowest wave not done), lowest layer first:
+  2. `docs/skeleton.md` not BUILT → Scaffolder: `/mod-modern-skeleton`;
+  3. no plan → agree a plan (the suggested one, or your own);
+  4. components that are building → finish them;
+  5. ready components of the current wave (the lowest wave not done), lowest layer first:
      with no deep-dive plan → `/mod-deepdive <component>`; with one → its next step for
      the Scaffolder;
-  5. the next wave's foundation work, then its ready components.
+  6. the next wave's foundation work, then its ready components.
 
 ## The full report
 

@@ -40,7 +40,7 @@ without a deep pass (`/mod-discover-comp`) are still planned, marked "discovery 
 
 1. Map the developer's stack text onto the layers the legacy system has: UI (desktop or web),
    API and services, business logic, data access, database, batch and jobs, messaging, files
-   and shares, reports, identity. Add hosting, build and deploy, and testing.
+   and shares, reports, identity. Add hosting.
 2. For each layer with no clear choice in the text, ask with `askQuestions` (header "Target",
    at most 4 questions per call):
    - 2–4 realistic options that fit the rest of the stack, each with a one-line reason and its
@@ -53,7 +53,9 @@ without a deep pass (`/mod-discover-comp`) are still planned, marked "discovery 
    become questions). It never blocks the plan.
 
 Ask nothing else. Goals, constraints and port decisions are proposed in the draft, from the
-context, and the developer changes them at review (§ 5).
+context, and the developer changes them at review (§ 5). Implementation details (package
+managers, test frameworks, linters and formatters, build settings, generator commands)
+aren't part of the target: `/mod-modern-skeleton` settles them with the developer.
 
 ## 3. Check what the records don't cover
 
@@ -82,9 +84,9 @@ Write `docs/target.md` with Status DRAFT, keeping its sections and columns:
 4. **Target structure (the modern solution):** the `modern/` tree down to each project's top
    folders; the projects table (name · kind · framework · references · the legacy
    components it receives · its test project), so every component lands somewhere or
-   says why not; then conventions (naming, namespaces, folders, nullable, analyzers),
-   test frameworks, and the generator commands in order. At most about 40 lines. This is
-   what the Scaffolder builds, and the P0 step of every port plan. It's accepted on its
+   says why not; then the naming conventions (solution and project names, root
+   namespace, folders). At most about 40 lines. Implementation details are left to
+   `/mod-modern-skeleton`. This is what the Scaffolder builds, and the P0 step of every port plan. It's accepted on its
    own, right after the plan (§ 6).
 5. **Port decisions:** the cross-cutting choices, each proposed with a reason: behaviour parity
    first or improve while porting; data schema unchanged or migrated; language (VB.NET kept
@@ -148,7 +150,8 @@ from § 4 of the plan, and what `modern/` already holds (file search only):
 - **the references diagram** (below);
 - **where each legacy component goes:** component → project, with its verdict; Keep and
   Retire components say "stays legacy" or "retired";
-- **conventions and generator commands,** in the order the Scaffolder runs them;
+- **the naming conventions;** the implementation details (package manager, test frameworks,
+  tooling) are settled with the Scaffolder in `/mod-modern-skeleton`;
 - what's still open: an `undecided` layer, with its question.
 
 Then ask with `askQuestions` (header "Solution"):
@@ -169,8 +172,8 @@ do:
 
 | Option | What to do |
 |---|---|
-| **Build the solution skeleton** (★ when `modern/` has no solution yet) | Select **Scaffolder** in the chat's agent picker and type: `Build the solution skeleton from docs/target.md § 4`. It shows its plan (projects, commands) and waits for your approval |
-| **Deep-dive the first component** (★ when the skeleton exists) | `/mod-deepdive <component>`, run here. Name it: the lowest layer, a Port, the lowest complexity |
+| **Build the solution skeleton** (★ when `docs/skeleton.md` isn't BUILT) | Select **Scaffolder** in the chat's agent picker and type `/mod-modern-skeleton`. It settles the names and implementation details with you, shows its plan, and waits for Run plan |
+| **Deep-dive the first component** (★ when the skeleton is built) | `/mod-deepdive <component>`, run here. Name it: the lowest layer, a Port, the lowest complexity |
 | **See the whole migration** | `/mod-modern-report`, run here: where things stand, a suggested wave plan, what's missing |
 | **Stop here** | Nothing now; `/mod-target` shows these options again later |
 

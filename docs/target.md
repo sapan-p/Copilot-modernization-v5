@@ -33,7 +33,10 @@ modern/
 | Project | Kind | Framework | References | Receives (legacy components) | Tests |
 |---|---|---|---|---|---|
 
-**Conventions:** — · **Generator commands:** —
+**Conventions:** —
+
+Implementation details (package manager, test frameworks, tooling) are settled in
+`/mod-modern-skeleton` and recorded in [skeleton.md](skeleton.md).
 
 ## 5. Port decisions
 

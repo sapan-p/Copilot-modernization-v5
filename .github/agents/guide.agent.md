@@ -80,5 +80,8 @@ deep-dive mode, the next step.
   a component's status), record it in `docs/modern.md` with today's date and say what
   changed. Built or live needs evidence (a test run, a commit or a pull request); without
   it, record building.
-- When the developer reports a step built from a deep-dive plan, also mark it
-  `done (YYYY-MM-DD)` in its `docs/deepdive/` file.
+- When a Scaffolder record arrives (its **Record in docs** button, or pasted):
+  - a skeleton record: write `docs/skeleton.md` from it, in its sections. `target.md`
+    stays as accepted; the differences are listed in `skeleton.md`;
+  - a plan step: mark it `done (YYYY-MM-DD)` in its `docs/deepdive/` file, and update
+    `docs/modern.md § Progress`.

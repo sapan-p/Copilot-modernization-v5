@@ -14,6 +14,7 @@ build, one component at a time.
     suggested approach once `/mod-discover-comp` has read it;
   - `questions.md`: the question bank;
   - `target.md`: the target stack and feasibility plan, accepted by the developer;
+  - `skeleton.md`: the modern solution as built, and its implementation choices;
   - `deepdive/<component>….md`: the migration plans the Scaffolder builds from;
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per
     component;
