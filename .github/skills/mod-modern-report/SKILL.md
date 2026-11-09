@@ -192,4 +192,4 @@ row per item: what's missing · why it helps · what to tell the Guide.
 | Built or live without evidence | "orders-core tests passed today, 42 of 42" |
 | Components that may stay legacy | "keep the vendor DLL wrapper as it is, because…" |
 | Dates, for a timeline | "wave 1 runs January to March 2027" |
-| OPEN H-risk questions on the next wave's components | answer them to the Guide in chat |
+| OPEN H-risk questions on the next wave's components | answer them with `/mod-answer` |

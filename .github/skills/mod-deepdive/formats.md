@@ -12,7 +12,8 @@ Set by the Guide from the Scaffolder's accepted build records:
 - **A step** (a port step, a flow's build step, a screen's step): `to do` ·
   `done (YYYY-MM-DD)` · `partial (YYYY-MM-DD): <what's left> (Q-###)`, then, when it happens,
   `· reworked (YYYY-MM-DD): <what>` · `· fixed (YYYY-MM-DD): <what>` ·
-  `to do · reverted (YYYY-MM-DD)`.
+  `to do · reverted (YYYY-MM-DD)` · `· re-check (YYYY-MM-DD): Q-### answered` (set by
+  `/mod-answer`; it stays until a rework or fix of the step is recorded).
 - **An item** in the order of work: `to do` · `building (<k> of <n> steps)` ·
   `done (YYYY-MM-DD)` · `partial: Q-###`.
 - **A plan file** (`logic.md`, `sdd.md`, `tdd.md`, a screen plan): `in progress` ·

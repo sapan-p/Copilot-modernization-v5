@@ -165,7 +165,7 @@ first.
 | Components without a deep pass (Deep not ✓) | `system.md § Discovery progress` | `/mod-discover-comp` |
 | Binary sources (Readability `binary`) | component files | export the text under `legacy/`, then `/mod-discover <component>` |
 | Unresolved links (target `? <hint>`) | `system.md § Dependencies` | the question that names it |
-| OPEN questions | `questions.md` | answer them to the Guide in chat |
+| OPEN questions | `questions.md` | answer them with `/mod-answer` |
 | What discovery doesn't record: business rules, data schemas, screens, runtime behaviour | — | `/mod-deepdive <component>` (business rules, flow by flow) · `/mod-discover-comp <component> "<what>"` |
 
 The last row explains why features and flows are inferred. Always include it.

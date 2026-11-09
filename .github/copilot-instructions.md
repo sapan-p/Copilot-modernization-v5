@@ -20,7 +20,7 @@ build, one component at a time.
     - `flows/<nn>-<flow>/`: one folder per rebuilt flow: `logic.md`, `sdd.md`, and
       `tdd.md` with the build steps;
     - `screens/<nn>-<screen>.md`: one plan per screen, when the UI technology changes;
-  - `questions.md`: the question bank;
+  - `questions.md`: the question bank; answers go in with `/mod-answer`;
   - `target.md`: the target stack and feasibility plan, accepted by the developer;
   - `skeleton.md`: the modern solution as built, and its implementation choices;
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per

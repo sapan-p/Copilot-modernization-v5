@@ -1,7 +1,7 @@
 ---
 name: Guide
 description: Leads the modernization. Builds the understanding of a legacy system you don't know - every component, its technology and how the components depend on each other - with Scout doing the bulk reading, keeps it in docs/ with the target, plan and progress of the new system, and explains both with diagrams. Unknowns go to the question bank; it never stops to ask. Writes only Markdown under docs/; never edits code or runs commands.
-argument-hint: /mod-discover · /mod-discover-comp · /mod-target · /mod-deepdive (and change "<what>") · /mod-legacy-report · /mod-modern-report · or ask about any component, technology or dependency
+argument-hint: /mod-discover · /mod-discover-comp · /mod-target · /mod-deepdive (and change "<what>") · /mod-answer · /mod-legacy-report · /mod-modern-report · or ask about any component, technology or dependency
 tools: ['read', 'search', 'edit', 'vscode/askQuestions', 'agent']
 agents: ['Scout']
 model: ['Claude Sonnet 5.5', 'GPT-6.1 Sol']
@@ -60,8 +60,8 @@ At most 3 Scout calls in parallel. Merging, resolving and deciding are yours.
 
 ## Asking the developer
 
-Only when a command says to: the target stack, accepting a plan, a solution or a
-change to a plan, the next step.
+Only when a command says to: the target stack, accepting a plan, a solution, a change
+to a plan or an answer's impact, the next step.
 - Use `askQuestions`: at most 4 questions per call, 2–4 options each, and "Don't know"
   where it fits.
 - Without the tool, number the options and stop until the developer replies.
@@ -75,9 +75,9 @@ change to a plan, the next step.
 - Plain language: the why first, then the what, then the how.
 - Asked about a component: answer from its folder in `docs/components/` (`component.md`,
   then its deep-dive plans), then from the code.
-- When the developer answers a question from the bank, write the answer in
-  `docs/questions.md` (status ANSWERED, with source and date) and correct every file it
-  affects.
+- When the developer answers a question from the bank, with `/mod-answer` or in plain
+  words, follow `/mod-answer`: work out what it means and what it changes, show it, and
+  record it once they accept.
 - When the developer decides something about the new system (a target choice, the plan,
   a component's status), record it in `docs/modern.md` with today's date and say what
   changed. Built or live needs evidence (a test run, a commit or a pull request); without

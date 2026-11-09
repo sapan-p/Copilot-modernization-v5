@@ -65,8 +65,9 @@ and put what you find first in § 2:
   tests), then review it (§ 5) like a new step;
 - **your own edits:** changed files of accepted steps. Run their tests, and offer to record
   them as a rework by the developer;
-- **answered:** a `TODO(Q-###)` marker whose question is now ANSWERED. Offer a follow-up:
-  apply the answer to the code and its tests, and remove the marker;
+- **answered:** a `TODO(Q-###)` marker whose question is now ANSWERED, or a step marked
+  `re-check: Q-### answered`. Offer a follow-up (a rework): apply the answer to the code
+  and its tests, and remove the marker;
 - **no longer waiting:** a component or step under **Waits for** that's now built. Offer a
   follow-up that switches to it.
 
@@ -211,6 +212,7 @@ Accept → record.
 | "this is wrong", "the screen differs from legacy" | **a fix** | compare the code with the legacy lines and the plan, show the cause, and propose ★ a fix as a step. When legacy really does what was seen and the plan was wrong, the correction goes under Plan changes |
 | "undo P3" | **revert** | delete the files the step created and restore the ones it changed, never with a git command. List what depends on it first |
 | a question ("why does it round like this?") | a question | answer from the plan and the legacy lines; change nothing |
+| an answer to an open question ("Q-031: it's 10%") | an answer | the Guide records answers, and works out everything else they change: "Select the Guide and run `/mod-answer Q-031: <answer>`". This step goes on with the working assumption, or with the answer when the developer says so, noted under Changes |
 | a problem outside the code: a missing SDK, a failed restore, a database it can't reach | an environment problem | say what's wrong and what to do; change no code; offer **Retry** |
 
 Never weaken a test. An expected value changes only for a decision the developer confirmed,
