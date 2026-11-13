@@ -8,7 +8,9 @@ section or a row with nothing to say. Every fact cites `path:line`.
 
 ## Statuses
 
-Set by the Guide from the Scaffolder's accepted build records:
+Set by the Scaffolder or the Mentor when the developer accepts a build record
+(`/mod-implement § 6`, `/mod-implement-manual § 5`), or by the Guide from one pasted into its
+chat:
 - **A step** (a port step, a flow's build step, a screen's step): `to do` ·
   `done (YYYY-MM-DD)` · `partial (YYYY-MM-DD): <what's left> (Q-###)`, then, when it happens,
   `· reworked (YYYY-MM-DD): <what>` · `· fixed (YYYY-MM-DD): <what>` ·

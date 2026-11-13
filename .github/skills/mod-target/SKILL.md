@@ -32,7 +32,7 @@ without a deep pass (`/mod-discover-comp`) are still planned, marked "discovery 
 - Every component file: § Technology, § Modernization signals, § Files and § Suggested
   approach. With more than about 15 components, search across `docs/components/` for those
   rows instead of opening every file.
-- The OPEN questions in `docs/questions.md`.
+- The OPEN rows of `docs/questions.md` (search `| OPEN |`; never the whole bank).
 - `docs/target.md` and `docs/skeleton.md`, to keep their sections and table columns.
 - What `modern/` holds (file search only).
 - [deep-signals.md](../mod-discover-comp/deep-signals.md) § 1 (platform) and § 2 (port
@@ -295,4 +295,4 @@ Never block the plan. Stack choices are the only thing you ask the developer.
 | Code beyond a skeleton in an existing solution whose legacy counterpart can't be told | Functional | Developer | "it's new work, not a migrated component (risk L)" |
 
 **Questions:** add rows in the format at the top of `docs/questions.md`. The next ID follows
-the highest `Q-###` there. Write each so the person asked can answer without the code.
+the highest of the IDs in its table and its **Highest archived ID:** line. Write each so the person asked can answer without the code.

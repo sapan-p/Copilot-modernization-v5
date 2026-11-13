@@ -29,7 +29,8 @@ that isn't a component: list the 3 closest names and stop.
 
 - The component's `docs/components/<component>/component.md`, and its rows in
   `docs/system.md`.
-- The OPEN questions in `docs/questions.md`, so you don't log duplicates.
+- The OPEN rows of `docs/questions.md` (search `| OPEN |`; never the whole bank), so you
+  don't log duplicates.
 - `docs/target.md` (draft or accepted) and `docs/modern.md § Target and decisions`: the
   approach depends on the target.
 - [deep-signals.md](deep-signals.md), and the mechanisms in
@@ -175,7 +176,8 @@ Never ask the developer, never wait for an answer, and never leave an unknown on
 ## Formats
 
 **Questions:** add rows to `docs/questions.md` in the format at the top of that file. The
-next ID follows the highest `Q-###` there. Write each so the person asked can answer it
+next ID follows the highest of the IDs in its table and its **Highest archived ID:** line.
+Write each so the person asked can answer it
 without the code: what we need to know, and why it matters for the migration.
 
 Add these sections to the component file, after § Modernization signals:

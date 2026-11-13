@@ -70,7 +70,9 @@ the 3 closest names and stop.
 - `docs/skeleton.md`, when it's BUILT or EXISTING: the projects' paths as built and the test frameworks
   chosen.
 - Its rows in `docs/system.md` and `docs/modern.md` (decisions, plan), and this component's
-  rows in `docs/questions.md`: OPEN ones, and ANSWERED ones, which can change a rule.
+  rows in `docs/questions.md`, found by search (never the whole bank): OPEN ones, and
+  ANSWERED ones, which can change a rule. A `Q-###` cited in a plan that isn't there is in
+  `docs/archive/questions.md`: settled, and already applied to the plans.
 - [formats.md](formats.md), [runtime-differences.md](runtime-differences.md), and the diagram
   rules in [../mod-legacy-report/diagrams.md](../mod-legacy-report/diagrams.md#rules-for-every-diagram).
 
@@ -397,4 +399,4 @@ the next step. Never ask the developer about the legacy system, and never wait f
 | A Scout "Unknowns" line, or a "Not covered" part still open after one follow-up | by topic | by topic | the narrowest reading |
 
 **Questions:** add rows in the format at the top of `docs/questions.md`. The next ID follows
-the highest `Q-###` there. Write each so the person asked can answer without the code.
+the highest of the IDs in its table and its **Highest archived ID:** line. Write each so the person asked can answer without the code.

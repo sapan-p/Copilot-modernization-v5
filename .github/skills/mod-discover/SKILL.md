@@ -25,7 +25,8 @@ README)".
 
 ## Read
 
-- `docs/system.md`, and the OPEN questions in `docs/questions.md` so you don't log duplicates.
+- `docs/system.md`, and the OPEN rows of `docs/questions.md` (search `| OPEN |`; never the
+  whole bank) so you don't log duplicates.
 - [technology-signals.md](technology-signals.md) for Step 1.
 - [communication-catalog.md](communication-catalog.md) for Step 2.
 
@@ -144,7 +145,7 @@ the other components' side (risk if wrong: H)".
 ## Formats
 
 **Questions:** add rows to `docs/questions.md` in the format at the top of that file. The
-next ID follows the highest `Q-###` there.
+next ID follows the highest of the IDs in its table and its **Highest archived ID:** line.
 
 **System:** keep the sections and table columns of `docs/system.md`. Mermaid conventions:
 `orders_mvc[orders-mvc]` for a component, `orders_db[(Orders DB)]` for a database,

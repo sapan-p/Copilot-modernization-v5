@@ -1,6 +1,6 @@
 ---
 name: mod-implement
-description: "Scaffolder. Builds one component in modern/, step by step, from its accepted /mod-deepdive plan. Copilot picks the next step from the order of work, whatever its kind (port a file, build a flow test first, rebuild a screen), says why, plans it, builds it after you choose Run plan, and asks you to accept the changes or ask for more; only what you accept is recorded. At any point you can ask in plain words: change this step, rework or revert an accepted one, change a behaviour, fix what's wrong, or re-plan. When it's stuck, it shows what it tried and lets you choose the way out. Unknowns become questions: three tries, then the next step."
+description: "Scaffolder. Builds one component in modern/, step by step, from its accepted /mod-deepdive plan. Copilot picks the next step from the order of work, whatever its kind (port a file, build a flow test first, rebuild a screen), says why, plans it, builds it after you choose Run plan, and asks you to accept the changes or ask for more; only what you accept is recorded, in docs/, right away. Every choice is a click, and a tracker shows where each step is. The code it writes cites the legacy file, method and lines it came from, so you can trace and compare any part. At any point you can ask in plain words: change this step, rework or revert an accepted one, change a behaviour, fix what's wrong, or re-plan. When it's stuck, it shows what it tried and lets you choose the way out. Unknowns become questions: three tries, then the next step."
 argument-hint: "<component> [your instructions] · <component> <step | file | flow nn | screen nn> · <component> road map"
 disable-model-invocation: true
 ---
@@ -11,9 +11,12 @@ disable-model-invocation: true
 
 The plan decides what to build and in what order; the developer decides, step by step, that
 it's right. Every step, whatever its kind, goes through the same loop: plan → **Run plan** →
-build → review → **Accept** → record. **Nothing is recorded before the developer accepts
-it.** VS Code asks before every edit and command. Build only this component; another
-component is reached the way the plan says.
+build → review → **Accept and record**. **Nothing is recorded before the developer accepts
+it,** and what they accept you record in `docs/` yourself, at once (§ 6). VS Code asks before
+every edit and command. Build only this component; another component is reached the way the
+plan says. A developer who wants to build a step themselves, guided, uses the Mentor's
+[/mod-implement-manual](../mod-implement-manual/SKILL.md) on the same plan and records: the
+two can take turns on one component.
 
 Each kind of step has a recipe. Read it when a step of that kind comes up:
 
@@ -32,6 +35,25 @@ shape the steps of this chat, and the records keep them.
 | `<component>` | § 1, then § 2: the next step on the order of work |
 | `<component> <step \| file \| flow nn \| screen nn>` | § 1, then § 3 for that step (`P3`, `F02-B1`, `S01-U1`), or the next step of that file, flow or screen |
 | `<component> road map` | § 1, then the order of work, to review or change it (§ 2) |
+
+**Every choice is clickable.** Wherever the developer decides, ask with `askQuestions`; never
+ask in prose while the tool is there. That's every stop of the loop: Next and Road map (§ 2),
+Plan (§ 3), Review (§ 5), Next step (§ 6) and Stuck (§ 8); the confirmations in § 7 (a
+decision, a revert, a pause); and an implementation choice (a package, a design detail). The recommended option
+first (★), 2–4 options, at most 4 questions per call; "Other…" always takes plain words.
+Use these labels, so each stop looks the same every time: **Run plan** · **Change
+something** · **Cancel** · **Accept and record** · **Discard this step** · **Build
+`<step>`**. Only without the tool, number the options, say the word to reply, and stop.
+
+**The tracker.** The first line of every reply about a step shows where it is in the loop:
+
+```text
+P3 · ✓ Plan ▸ ✓ Run plan ▸ ✓ Build ▸ ● Review ▸ ○ Accept ▸ ○ Record
+```
+
+`✓` done, `●` now, `○` to come. Accept and Record are done together: one click accepts the
+step and records it. A change sends it back to the stage it reopens (a plan change → `● Plan`;
+a code change in review → `● Build`).
 
 **Gate,** in this order. The first that fails says what to do, and you stop:
 - not a component: list the 3 closest names;
@@ -53,8 +75,16 @@ shape the steps of this chat, and the records keep them.
 - `docs/target.md` § 2–5, and `docs/skeleton.md`: the project paths, test frameworks,
   implementation choices, and the build, test and run commands.
 - § In the modern solution of each component this one depends on, when it has one.
-- `docs/questions.md`: this component's rows. OPEN ones give their working assumptions;
-  ANSWERED ones can change what the code must do.
+- `docs/questions.md`: this component's rows, found by search (never the whole bank). OPEN
+  ones give their working assumptions; ANSWERED ones can change what the code must do. A
+  `Q-###` cited in the plan or the code that isn't there is in `docs/archive/questions.md`:
+  settled, and already applied.
+- `docs/modern.md`: this component's rows in § Progress and § Work in progress (a paused
+  step to pick up), which you update when you record (§ 6); § Target and decisions, the rows
+  whose Area is this component or a layer (UI, data, hosting…), not other components', where
+  a decision dated after `target.md` was accepted wins over it; and § Improvements: one
+  that's being built and touches this component's projects (its plan in `docs/improvements/`
+  says what it changes).
 - `modern/`: the component's projects and tests as they are now.
 - For the step: the legacy files it moves, or the lines its rules cite, read whole. `legacy/`
   is read-only.
@@ -63,8 +93,8 @@ shape the steps of this chat, and the records keep them.
 and put what you find first in § 2:
 - **unrecorded:** a step not marked done whose modern files exist. Verify it (build, run its
   tests), then review it (§ 5) like a new step;
-- **your own edits:** changed files of accepted steps. Run their tests, and offer to record
-  them as a rework by the developer;
+- **your own edits:** changed files of accepted steps. Run their tests, and offer to review
+  them as a rework by the developer (§ 5): they're recorded only after **Accept and record**;
 - **answered:** a marker naming a question that's now ANSWERED (`TODO`, `RECHECK` or
   `BLOCKED` with its `Q-###`), or a step marked `re-check: Q-### answered`. Offer a follow-up (a rework): apply the answer to the code
   and its tests, and remove the marker;
@@ -93,7 +123,9 @@ component, or anything in plain words (§ 7).
   and ask again.
 - **The road map:** the order of work with its statuses. A change (another order, an item
   left for later) must keep each item after its Needs: say which, and offer the nearest order
-  that works. An accepted change is a record of kind `order`.
+  that works. Show the new order and its record (kind `order`), and ask (header "Road map"):
+  ★ **Accept and record** · **Change something** · **Cancel**. Only an accepted change is
+  recorded.
 
 ## 3. Plan the step (no changes yet)
 
@@ -121,7 +153,10 @@ ask again. Without the tool, ask "Reply `run`, or say what to change, or `cancel
    file, a comment where each rule is enforced, where legacy behaviour is kept on purpose,
    and where the port or a decision changed something, a comment on each test, and a
    marker with its ID wherever something is unresolved (`TODO`, `RECHECK`, `BLOCKED`,
-   `WAITS`).
+   `WAITS`). **Trace it back to legacy:** a `Legacy:` reference (the full `legacy/` path, the
+   lines, the type and member) on the file header, on every type, member and block whose
+   logic comes from legacy, on each rule, and on each test's expected value. Cite only lines
+   you read in this step.
 3. **Build and test:** the build, this step's tests, then the whole test projects, so nothing
    built earlier breaks. Quote the lines that show each result.
 4. **A failing test:** fix the code, never the test. At most three focused attempts; then
@@ -138,10 +173,16 @@ Nothing is recorded yet. Show:
 - what the recipe adds to the review;
 - the questions it rests on, the new ones with their working assumptions; for a `partial`
   step, what's left;
-- the markers added and removed, each with what makes it go away.
+- the markers added and removed, each with what makes it go away;
+- **the trace back to legacy:** each type and member written or changed, with its `Legacy:`
+  reference (`OrderPricing.ApplyDiscount ← legacy/Orders/Pricing/PriceCalculator.cs:41-58 ·
+  PriceCalculator.ApplyDiscount(Order)`), and any that has none, named. A member with legacy
+  logic and no reference is fixed before you ask; new code with no legacy origin says so
+  (`Legacy: none (new: …)`). In chat only: the code comments are the trace.
 
 Then ask with `askQuestions` (header "Review"):
-- **Accept the changes** (★ when every test passes);
+- **Accept and record** (★ when every test passes): the step is accepted, and you record it
+  in `docs/` (§ 6);
 - **Change something** (the developer says what): make it, build and test again, and come
   back to this review;
 - **Discard this step:** undo its changes (delete the files it created, restore the ones it
@@ -152,7 +193,8 @@ Without the tool, ask "Reply `accept`, or say what to change, or `discard`", and
 
 ## 6. Record, then the next step
 
-Only after **Accept**, show the **build record**:
+Only after **Accept and record**, show the **build record**, then write it to `docs/` at once,
+as [§ What gets recorded](#what-gets-recorded) says:
 
 ```text
 BUILD RECORD · <component> · <step> · <build | rework | fix | revert | order> · accepted YYYY-MM-DD
@@ -173,10 +215,16 @@ Markers:      <added: TODO(Q-031), WAITS(orders-core) · removed: RECHECK(F02-T6
 Progress:     <k> of <n> items done · <item>: <k> of <n> steps | component built: every item done, the whole test projects pass (<n> tests)
 ```
 
-Number new questions after the highest `Q-###` in `docs/questions.md` and any used earlier in
-this chat. You can't write `docs/`: the developer chooses the **Record in docs** button, and
-the Guide records every accepted record in this chat not yet recorded. Or they paste the
-records to the Guide.
+**Question IDs:** read the highest `Q-###` in `docs/questions.md` (its table and its
+**Highest archived ID:** line) just before you write (the Guide may have added or archived
+some since the chat began), and number new questions after it and any used earlier in this
+chat. An ID in the record that's taken by then → the next free one: rename
+its `TODO(Q-###)` markers and test comments in `modern/` in the same step, and say so.
+
+Then write the record, and say in one line what was written where (`port.md P3 → done ·
+deepdive.md: 9 of 24 · modern.md § Progress · component.md § In the modern solution ·
+questions.md: Q-047`). A rejected edit: say what wasn't saved, and offer **Write it again**;
+the record stays in the chat.
 
 Then show the progress line and the next ready steps, and ask with `askQuestions` (header
 "Next step"):
@@ -185,21 +233,21 @@ Then show the progress line and the next ready steps, and ask with `askQuestions
 |---|---|
 | **★ Build `<next step>`** (what, and why) | Here: its plan (§ 3) |
 | **Another step, or change the road map** | Here: say which, or what to change (§ 2) |
-| **Record in docs** | Choose the **Record in docs** button below. To carry on, select the Scaffolder in a new chat and type `/mod-implement <component>`: it continues from the records |
-| **Change something in this step** | Say what: the change is made and reviewed again (§ 5), and the record is shown again |
+| **Rework this step** | Say what: a rework (§ 7), with its own plan, review and record |
+| **Continue in a fresh chat** | Everything accepted is already in `docs/`. Select the Scaffolder in a new chat and type `/mod-implement <component>`: it continues from the records |
 
-After about 5 steps in one chat, make **Record in docs** the ★ option: a fresh chat keeps the
-work focused, and nothing is lost.
+After about 5 steps in one chat, make **Continue in a fresh chat** the ★ option: a fresh chat
+keeps the work focused, and nothing is lost.
 
 **An item is done:** say so. When it's a flow, suggest confirming its rules with a business
 person: share its `logic.md` and `tdd.md`, then tell the Guide who confirmed them, and when.
 
 **The component is built** (every item in the order of work done; the whole test projects
-pass): say so; the record's Progress line says so. Then the options: **★ Record in docs**;
-the components that use it (§ Used by), each with its next command (`/mod-implement
-<component>` when its plan is accepted, or the Guide's `/mod-deepdive <component>`), first the
-ones whose **Waits for** names this component; **Review and commit:** look at `git -C modern
-diff`, then commit it yourself.
+pass): say so; the record's Progress line says so, and `docs/modern.md § Progress` now says
+built. Then the options: **★** the components that use it (§ Used by), each with its next
+command (`/mod-implement <component>` when its plan is accepted, or the Guide's `/mod-deepdive
+<component>`), first the ones whose **Waits for** names this component; **Review and commit:**
+look at `git -C modern diff`, then commit it yourself.
 
 ## 7. Changes and problems, at any point
 
@@ -211,15 +259,16 @@ Accept → record.
 |---|---|---|
 | a change to the current step, before it's accepted | a change | update the plan or the code, build and test, and review again |
 | a change to an accepted step ("in P3, use Dapper") | **rework** | a rework step on it. Its tests must still pass: the behaviour doesn't change |
-| a change of behaviour ("the discount is 10%", "drop this field") | **a decision** | name the rule and what legacy does (`F02-R3: 5%, Pricing.cs:41`), and ask the developer to confirm. Confirmed: build it, change the expected values it affects (their source: the decision), and record it under Decisions and Plan changes |
+| a change of behaviour ("the discount is 10%", "drop this field") | **a decision** | name the rule and what legacy does (`F02-R3: 5%, Pricing.cs:41`), and ask the developer to confirm. Confirmed: build it (plan → Run plan → build → review), change the expected values it affects (their source: the decision), and put it in the step's build record under Decisions and Plan changes: it reaches `docs/` only with **Accept and record** |
 | a package, library or tool | an implementation detail | suggest 2–4 options, ★ first with its reason; the developer chooses |
 | another framework, a database, a message broker | an architecture change | "That changes the architecture: select the Guide and run `/mod-target <change>`", and go on without it |
+| an improvement beyond the plan ("move the secrets to Key Vault", "use EF Core here", "refactor this") | **an improvement** | it needs options weighed and a plan of its own: "Select the Mentor and type `/mod-implement-manual discuss \"<what>\"`". Meanwhile, go on with the plan |
 | "rebuild this instead of porting it", a new flow or screen, or the plan doesn't fit the code | **re-plan** | it needs fresh analysis: "Select the Guide and run `/mod-deepdive <component> change \"<what>\"`". Meanwhile, offer the next step that doesn't depend on it |
 | "this is wrong", "the screen differs from legacy" | **a fix** | compare the code with the legacy lines and the plan, show the cause, and propose ★ a fix as a step. When legacy really does what was seen and the plan was wrong, the correction goes under Plan changes |
 | "undo P3" | **revert** | delete the files the step created and restore the ones it changed, never with a git command. List what depends on it first |
 | a question ("why does it round like this?") | a question | answer from the plan and the legacy lines; change nothing |
 | an answer to an open question ("Q-031: it's 10%") | an answer | the Guide records answers, and works out everything else they change: "Select the Guide and run `/mod-answer Q-031: <answer>`". This step goes on with the working assumption, or with the answer when the developer says so, noted under Changes |
-| "pause", "switch to orders-web" | **pause** | finish or leave the current step: ★ **Review it now** · **Leave it for later** (its files stay in `modern/`, named in the pause record, and the next run reviews them) · **Discard it**. Then show this chat's unrecorded records and a pause record ([/mod-track § 5](../mod-track/SKILL.md#5-pause-and-switch)), ask to accept it, and say: "Choose **Record in docs**: the Guide records them and takes you to `<component>`" |
+| "pause", "switch to orders-web" | **pause** | finish or leave the current step: ★ **Review it now** · **Leave it for later** (its files stay in `modern/`, named in the pause record, and the next run reviews them) · **Discard it**. An accepted record of this chat whose edit was rejected (not in `docs/` yet): ask ★ **Write it again** · **Leave it out** (it stays in the chat, and the next run finds its files as unrecorded). Then show a pause record ([/mod-track § 5](../mod-track/SKILL.md#5-pause-and-switch)) and ask (header "Pause"): ★ **Accept and record** · **Change the note** · **Don't pause**. Accepted: write its row in `docs/modern.md § Work in progress`, then say: "Select the Scaffolder in a new chat and type `/mod-implement <component>`" (for a component that isn't ready to build, the Guide's `/mod-track <component>` instead) |
 | a problem outside the code: a missing SDK, a failed restore, a database it can't reach | an environment problem | say what's wrong and what to do; change no code; offer **Retry** |
 
 Never weaken a test. An expected value changes only for a decision the developer confirmed,
@@ -238,17 +287,22 @@ Then ask with `askQuestions` (header "Stuck"):
   `Pricing.cs:38` does";
 - **another fix,** when there is one;
 - **Keep it as a decision,** when the difference is acceptable (a behaviour change, § 7);
-- **Park it:** a question with the evidence, the step `partial`, a `BLOCKED(Q-###)` marker
-  where the code stops, and on to the next ready step;
+- **Park it:** a question with the evidence and a `BLOCKED(Q-###)` marker where the code
+  stops; then the review (§ 5) of the step as `partial`: what's built, what's left, and its
+  question. **Accept and record** records it `partial`; then on to the next ready step;
 - **Re-plan:** `/mod-deepdive <component> change "<what>"`.
 
 A fix the developer chooses is their decision, not a loop. Without the tool, number the
-options and stop. With no answer, park it: the work never waits.
+options and stop. With no answer, park it in `modern/` and the chat only (the marker, and the
+question in the chat): nothing reaches `docs/` until the developer accepts it, and the next run
+finds the step as unrecorded (§ 1) and reviews it. The work never waits.
 
-## What the Guide records
+## What gets recorded
 
-Only records the developer accepted: their first line says `accepted YYYY-MM-DD`. Anything
-else isn't recorded; say so. For each accepted record not yet recorded:
+You write it, right after the developer accepts the record (§ 6), changing only the sections
+below; the Guide follows the same rules for a record pasted into its chat. Only records the
+developer accepted: their first line says `accepted YYYY-MM-DD`. Anything else isn't
+recorded; say so. For each accepted record not yet recorded:
 - **the step's status** in its plan (`port.md`, the flow's `tdd.md § Build steps`, or the
   screen plan's § Steps), as
   [formats.md § Statuses](../mod-deepdive/formats.md#statuses) says, and the item's status in
@@ -260,12 +314,16 @@ else isn't recorded; say so. For each accepted record not yet recorded:
   a "May differ" row in the flow's `sdd.md § Behaviour parity` with the decision as its
   source;
 - **Questions:** the new rows in `docs/questions.md`, with their IDs. An ID already taken →
-  the next free one, and tell the developer which `TODO(Q-###)` markers to rename. An existing
-  question gets this component;
+  the next free one, and its `TODO(Q-###)` markers in `modern/` renamed in the same step (the
+  Guide, which doesn't edit code, names them for the developer instead). An existing question
+  gets this component;
 - **`component.md § In the modern solution`,** after § Deep-dives (below);
 - **`docs/modern.md § Progress`:** the component's row. The project is its modern part; the
   status is building, or built when the record says so; the evidence is the items done and
-  the test result with its date.
+  the test result with its date. Update **Updated:** at the top of `modern.md`;
+- **`docs/modern.md § Work in progress`:** a pause record adds the component's row
+  ([/mod-track § 5](../mod-track/SKILL.md#5-pause-and-switch)); the component's next build
+  record removes it.
 
 § In the modern solution holds what a component that uses this one needs, and nothing more:
 

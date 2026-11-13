@@ -1,15 +1,18 @@
 # Repository instructions for GitHub Copilot
 
 This workspace modernizes a legacy system into a new stack. The developer may not know the
-legacy system yet: Copilot builds the understanding first, then the developer leads the
-build, one component at a time.
+legacy system yet: Copilot builds the understanding first, then leads the build too, one
+component and one step at a time; the developer approves each plan and accepts each step.
+With the `Mentor`, the developer does the build themselves, guided step by step.
 
 ## Layout
 
 - `legacy/`: the legacy repository. Read-only for every agent.
 - `modern/`: the new code and its tests, commented as
-  `.github/instructions/modern-code.instructions.md` says.
-- `docs/`: what we know, written by the `Guide`:
+  `.github/instructions/modern-code.instructions.md` says: each part cites the legacy file,
+  lines and member it came from (`Legacy: legacy/…:41-58 · Type.Member`).
+- `docs/`: what we know, written by the `Guide`; the `Scaffolder` and the `Mentor` record the
+  work you accept (statuses, progress, decisions, new questions, `skeleton.md`) as they go:
   - `system.md`: the whole solution on one page. Read it first;
   - `components/<component>/`: one folder per component, everything about it in one place:
     - `component.md`: self-contained: what discovery found, its files and suggested
@@ -26,7 +29,9 @@ build, one component at a time.
   - `skeleton.md`: the modern solution as built (or as found, when it already existed), and
     its implementation choices;
   - `modern.md`: the new system: target and decisions, the plan in waves, progress per
-    component, and paused work (`/mod-track`);
+    component, paused work (`/mod-track`), and the improvements;
+  - `improvements/<nn>-<topic>.md`: one plan per improvement to the new system (Key Vault,
+    EF Core, a refactoring), from the Mentor's `/mod-implement-manual discuss`;
   - `reports/`: `legacy-report.md` and `modern-report.md`, the legacy system and the migration
     explained in detail, with diagrams. `/mod-legacy-report` and `/mod-modern-report`
     regenerate them; never edit them by hand.
@@ -39,9 +44,10 @@ Search only the folders a request needs.
 |---|---|---|
 | `Guide` | Leads: decides what to look at, reasons, explains, writes `docs/` | Markdown under `docs/` |
 | `Scout` | Reads and searches fast and cheaply; reports facts with citations | nothing |
-| `Scaffolder` | Builds the new system | files under `modern/` |
+| `Scaffolder` | Builds the new system, and records what you accept | files under `modern/`; in `docs/`, only the sections its accepted records update |
+| `Mentor` | Builds the new system with you, hands-on: explains each step, gives the full code and the commands, checks what you applied; discusses improvements | in `modern/`, only what you ask it to apply; in `docs/`, its accepted records and improvement plans |
 
-If you are not one of these three agents (for example the default Agent mode), don't edit
+If you are not one of these four agents (for example the default Agent mode), don't edit
 files or run commands in this workspace. Say which agent to use instead.
 
 ## Rules that always apply

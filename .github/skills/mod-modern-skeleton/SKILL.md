@@ -34,7 +34,7 @@ name, projects or "foundation only" answers those questions (§ 3) in advance.
 - `skeleton.md` is EXISTING (`/mod-target` recorded a solution that was already there):
   create nothing that's there. Add only the projects § 4 marks `to add`, ask only the
   details `skeleton.md` doesn't record, then restore, build and test the whole solution,
-  and record it BUILT.
+  and record it BUILT once the developer accepts the skeleton record (§ 6).
 
 ## 2. Check the tools
 
@@ -131,18 +131,17 @@ built:
 - **Commands:** restore, build, test and run, from `modern/`;
 - **Differs from target.md § 4:** the renames and other structure changes, or "nothing".
 
-You can't write `docs/`. The Guide records it: the developer chooses the **Record in docs**
-button under your answer, or selects the Guide and pastes the record.
-
 Then ask with `askQuestions` (header "Next step"). Each option says what happens and exactly
 what to do:
 
 | Option | What to do |
 |---|---|
-| **★ Record in docs** | Choose the **Record in docs** button below. The Guide writes `docs/skeleton.md` from the record |
+| **★ Accept and record** | Here: you write `docs/skeleton.md` from the record, in its sections (VS Code asks to approve each edit). `target.md` stays as accepted: what differs goes in `skeleton.md § Differs from target.md § 4` |
 | **Change the skeleton** | Say what, here. The plan is updated, and you choose Run plan again |
-| **Plan the first component** | After recording, select **Guide** and type `/mod-deepdive <component>` (the first component from `/mod-target`'s next step) |
+| **Plan the first component** | Once it's recorded, select **Guide** and type `/mod-deepdive <component>` (the first component from `/mod-target`'s next step) |
 | **Review and commit** | Look at `git -C modern diff`, then commit it yourself |
 
-Run "Change the skeleton" here. For the others, show the instruction and stop: only the
-developer can switch agents or commit.
+Run "Accept and record" and "Change the skeleton" here. After recording, say in one line what
+was written, and ask again with the other options. A rejected edit: say what wasn't saved, and
+offer to write it again. For the others, show the instruction and stop: only the developer can
+switch agents or commit.

@@ -46,13 +46,17 @@ flow in a chat; after that, its build steps as a table.
    test asserts too little) and report it. Strengthen a test that asserts too little; never
    weaken one.
 2. **Green:** write the code that makes them pass, following the design. Where a rule is
-   enforced, a comment names it by its flow ID, in business words, with its legacy line
-   (`// F02-R3: over the credit limit → ON HOLD (legacy OrderService.cs:88)`), as
-   [modern-code.instructions.md](../../instructions/modern-code.instructions.md) says.
+   enforced, a comment names it by its flow ID, in business words, with the legacy member
+   and lines it comes from
+   (`// F02-R3: over the credit limit → ON HOLD · Legacy: legacy/Orders/Services/OrderService.cs:88 · OrderService.Submit(Order)`),
+   as [modern-code.instructions.md](../../instructions/modern-code.instructions.md) says.
+   Each new type and member says which legacy methods on the flow's path (`logic.md`) it
+   replaces, with their lines; the rebuilt code doesn't mirror their structure, so this is
+   how the developer finds the legacy side to compare.
 3. **Tidy up:** with the tests green, remove duplication and make the names say what the rules
    say. The behaviour doesn't change; run the tests again.
 
 ## Review (§ 5)
 
-Each rule built, and where (`F02-R3 → modern/…:line`); the tests red, then green (or which
-weren't red, and why).
+Each rule built, and where (`F02-R3 → modern/…:line ← legacy/…:line · Type.Member`); the
+tests red, then green (or which weren't red, and why).

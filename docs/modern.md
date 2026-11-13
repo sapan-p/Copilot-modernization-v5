@@ -1,12 +1,14 @@
 # The modern system
 
-**Updated:** — · Kept by the Guide from what you decide and build. The legacy side is in
-[system.md](system.md); `/mod-modern-report` explains both together.
+**Updated:** — · Kept by the Guide from what you decide, and by the Scaffolder and the Mentor
+from what you accept as built. The legacy side is in [system.md](system.md);
+`/mod-modern-report` explains both together.
 
 `/mod-target` writes the target rows when you accept [target.md](target.md), and the
-Scaffolder's **Record in docs** button records what it builds. For anything else, tell the
-Guide in plain words and it records it here, for example: "use the suggested plan",
-"orders-core is built, all tests pass".
+Scaffolder and the Mentor record what's built each time you choose **Accept and record**. A
+decision here dated after `target.md` was accepted wins over it. For anything
+else, tell the Guide in plain words and it records it here, for example: "use the suggested
+plan", "orders-core is live since 2026-12-01".
 
 ## Target and decisions
 
@@ -46,4 +48,14 @@ Paused work, so it can be picked up exactly where it stopped. `/mod-track` recor
 when you pause, and it goes when the work carries on.
 
 | Component | Stopped at | In `modern/`, not accepted | Next | Note | Since |
+|---|---|---|---|---|---|
+
+## Improvements
+
+Changes to the new system beyond the plans (secrets to Key Vault, EF Core, a refactoring), one
+plan each in [improvements/](improvements/). Select the **Mentor** and type
+`/mod-implement-manual discuss "<what>"` to talk one through; it adds the row once you accept
+its plan.
+
+| # | Improvement | Scope | Status | Plan | Updated |
 |---|---|---|---|---|---|

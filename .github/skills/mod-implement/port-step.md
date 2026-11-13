@@ -54,12 +54,18 @@ wait on it, each with its status, one subgraph per level, following the
 1. **Tests first:** write the ported, planned and added tests.
 2. **Port the files** with exactly the planned changes. Comment them as
    [modern-code.instructions.md](../../instructions/modern-code.instructions.md) says: a
-   header naming the legacy file and the step, a `Port change` comment at each change, and a
-   `Kept from legacy` comment where odd-looking code stays as it is.
+   header naming the legacy file (its full `legacy/` path and the types it holds) and the
+   step, a `Port change` comment at each change, and a `Kept from legacy` comment where
+   odd-looking code stays as it is. **Every ported type and member, public or not,** gets a
+   `Legacy:` line with the member it came from and its lines
+   (`// Legacy: legacy/Orders/Pricing/PriceCalculator.cs:41-58 · PriceCalculator.ApplyDiscount(Order)`),
+   and `(was …)` when a name changed. A legacy method split into several, or several merged
+   into one: each piece cites its own lines.
 3. **A failing test:** compare the modern lines with the legacy lines they came from, and fix
    the port.
 
 ## Review (§ 5)
 
-For each file, what changed from the legacy file and why; and each behaviour risk with its
-test result.
+For each file, what changed from the legacy file and why; each behaviour risk with its
+test result; and each legacy member → its modern member, from the `Legacy:` lines (a legacy
+member of these files with no modern counterpart is named, with why).

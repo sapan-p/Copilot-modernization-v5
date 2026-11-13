@@ -2,6 +2,10 @@
 /legacy/
 /modern/
 
+# Backups of docs/ made before /mod-answer archive changes anything: local only (git history
+# keeps the committed versions)
+/.backup/
+
 # OS and editor noise
 .DS_Store
 Thumbs.db

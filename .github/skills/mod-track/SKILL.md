@@ -32,12 +32,15 @@ orders-web" → `switch orders-web`.
 - `docs/system.md`: § Components, § Dependencies, § Discovery progress.
 - `docs/target.md` (its status, its Solution, the verdicts in § 6) and `docs/skeleton.md`
   (its status).
-- `docs/modern.md`: § Plan (the waves), § Progress, § Work in progress, and § Target and
-  decisions.
+- `docs/modern.md`: § Plan (the waves), § Progress, § Work in progress, § Target and
+  decisions, and § Improvements (the plan in `docs/improvements/` of each one not done or
+  dropped: its **Status:** line and § Steps).
 - Each component's folder: `component.md` (§ Files, § Suggested approach, § In the modern
   solution), and `deepdive.md` (**Plan:**, § Order of work and its statuses, the state of its
-  plan files).
-- The OPEN rows of `docs/questions.md`, H risk by component.
+  plan files). A component that's built, live or kept: only its row in `modern.md § Progress`
+  and its § In the modern solution; its plans aren't needed here.
+- The OPEN rows of `docs/questions.md` (search `| OPEN |`; never the whole bank), H risk by
+  component; and how many rows are ANSWERED or CLOSED (a count by search).
 
 With more than about 15 components, search across `docs/components/` for the lines you need
 (`**Plan:**`, the § Order of work rows) rather than reading every file.
@@ -59,8 +62,8 @@ then moves through its stages:
 | **found** | a row in `system.md`, and its `component.md` | Guide: `/mod-discover-comp <component>` |
 | **analysed** | `component.md` § Files and § Suggested approach | Guide: `/mod-deepdive <component>` (after the target gate) |
 | **planning** | `deepdive.md`, with the plan not accepted or plans still being written | Guide: `/mod-deepdive <component>`: accept the plan, or it carries on writing the plans |
-| **ready to build** | the plan accepted, and nothing built yet | Scaffolder: `/mod-implement <component>` (after the skeleton gate) |
-| **building** | some items of the order of work done | Scaffolder: `/mod-implement <component>`, naming its next step |
+| **ready to build** | the plan accepted, and nothing built yet | Scaffolder: `/mod-implement <component>` (after the skeleton gate); or, to build it yourself, guided, Mentor: `/mod-implement-manual <component>` |
+| **building** | some items of the order of work done | Scaffolder: `/mod-implement <component>`, naming its next step; or Mentor: `/mod-implement-manual <component>` |
 | **built** | every item done, the tests pass (`modern.md § Progress`: built) | tell the Guide when it's live, with the evidence: "orders-core is live since …" |
 | **live** | used instead of the legacy component | — |
 | **kept** | stays legacy (`target.md § 6`, or a decision in `modern.md`) | — |
@@ -76,7 +79,16 @@ A component can also be:
   (`BLOCKED` and `RECHECK` first), unrecorded work in `modern/`, or records that don't
   match `modern/`.
 
+**The question bank needs attention** when `questions.md` holds 20 or more ANSWERED or CLOSED
+rows: every command reads it. Next action: Guide: `/mod-answer archive` (it checks which can
+move, and backs up `docs/` before it changes anything).
+
 **Ready:** not yet building, and not blocked.
+
+**An improvement** (a row in `modern.md § Improvements`) is `planned`, `building (k of n
+steps)`, `done` or `dropped`. Its next action: Mentor: `/mod-implement-manual improvement
+<nn>`; a step whose Needs aren't done, or a step for the Guide (`/mod-target <change>`), is
+named as such.
 
 **The next action overall,** first match wins:
 1. discovery isn't finished → Guide: `/mod-discover`;
@@ -85,7 +97,8 @@ A component can also be:
    `/mod-target existing` when `modern/` already holds the solution;
 4. no plan in waves (`modern.md § Plan`) → agree one: `/mod-modern-report plan` suggests it;
 5. a building or paused component that needs attention → that first;
-6. building or paused components → finish them, the most recently worked on first;
+6. building or paused components, and improvements being built → finish them, the most
+   recently worked on first;
 7. ready components of the current wave (the lowest wave not done), lowest layer first →
    their next action;
 8. the next wave's foundation work, then its ready components.
@@ -98,8 +111,9 @@ Show, in chat:
 - **the progress line:** `▓▓▓░░░░░░░ 3 of 12 components built · 2 building · 1 paused · 4 ready · 2 blocked · 2 kept`.
   Count components, not effort; kept ones are left out of the total;
 - **paused and in progress:** each with where it stopped and its next action;
-- **needs attention:** re-checks, parked steps, unrecorded work, mismatches, and the OPEN
-  H-risk questions that block something (→ `/mod-answer`);
+- **needs attention:** re-checks, parked steps, unrecorded work, mismatches, the OPEN
+  H-risk questions that block something (→ `/mod-answer`), and the question bank when it
+  needs archiving (→ `/mod-answer archive`);
 - **the components:**
 
   | Component | Wave | Stage | Progress | Next action | Blocked by |
@@ -109,11 +123,13 @@ Show, in chat:
   Order: building and paused first, then ready (by wave and layer), planning, analysed,
   found, blocked, and last built, live and kept. Over about 25 components, the first 15 and
   a count per stage for the rest;
+- **improvements,** when there are any planned or being built: `I01 Secrets from Key Vault ·
+  building 2 of 5 steps · next: Mentor: /mod-implement-manual improvement 01`;
 - **★ the next action** (§ 1): why, who does it, and exactly what to type.
 
 Then ask with `askQuestions` (header "Next"): **★ the next action**, up to two others from the
-board, and **Pause or switch**. A Guide action runs here. For the Scaffolder, show its
-instruction and stop: only the developer can switch agents. Without the tool, number the
+board, and **Pause or switch**. A Guide action runs here. For the Scaffolder or the Mentor,
+show its instruction and stop: only the developer can switch agents. Without the tool, number the
 options and stop.
 
 ## 3. One component
@@ -152,10 +168,11 @@ sure nothing is lost between them. It's recorded in `docs/modern.md § Work in p
 - **Note:** the developer's own words, or `—`.
 
 **Where the work happens decides who pauses it:**
-- **in the Scaffolder's chat** (`/mod-implement`): it pauses itself (its § 7). It finishes or
-  leaves the current step, then shows its unrecorded records and a pause record. The
-  developer records them all with **Record in docs**, and the Guide then shows the component
-  switched to (§ 3);
+- **in the Scaffolder's or the Mentor's chat** (`/mod-implement`, `/mod-implement-manual`):
+  it pauses itself (`/mod-implement § 7`). It finishes or
+  leaves the current step, writes any accepted record not in `docs/` yet, shows a pause
+  record, and records the row itself once the developer accepts it. It then gives the next
+  command for the component switched to;
 - **in the Guide's chat** (`/mod-deepdive`, `/mod-answer`…): what's written is already in
   `docs/`, and the plan files say `in progress`; the pause adds the row;
 - **with no chat to hand:** the row is built from the records and a file search of `modern/`,
@@ -164,7 +181,8 @@ sure nothing is lost between them. It's recorded in `docs/modern.md § Work in p
 Show the pause, then ask with `askQuestions` (header "Pause"): **★ Record the pause** ·
 **Change the note** · **Don't pause**. Record it only after Accept.
 
-The Scaffolder's pause record, recorded the same way:
+The Scaffolder's or the Mentor's pause record, recorded the same way (by them, or by you when
+it's pasted here and `docs/` doesn't show it yet):
 
 ```text
 PAUSE RECORD · <component> · accepted YYYY-MM-DD
@@ -188,12 +206,13 @@ or dropped.
 
 When the developer asks (`how`), or once, under the first board of a workspace:
 1. Start each session with `/mod-track`: what's paused, what needs attention, what's next.
-2. Build each component in its own chat. Choose **Record in docs** every few steps, and
-   before you stop.
+2. Build each component in its own chat. **Accept and record** writes each step to `docs/`
+   at once; start a fresh chat every 5 steps or so.
 3. Switching? Say "pause" in the chat you're in, or `/mod-track switch <component>`, so where
    you stopped is recorded.
 4. Answer questions as they come, with `/mod-answer`: an H-risk question can block a
-   component.
+   component. When the board says the question bank needs attention, run `/mod-answer
+   archive`: it backs up `docs/`, then moves the settled questions out of every command's way.
 5. Commit `modern/` after each recorded batch, so the code and the records match.
 6. Tell the Guide when something goes live, with the evidence.
 7. For others: `/mod-modern-report` writes the whole picture, with diagrams, to

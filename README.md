@@ -9,7 +9,8 @@ modernizing it piece by piece.
 |---|---|
 | **Guide** | Leads. Decides what to look at, reasons over what's found, explains it, and keeps `docs/` |
 | **Scout** | Reads the legacy code fast and cheaply for the Guide, and reports facts with citations |
-| **Scaffolder** | Builds the new system, only inside `modern/` |
+| **Scaffolder** | Builds the new system inside `modern/`, and records what you accept in `docs/` |
+| **Mentor** | Builds the new system with you, hands-on, so you learn it: explains each step, gives the full code and the commands, and checks what you applied. Discusses improvements to the new system with you |
 
 ## Commands
 
@@ -21,6 +22,7 @@ modernizing it piece by piece.
 | `/mod-modern-skeleton` | Scaffolder | Builds the solution skeleton in `modern/` from the accepted architecture, with you: names and scope, then every implementation detail (package manager, test frameworks, linters, build settings), each suggested with a recommendation for you to choose. Plans first, acts after you choose Run plan (generators, projects, test projects, references, entry-point stubs, then restore, build and test), and records the skeleton as built in `docs/skeleton.md`. Never changes the architecture; ask for changes at any point |
 | `/mod-deepdive` | Guide | Plans a component's migration: maps its files and numbered flows, then decides how each file moves (port the code, rebuild its logic through a flow, rebuild the screen, or keep it) and the order of work, for you to accept or change. Then it writes the plans that apply, with intense care for the legacy behaviour: `port.md` (port steps, unit tests, the runtime differences that could change behaviour), a numbered folder per rebuilt flow (`logic.md` with every method on its path read whole, `sdd.md`, `tdd.md` with the build steps), and a plan per screen (its inventory and UI/backend split). `/mod-deepdive <component> change "<what>"` re-plans |
 | `/mod-implement` | Scaffolder | Builds a component in `modern/`, step by step, from its accepted plan. It picks the next step from the order of work, whatever its kind (port a file, build a flow test first, rebuild a screen), says why, plans it, builds it after you choose Run plan, and asks you to accept the changes or ask for more; only what you accept is recorded. At any point, ask in plain words: change this step, rework or revert an accepted one, change a behaviour, fix what's wrong, or re-plan. When it's stuck, it shows what it tried and lets you choose the way out |
+| `/mod-implement-manual` | Mentor | The same plan and records as `/mod-implement`, but you do the work and learn it. It picks the next step and says why, explains the plan, gives you the full code with where it goes and why, and the commands to build, run and test locally with what you should see. You apply and run them yourself, or choose Apply it for me / Run them for me at any stage. It checks what you applied and the output you send back, and records only what you accept. When it needs something, it says what, why and exactly how to get it. `discuss "<topic>"` talks through any improvement to the new system (secrets to Key Vault or Azure App Configuration, EF Core, any refactoring): it weighs the options, recommends the best, and turns your decision into a plan in `docs/improvements/` that you build the same way |
 | `/mod-legacy-report` | Guide | Explains the system in detail, with diagrams: what it's for, projects and the dependency tree, technologies and support status, data, integrations, features and flows, risks, where to start, and what's still pending. With no argument it writes `docs/reports/legacy-report.md`; a topic (`summary`, `tech`, `data`…), a component, `flow "<process>"` or a question is answered in chat |
 | `/mod-modern-report` | Guide | Explains the migration in detail, with diagrams: what the new system is for, its target, the plan of execution, progress per component and wave, how old and new run side by side, risks, what's pending and the next steps. Before anything is planned it suggests a plan from the legacy layers. With no argument it writes `docs/reports/modern-report.md`; a topic (`target`, `plan`, `progress`…), a component, `wave <n>`, `flow "<process>"` or a question is answered in chat |
 | `/mod-track` | Guide | Tracks the whole migration, day to day: which stage each component is in, what's in progress, paused, blocked or needs attention, and the next action for each, with who does it and exactly what to type. The board, one component, or just `next`. Working on several components? `pause` or `switch <component>` records where the work stopped (once you accept) and takes you to the next task; picking it up later starts exactly there. `how` suggests a routine |
@@ -65,7 +67,7 @@ accept or change, and the options for the next step.
 Then select **Scaffolder** and run `/mod-modern-skeleton`. It settles the names and the
 implementation details with you (it suggests, you choose), shows its plan, and builds the
 skeleton in `modern/` once you choose Run plan. VS Code asks you to approve every command
-and edit. The **Record in docs** button then has the Guide write `docs/skeleton.md`.
+and edit. Choose **Accept and record** and it writes `docs/skeleton.md`.
 
 Then plan each component with `/mod-deepdive <component>`. It maps the component, decides how
 each file moves (ported, rebuilt through a flow, or a rebuilt screen) and the order of work,
@@ -74,8 +76,16 @@ every method on each flow's path so the new system keeps the legacy behaviour ex
 
 Then select **Scaffolder** and run `/mod-implement <component>`. It picks the next step
 from the order of work and says why; you approve its plan, it builds the step with its
-tests, and you accept the changes or ask for more. Ask for a change, a fix or a re-plan in
-plain words at any point. **Record in docs** has the Guide record only what you accepted.
+tests, and you accept the changes or ask for more. Every choice is a click (Run plan, Accept
+and record, Build the next step…), and a tracker line shows where each step is. Ask for a
+change, a fix or a re-plan in plain words at any point. **Accept and record** writes the step
+to `docs/` at once (statuses, progress, decisions, new questions): no switching to the Guide.
+
+Want to build it yourself and learn the new system as you go? Select **Mentor** and run
+`/mod-implement-manual <component>` instead: same plan, same records, but you apply the code
+and run the commands (or hand any stage back to it). Once a part is built, talk through
+improvements with `/mod-implement-manual discuss "<what>"`, for example moving secrets to Key
+Vault or data access to EF Core.
 
 `/mod-modern-report` shows the migration and its progress at any time. Tell the Guide
 what's done in plain words ("orders-core is built, all tests pass") and it records it in
@@ -101,6 +111,9 @@ what's done in plain words ("orders-core is built, all tests pass") and it recor
   of each component, and paused work.
 - `docs/reports/modern-report.md`: the migration explained, with progress, a migration map and
   the next steps, from `/mod-modern-report`.
+- `docs/improvements/<nn>-<topic>.md`: one plan per improvement to the new system, from the
+  Mentor's `/mod-implement-manual discuss`: the options weighed, the decision and why, the
+  steps with their statuses, and how to roll it back.
 - `docs/components/<component>/`: the migration plans, from `/mod-deepdive`: `deepdive.md`
   (the map, how each file moves, the order of work), `port.md` (port steps and unit tests),
   `flows/01-<flow>/` (`logic.md`, `sdd.md`, `tdd.md`) and `screens/01-<screen>.md`, only
@@ -108,7 +121,10 @@ what's done in plain words ("orders-core is built, all tests pass") and it recor
 - In `modern/`, code commented with where it came from, the rules it enforces and what was
   kept from legacy on purpose, plus a marker wherever something is unresolved: `TODO(Q-###)`,
   `RECHECK(…)`, `BLOCKED(…)`, `WAITS(…)`. Find them all with the regex search
-  `\b(TODO|RECHECK|BLOCKED|WAITS)\(`.
+  `\b(TODO|RECHECK|BLOCKED|WAITS)\(`. Every file, member, rule and test that came from legacy
+  cites the legacy file, lines and member (`Legacy: legacy/Orders/Pricing/PriceCalculator.cs:41-58 · PriceCalculator.ApplyDiscount(Order)`),
+  so you can open the legacy side and compare: search `Legacy: legacy/<path>` to find
+  everything that came from one legacy file.
 
 ## Sources Copilot can't read
 
@@ -121,9 +137,10 @@ example VBA modules and queries) anywhere under `legacy/`, then run `/mod-discov
 
 ```text
 <project>-workspace/
-├── .github/      3 agents · skills (/mod-… commands) · instructions
+├── .github/      4 agents · skills (/mod-… commands) · instructions
 ├── docs/         system.md · questions.md · target.md · skeleton.md · modern.md · reports/ ·
-│                 components/<component>/ (component.md · deepdive.md · port.md · flows/ · screens/)
+│                 components/<component>/ (component.md · deepdive.md · port.md · flows/ · screens/) ·
+│                 improvements/ (one plan per improvement)
 ├── legacy/       the legacy repo (separate Git repo; read-only for agents)
 └── modern/       the new code (separate Git repo)
 ```

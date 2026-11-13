@@ -1,7 +1,7 @@
 ---
 name: mod-answer
-description: "Any time. Answer the question bank whenever you can; the work never waits for it. With nothing after the command it lists the open questions, grouped by who can answer them, ready to answer now or to send on. Give an answer by its ID or in plain words (a pasted e-mail or meeting notes work too): Copilot finds the question, reasons over the answer, and explains what it means, what it changes (the rules, plans, tests and built code that rested on the working assumption) and what it suggests. It records the answer only after you accept: in the question bank, in every file that rested on it, and the follow-up work for the Scaffolder."
-argument-hint: "nothing = the open questions · <component> · ask <Business | Ops | DBA | Vendor | Developer> · risk H · Q-### · Q-###: <answer> [(source, date)] · or the answer in plain words"
+description: "Any time. Answer the question bank whenever you can; the work never waits for it. With nothing after the command it lists the open questions, grouped by who can answer them, ready to answer now or to send on. Give an answer by its ID or in plain words (a pasted e-mail or meeting notes work too): Copilot finds the question, reasons over the answer, and explains what it means, what it changes (the rules, plans, tests and built code that rested on the working assumption) and what it suggests. It records the answer only after you accept: in the question bank, in every file that rested on it, and the follow-up work for the Scaffolder. archive keeps the question bank small as the work goes on: it backs up docs/ first, then moves the answered and closed questions that nothing rests on any more, word for word, to docs/archive/questions.md, and checks that every ID is still found."
+argument-hint: "nothing = the open questions · <component> · ask <Business | Ops | DBA | Vendor | Developer> · risk H · Q-### · Q-###: <answer> [(source, date)] · archive · or the answer in plain words"
 disable-model-invocation: true
 ---
 
@@ -24,14 +24,20 @@ Values in `<ANGLE BRACKETS>` come from the text after the command.
 |---|---|
 | nothing | § 1 The open questions |
 | `<component>` · `ask <who>` · `risk H` · `kind <kind>` | § 1, only the questions that match |
-| `Q-###` | That question in full: its context, its working assumption, and everything that rests on it (§ 2d), with no answer yet |
+| `Q-###` | That question in full: its context, its working assumption, and everything that rests on it (§ 2d), with no answer yet. Not in `questions.md`: look in `docs/archive/questions.md` |
 | `Q-###: <answer> [(source, date)]`, one or more | § 2 for each |
 | an answer in plain words, or a pasted e-mail or meeting notes | § 2: find the questions it answers first |
 | `close Q-###: <why>` | § 2 for a question that's no longer relevant (CLOSED) |
+| `archive` | § 5: back up `docs/`, then move the settled questions to the archive |
+
+**Read by search,** never the whole bank: the OPEN rows (`| OPEN |`), the rows of one
+component, or one ID. An ID that isn't in `questions.md` is in `docs/archive/questions.md`.
+A new answer to an archived question (it's reopened) moves its row back to `questions.md`
+first, then § 2 as usual.
 
 ## 1. The open questions
 
-Read the OPEN rows of `docs/questions.md`, then:
+Search the OPEN rows of `docs/questions.md`, then:
 - **Duplicates:** questions that ask the same thing. Suggest closing all but one ("duplicate
   of Q-###"), with their components and links merged.
 - **Settled since:** a question that later records now settle (a deep-dive found the caller,
@@ -40,7 +46,9 @@ Read the OPEN rows of `docs/questions.md`, then:
   built code.
 
 Show, in chat:
-- the counts: OPEN questions by risk, and by who can answer them;
+- the counts: OPEN questions by risk, and by who can answer them; and, when `questions.md`
+  holds 20 or more ANSWERED or CLOSED rows, "n answered or closed: `/mod-answer archive`
+  checks which can move";
 - the questions grouped by **Ask**: the developer's first (they can answer now), then
   Business, Ops, DBA and Vendor. Within a group, H risk first, then those the most work rests
   on. For each: the ID, the question in plain words, why it matters, the working assumption,
@@ -126,7 +134,8 @@ Without the tool, ask "Reply `accept`, or say what to change, or `skip`", and st
 
 - **`docs/questions.md`:** Status ANSWERED, and the answer with its source and date. A partial
   answer stays OPEN: its working assumption becomes what's known now, with the source. A
-  closed one: CLOSED, and why. New questions: new rows, after the highest `Q-###`.
+  closed one: CLOSED, and why. New questions: new rows, after the highest of the IDs in the
+  table and its **Highest archived ID:** line.
 - **Each place in the impact:** the change as shown. Remove the `(rests on Q-###)` tags the
   answer settles.
 - **A step already built** on the old assumption: add `· re-check (YYYY-MM-DD): Q-###
@@ -143,6 +152,99 @@ Then, in chat: what was recorded (files, counts), and the next steps, ★ first,
 agent to select and what to type: the Scaffolder's `/mod-implement <component>` for the
 re-checks and `TODO` markers, the Guide's `/mod-deepdive <component> change "<what>"` or
 `/mod-target <change>`, the questions still open for the same person, or nothing.
+
+## 5. Archive settled questions (`archive`)
+
+The question bank only grows: every command that logs a question adds rows, and answered ones
+stay, while ten commands read it. Archiving moves the rows that nothing rests on any more,
+word for word, to `docs/archive/questions.md`, so every command reads a smaller bank. It never
+rewords, summarizes, deletes or renumbers anything, and **it changes nothing until a backup of
+`docs/` is verified.**
+
+**Only rows of `questions.md` move.** No other file in `docs/` is archived, ever:
+- plan files and improvement plans are cited by path in code comments and in links;
+- the decisions in `modern.md` are a live log: a later decision overrides `target.md`, and
+  code comments point to it;
+- `component.md § Notes` holds analysis that `/mod-implement` reads.
+
+### a. Check (changes nothing)
+
+A row can move only when all three hold:
+1. **Settled:** its Status is ANSWERED or CLOSED. A partly answered question is OPEN: it stays.
+2. **Nothing rests on it any more:** search `docs/` and `modern/` (read-only) for the ID:
+   - no `(rests on Q-###)` tag, and no Rests on line in a § Suggested approach;
+   - no step status `re-check (…): Q-### answered` without a later `reworked` or `fixed`;
+   - no `partial` step that names it;
+   - no `TODO(Q-###)`, `RECHECK(Q-###)` or `BLOCKED(Q-###)` marker in `modern/`;
+   - no improvement plan that isn't done or dropped listing it.
+3. **No plan still to write needs it:** every component in its Component column has an
+   accepted deep-dive plan (`deepdive.md` **Plan:** accepted), or is Keep or retired. A
+   question that names no component stays.
+
+Mentions that only refer to it don't stop it: a "Q-### answered" line in § Notes, a "May
+differ" row in `sdd.md` whose source is the answer, a decision row, a code comment that names
+it. They find it in the archive.
+
+Show:
+- `questions.md` now: its rows by status, and its lines;
+- the rows that can move, by component, and the lines after;
+- the answered and closed rows that stay, grouped by reason (rests on, re-check, marker, a
+  plan still to write), each with what clears it;
+- the backups already in `.backup/` (file search), oldest first.
+
+Nothing can move: say so, and stop. Otherwise ask with `askQuestions` (header "Archive"):
+★ **Back up, then archive** · **Not now**.
+
+### b. Back up `docs/` (before anything changes)
+
+You never run commands, so the developer makes the backup: a full copy of `docs/`, in one
+command. Name it `docs-YYYY-MM-DD` (today), with `-2`, `-3`… when that folder already exists
+(file search in `.backup/`). Show it in a copy-ready block:
+
+```powershell
+Set-Location "<workspace>"; New-Item -ItemType Directory -Force .backup | Out-Null; Copy-Item -Path docs -Destination ".backup/docs-YYYY-MM-DD" -Recurse
+```
+
+Then ask (header "Backup"): ★ **Done, check it** · **Copilot: back up only the files this
+changes** · **Cancel**.
+- **Done, check it:** verify before going on: the folder exists, it holds as many files as
+  `docs/` (file search on both), and its `questions.md` has as many `| Q-` rows as the live
+  one. Anything off: say what, and ask again. **Never archive without a verified backup.**
+- **Copilot: back up only the files this changes:** write
+  `.backup/docs-YYYY-MM-DD/questions.md`, and `.backup/docs-YYYY-MM-DD/archive/questions.md`
+  when it exists, word for word, and verify their row counts the same way.
+
+`.backup/` is outside `docs/` and out of git (`.gitignore`): no command reads or searches it,
+except to restore.
+
+### c. Archive
+
+1. **Note the IDs before:** every `Q-###` in `questions.md` and in `archive/questions.md`.
+2. **Append** the rows to `docs/archive/questions.md`, word for word, in ID order, under
+   `## Archived YYYY-MM-DD` with the table's header row.
+3. **Remove** the same rows from `questions.md`.
+4. **Update** its **Highest archived ID:** line to the highest ID now in the archive.
+
+### d. Verify, and restore if anything's off
+
+- the IDs across `questions.md` and the archive are exactly the IDs before: none lost, none
+  twice;
+- every `Q-###` cited in `docs/` and `modern/` is found in exactly one of the two files;
+- the moved rows match the rows in the backup, character for character.
+
+Anything off: restore `questions.md` and `archive/questions.md` from the backup, say what
+failed, and stop.
+
+### e. Report
+
+In chat: the rows moved (by component), `questions.md` lines before → after, the backup's
+path, and how to restore it, should it ever be needed:
+
+```powershell
+Set-Location "<workspace>"; Copy-Item -Path ".backup/docs-YYYY-MM-DD/*" -Destination docs -Recurse -Force
+```
+
+Old backups are the developer's to delete: suggest keeping the last 3.
 
 ## Unknowns become questions
 

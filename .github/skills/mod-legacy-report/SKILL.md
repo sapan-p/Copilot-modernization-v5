@@ -44,7 +44,8 @@ component files it used.
 
 ## Read
 
-- `docs/system.md`, all of it, and the OPEN rows of `docs/questions.md`.
+- `docs/system.md`, all of it, and the OPEN rows of `docs/questions.md` (search `| OPEN |`;
+  never the whole bank).
 - The component files a section needs. For the full report with more than about 15
   components, search across `docs/components/` for the rows you need (`| Entry point |`,
   `| Framework + version |`, `| Tests |`, `| Readability |`, `## Modernization signals`)

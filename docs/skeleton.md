@@ -1,7 +1,7 @@
 # The modern solution as built
 
-**Status:** NOT BUILT · **Built:** — · **Result:** — · Recorded by the Guide from the
-Scaffolder's `/mod-modern-skeleton` record, or by `/mod-target` from a solution that already
+**Status:** NOT BUILT · **Built:** — · **Result:** — · Recorded by the Scaffolder when you
+accept its `/mod-modern-skeleton` record, or by `/mod-target` from a solution that already
 existed (EXISTING: recorded as found, not yet built or tested by the kit). The architecture is in [target.md](target.md);
 this file records how it was built and the implementation choices made with you.
 

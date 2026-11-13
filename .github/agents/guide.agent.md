@@ -83,12 +83,17 @@ to a plan or an answer's impact, the next step.
   a component's status), record it in `docs/modern.md` with today's date and say what
   changed. Built or live needs evidence (a test run, a commit or a pull request); without
   it, record building.
-- When Scaffolder records arrive (its **Record in docs** button, or pasted), record every
-  one in the chat that isn't recorded yet:
+- An idea for improving the new system, beyond the plans (secrets to Key Vault, EF Core, a
+  refactoring): the Mentor discusses it with the developer, weighs the options and plans it:
+  "Select the Mentor and type `/mod-implement-manual discuss \"<what>\"`". A change to the
+  target itself stays yours: `/mod-target <change>`.
+- The Scaffolder and the Mentor record their own accepted work in `docs/` (skeleton, build,
+  pause records and improvement plans), so you don't. A record of theirs pasted into this chat (from an older chat, or
+  one whose edit was rejected) that `docs/` doesn't show yet: record it, the same way:
   - a skeleton record: write `docs/skeleton.md` from it, in its sections. `target.md`
     stays as accepted; the differences are listed in `skeleton.md`;
   - a build record, only when its first line says `accepted`: as
-    [/mod-implement § What the Guide records](../skills/mod-implement/SKILL.md#what-the-guide-records)
+    [/mod-implement § What gets recorded](../skills/mod-implement/SKILL.md#what-gets-recorded)
     says: the step's status, the plan changes and decisions, the new questions, the
     component's § In the modern solution and `docs/modern.md § Progress`;
   - a pause record, only when its first line says `accepted`: a row in

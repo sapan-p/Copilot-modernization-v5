@@ -37,7 +37,14 @@ another component's screens `outside`
 Rebuild the screen the target's own way: never translate UI code line by line, and never
 leave a business rule only in the UI. Comment it in its markup's own syntax (`@* *@`,
 `<!-- -->`), as [modern-code.instructions.md](../../instructions/modern-code.instructions.md)
-says: which legacy screen it rebuilds, and which backend piece each action calls.
+says, so each part can be found on the legacy screen:
+- **the header:** the legacy screen it rebuilds, by its full `legacy/` path (the form and its
+  designer file);
+- **each control or group of controls:** the legacy control it replaces, by name, with its
+  designer line (`@* Legacy: legacy/Orders/UI/OrderForm.Designer.cs:120 · txtCustomer *@`);
+- **each action:** the legacy event handler it replaces, with its lines, and the backend
+  piece it calls (`@* Legacy: legacy/Orders/UI/OrderForm.cs:210-245 · OrderForm.btnSave_Click → IOrderService.Save *@`);
+- **each show, hide, enable or validation rule:** the legacy lines that set it.
 
 ## Review (§ 5)
 
