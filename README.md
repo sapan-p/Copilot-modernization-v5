@@ -127,9 +127,10 @@ what's done in plain words ("orders-core is built, all tests pass") and it recor
   kept from legacy on purpose, plus a marker wherever something is unresolved: `TODO(Q-###)`,
   `RECHECK(…)`, `BLOCKED(…)`, `WAITS(…)`. Find them all with the regex search
   `\b(TODO|RECHECK|BLOCKED|WAITS)\(`. Every file, member, rule and test that came from legacy
-  cites the legacy file, lines and member (`Legacy: legacy/Orders/Pricing/PriceCalculator.cs:41-58 · PriceCalculator.ApplyDiscount(Order)`),
-  so you can open the legacy side and compare: search `Legacy: legacy/<path>` to find
-  everything that came from one legacy file.
+  cites the legacy file, lines and member (`Legacy: Orders/Pricing/PriceCalculator.cs:41-58 · PriceCalculator.ApplyDiscount(Order)`),
+  so you can open the legacy side and compare. The path is the one inside the legacy
+  repository, without the workspace's `legacy/` folder: the file is at `legacy/<path>`. Search
+  `Legacy: <path>` to find everything that came from one legacy file.
 
 ## Sources Copilot can't read
 

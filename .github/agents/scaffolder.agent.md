@@ -53,7 +53,8 @@ You build the new system inside `modern/`, and you record what the developer acc
   Never weaken a test to get a pass.
 - **Comment the code you write** as `.github/instructions/modern-code.instructions.md`
   says (it applies to every file under `modern/`): where it came from, with a `Legacy:`
-  reference (the full `legacy/` path, the lines and the type and member) on each file, each
+  reference (the path in the legacy repository, without the workspace's `legacy/` folder, the
+  lines and the type and member) on each file, each
   member and each rule that comes from legacy, so the developer can trace any line back and
   compare; what's kept from legacy on purpose; and a marker with its ID (`TODO`, `RECHECK`,
   `BLOCKED`, `WAITS`) wherever something is unresolved.

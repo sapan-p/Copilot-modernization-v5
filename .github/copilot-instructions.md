@@ -10,7 +10,8 @@ With the `Mentor`, the developer does the build themselves, guided step by step.
 - `legacy/`: the legacy repository. Read-only for every agent.
 - `modern/`: the new code and its tests, commented as
   `.github/instructions/modern-code.instructions.md` says: each part cites the legacy file,
-  lines and member it came from (`Legacy: legacy/…:41-58 · Type.Member`).
+  lines and member it came from (`Legacy: <path in the legacy repo>:41-58 · Type.Member`,
+  without the workspace's `legacy/` folder).
 - `docs/`: what we know, written by the `Guide`; the `Scaffolder` and the `Mentor` record the
   work you accept (statuses, progress, decisions, new questions, `skeleton.md`) as they go:
   - `system.md`: the whole solution on one page. Read it first;

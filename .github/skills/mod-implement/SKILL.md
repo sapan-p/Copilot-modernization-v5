@@ -156,7 +156,7 @@ ask again. Without the tool, ask "Reply `run`, or say what to change, or `cancel
    file, a comment where each rule is enforced, where legacy behaviour is kept on purpose,
    and where the port or a decision changed something, a comment on each test, and a
    marker with its ID wherever something is unresolved (`TODO`, `RECHECK`, `BLOCKED`,
-   `WAITS`). **Trace it back to legacy:** a `Legacy:` reference (the full `legacy/` path, the
+   `WAITS`). **Trace it back to legacy:** a `Legacy:` reference (its path in the legacy repository, the
    lines, the type and member) on the file header, on every type, member and block whose
    logic comes from legacy, on each rule, and on each test's expected value. Cite only lines
    you read in this step.
@@ -178,7 +178,7 @@ Nothing is recorded yet. Show:
   step, what's left;
 - the markers added and removed, each with what makes it go away;
 - **the trace back to legacy:** each type and member written or changed, with its `Legacy:`
-  reference (`OrderPricing.ApplyDiscount ← legacy/Orders/Pricing/PriceCalculator.cs:41-58 ·
+  reference (`OrderPricing.ApplyDiscount ← Orders/Pricing/PriceCalculator.cs:41-58 ·
   PriceCalculator.ApplyDiscount(Order)`), and any that has none, named. A member with legacy
   logic and no reference is fixed before you ask; new code with no legacy origin says so
   (`Legacy: none (new: …)`). In chat only: the code comments are the trace.
