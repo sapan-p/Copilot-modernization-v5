@@ -86,6 +86,9 @@ a code change in review → `● Build`).
   that's being built and touches this component's projects (its plan in `docs/improvements/`
   says what it changes).
 - `modern/`: the component's projects and tests as they are now.
+- A plan file with a `**Compacted:**` field had its settled detail condensed by `/mod-compact`
+  (a live component's walk-throughs, diagrams, done steps' histories). Its IDs, rules' exact
+  details, tests and statuses are all there; for more, read the legacy lines it cites.
 - For the step: the legacy files it moves, or the lines its rules cite, read whole. `legacy/`
   is read-only.
 

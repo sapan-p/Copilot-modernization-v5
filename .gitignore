@@ -2,7 +2,7 @@
 /legacy/
 /modern/
 
-# Backups of docs/ made before /mod-answer archive changes anything: local only (git history
+# Backups of docs/ made before /mod-answer archive or /mod-compact changes anything: local only (git history
 # keeps the committed versions)
 /.backup/
 

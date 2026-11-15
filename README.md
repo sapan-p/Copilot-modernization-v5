@@ -27,6 +27,7 @@ modernizing it piece by piece.
 | `/mod-modern-report` | Guide | Explains the migration in detail, with diagrams: what the new system is for, its target, the plan of execution, progress per component and wave, how old and new run side by side, risks, what's pending and the next steps. Before anything is planned it suggests a plan from the legacy layers. With no argument it writes `docs/reports/modern-report.md`; a topic (`target`, `plan`, `progress`…), a component, `wave <n>`, `flow "<process>"` or a question is answered in chat |
 | `/mod-track` | Guide | Tracks the whole migration, day to day: which stage each component is in, what's in progress, paused, blocked or needs attention, and the next action for each, with who does it and exactly what to type. The board, one component, or just `next`. Working on several components? `pause` or `switch <component>` records where the work stopped (once you accept) and takes you to the next task; picking it up later starts exactly there. `how` suggests a routine |
 | `/mod-answer` | Guide | Answers the question bank, any time. With nothing after it, lists the open questions grouped by who can answer them, ready to answer now or to send on. Give an answer by its ID or in plain words (a pasted e-mail works too): it explains what the answer means, what it changes (rules, plans, tests, built code) and what it suggests, and records it only after you accept |
+| `/mod-compact` | Guide | Keeps `docs/` small as it grows, so every command reads less. It checks the records and proposes what can be condensed: settled history (old notes, rework histories on done steps, superseded decisions, finished improvement plans, answered questions) and the plans of components that are live or kept. Once you accept, it backs up the whole of `docs/` to `.backup/`, then condenses in place, file by file, keeping every ID, heading, path and exact value, and checks each file against the backup. Work in progress is never touched |
 
 ## Start
 
@@ -86,6 +87,10 @@ Want to build it yourself and learn the new system as you go? Select **Mentor** 
 and run the commands (or hand any stage back to it). Once a part is built, talk through
 improvements with `/mod-implement-manual discuss "<what>"`, for example moving secrets to Key
 Vault or data access to EF Core.
+
+As the work goes on, `docs/` grows. When `/mod-track` says the records need compacting
+(a component went live, the notes grew), run `/mod-compact`: it backs up `docs/` first, then
+condenses only what's settled, so every command keeps reading what it needs, and less of it.
 
 `/mod-modern-report` shows the migration and its progress at any time. Tell the Guide
 what's done in plain words ("orders-core is built, all tests pass") and it records it in

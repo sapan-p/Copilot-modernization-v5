@@ -20,6 +20,12 @@ chat:
   `done (YYYY-MM-DD)` · `partial: Q-###`.
 - **A plan file** (`logic.md`, `sdd.md`, `tdd.md`, a screen plan): `in progress` ·
   `complete` · `complete, resting on Q-###`.
+- **Compacted** (by `/mod-compact`, once settled): a done step's history keeps its first `done`,
+  its latest rework or fix, and the count of the earlier ones:
+  `done (YYYY-MM-DD) · fixed (YYYY-MM-DD): <what> (+<n> earlier)`. A file whose settled
+  detail was condensed carries `**Compacted:** YYYY-MM-DD (full text: .backup/docs-YYYY-MM-DD)`
+  on its header line. Its IDs, rules' exact details, tests and statuses are all still there;
+  for more, read the legacy lines it cites.
 
 ## In `component.md`
 

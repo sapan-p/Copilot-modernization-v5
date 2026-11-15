@@ -83,6 +83,13 @@ A component can also be:
 rows: every command reads it. Next action: Guide: `/mod-answer archive` (it checks which can
 move, and backs up `docs/` before it changes anything).
 
+**The records need compacting** when settled detail is still in full (each a search): a live
+or kept component whose `deepdive.md` has no `**Compacted:**` field; a `component.md` with more
+than 10 dated § Notes entries after its `**Compacted:**` date (or in all, when it has none); an
+improvement plan `done` or `dropped` with no
+`**Compacted:**`. Next action: Guide: `/mod-compact` (it backs up `docs/`, then condenses only
+what's settled; it can archive the question bank in the same run).
+
 **Ready:** not yet building, and not blocked.
 
 **An improvement** (a row in `modern.md § Improvements`) is `planned`, `building (k of n
@@ -112,8 +119,9 @@ Show, in chat:
   Count components, not effort; kept ones are left out of the total;
 - **paused and in progress:** each with where it stopped and its next action;
 - **needs attention:** re-checks, parked steps, unrecorded work, mismatches, the OPEN
-  H-risk questions that block something (→ `/mod-answer`), and the question bank when it
-  needs archiving (→ `/mod-answer archive`);
+  H-risk questions that block something (→ `/mod-answer`), the question bank when it
+  needs archiving (→ `/mod-answer archive`), and the records when they need compacting
+  (→ `/mod-compact`);
 - **the components:**
 
   | Component | Wave | Stage | Progress | Next action | Blocked by |
@@ -213,6 +221,8 @@ When the developer asks (`how`), or once, under the first board of a workspace:
 4. Answer questions as they come, with `/mod-answer`: an H-risk question can block a
    component. When the board says the question bank needs attention, run `/mod-answer
    archive`: it backs up `docs/`, then moves the settled questions out of every command's way.
+   When it says the records need compacting (a component went live, the notes grew), run
+   `/mod-compact`: it backs up `docs/`, then condenses only what's settled.
 5. Commit `modern/` after each recorded batch, so the code and the records match.
 6. Tell the Guide when something goes live, with the evidence.
 7. For others: `/mod-modern-report` writes the whole picture, with diagrams, to

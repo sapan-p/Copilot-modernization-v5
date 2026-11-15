@@ -35,6 +35,9 @@ With the `Mentor`, the developer does the build themselves, guided step by step.
   - `reports/`: `legacy-report.md` and `modern-report.md`, the legacy system and the migration
     explained in detail, with diagrams. `/mod-legacy-report` and `/mod-modern-report`
     regenerate them; never edit them by hand.
+  - As the records grow, `/mod-compact` condenses their settled detail in place (after a
+    backup of `docs/` in `.backup/`), keeping every ID, path and exact value. A file it
+    condensed says `**Compacted:**` on its header line.
 
 Search only the folders a request needs.
 

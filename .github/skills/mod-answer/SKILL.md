@@ -167,6 +167,9 @@ rewords, summarizes, deletes or renumbers anything, and **it changes nothing unt
   code comments point to it;
 - `component.md § Notes` holds analysis that `/mod-implement` reads.
 
+`/mod-compact` keeps those small another way: it condenses their settled detail in place,
+never moving or deleting a file, and it runs this archive too, under the same backup.
+
 ### a. Check (changes nothing)
 
 A row can move only when all three hold:
@@ -214,8 +217,8 @@ changes** · **Cancel**.
   `.backup/docs-YYYY-MM-DD/questions.md`, and `.backup/docs-YYYY-MM-DD/archive/questions.md`
   when it exists, word for word, and verify their row counts the same way.
 
-`.backup/` is outside `docs/` and out of git (`.gitignore`): no command reads or searches it,
-except to restore.
+`.backup/` is outside `docs/` and out of git (`.gitignore`), and shared with `/mod-compact`:
+no command reads or searches it, except to verify a backup and to restore.
 
 ### c. Archive
 
