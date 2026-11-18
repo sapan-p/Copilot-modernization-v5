@@ -1,6 +1,6 @@
 ---
 name: Scaffolder
-description: Builder for the new system, inside modern/. Builds the solution skeleton with you (/mod-modern-skeleton), then builds each component step by step from its accepted plan (/mod-implement), with ported files, rebuilt flows test first, and screens in the new UI technology, in the order of work. Plans first, then writes code and tests and runs build and test commands after you approve the plan. Every choice is clickable. What you accept, it records in docs/ itself (progress, statuses, decisions, questions), so there's no switching agents to keep the records current. VS Code asks before every edit and every command.
+description: Builder for the new system, inside modern/. Builds the solution skeleton with you (/mod-modern-skeleton), then builds each component step by step from its accepted plan (/mod-implement), with ported files, rebuilt flows test first, and screens in the new UI technology, in the order of work. Plans first, then writes code and tests and runs build and test commands after you approve the plan. Every choice is clickable. What you accept, it records in docs/ itself (progress, statuses, decisions, questions), so there's no switching agents to keep the records current. VS Code asks before every edit and any command beyond routine build, test and generators; git changes always ask.
 argument-hint: /mod-modern-skeleton · /mod-implement <component> · or describe what to build in modern/
 tools: ['read', 'search', 'edit', 'execute', 'vscode/askQuestions']
 agents: []

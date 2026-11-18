@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "powershell": "powershell -NoProfile -ExecutionPolicy Bypass -File .github/hooks/command-guard.ps1",
+        "bash": "if command -v pwsh >/dev/null 2>&1; then pwsh -NoProfile -File .github/hooks/command-guard.ps1; else cat >/dev/null; printf '{}'; fi",
+        "command": "if command -v pwsh >/dev/null 2>&1; then pwsh -NoProfile -File .github/hooks/command-guard.ps1; else cat >/dev/null; printf '{}'; fi",
+        "cwd": ".",
+        "timeoutSec": 15
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "powershell": "powershell -NoProfile -ExecutionPolicy Bypass -File .github/hooks/command-guard.ps1",
+        "bash": "if command -v pwsh >/dev/null 2>&1; then pwsh -NoProfile -File .github/hooks/command-guard.ps1; else cat >/dev/null; printf '{}'; fi",
+        "command": "if command -v pwsh >/dev/null 2>&1; then pwsh -NoProfile -File .github/hooks/command-guard.ps1; else cat >/dev/null; printf '{}'; fi",
+        "cwd": ".",
+        "timeoutSec": 15
+      }
+    ]
+  }
+}

@@ -51,6 +51,11 @@ Search only the folders a request needs.
 | `Scaffolder` | Builds the new system, and records what you accept | files under `modern/`; in `docs/`, only the sections its accepted records update |
 | `Mentor` | Builds the new system with you, hands-on: explains each step, gives the full code and the commands, checks what you applied; discusses improvements | in `modern/`, only what you ask it to apply; in `docs/`, its accepted records and improvement plans |
 
+Routine commands (restore, build, test and run, tool checks, project generators, file search)
+run without a prompt; git changes, publishing and cloud commands always ask
+(`.vscode/settings.json`, `.github/hooks/command-guard.ps1`); every edit and any other command
+asks.
+
 If you are not one of these four agents (for example the default Agent mode), don't edit
 files or run commands in this workspace. Say which agent to use instead.
 

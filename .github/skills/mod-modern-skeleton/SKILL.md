@@ -1,6 +1,6 @@
 ---
 name: mod-modern-skeleton
-description: "Scaffolder. Builds the modern solution skeleton under modern/ from the accepted architecture in docs/target.md, interactively. It settles every implementation detail with you (solution and project names, package manager, test frameworks, linters and formatters, build settings, template options): for each it suggests the best options for the accepted stack, recommended first, and you choose. Then it plans, acts after you choose Run plan (generators, projects, test projects, references, entry-point stubs, restore, build, test), and records the skeleton as built in docs/skeleton.md. It never changes the architecture. Ask for changes at any point; every edit and command is approved in VS Code."
+description: "Scaffolder. Builds the modern solution skeleton under modern/ from the accepted architecture in docs/target.md, interactively. It settles every implementation detail with you (solution and project names, package manager, test frameworks, linters and formatters, build settings, template options): for each it suggests the best options for the accepted stack, recommended first, and you choose. Then it plans, acts after you choose Run plan (generators, projects, test projects, references, entry-point stubs, restore, build, test), and records the skeleton as built in docs/skeleton.md. It never changes the architecture. Ask for changes at any point; every edit, and any command beyond routine generators, restore, build and test, is approved in VS Code."
 argument-hint: "[nothing = the whole solution · your input: solution name, which projects, \"foundation only\", or a change]"
 disable-model-invocation: true
 ---
@@ -38,7 +38,7 @@ name, projects or "foundation only" answers those questions (§ 3) in advance.
 
 ## 2. Check the tools
 
-Read-only checks in `modern/`, one command each, VS Code asking for each: the SDKs and
+Read-only checks in `modern/`, one command each (they run without asking): the SDKs and
 runtimes § 2 needs (`dotnet --list-sdks`, `node --version`, `npm --version`…) and the
 generator templates § 4 uses (`dotnet new list <template>`). Note what's installed; it
 shapes the suggestions (§ 3). A missing SDK or template the architecture needs: say what to
@@ -110,8 +110,9 @@ On a change, update the plan, show only what changed, and ask again. Without the
 
 ## 5. Build (only after Run plan)
 
-1. Run the generators and write the files in the planned order. VS Code asks the developer to
-   approve each command and edit.
+1. Run the generators and write the files in the planned order. Generators, restore, build
+   and test run without asking; VS Code asks the developer to approve each edit and any other
+   command (a package, for example).
 2. Run restore, build and test. Quote the lines of output that show the result.
 3. A failure: fix it inside `modern/` and run again, at most three focused attempts. Still
    failing → stop and report it with the output; never weaken a test or skip a project.

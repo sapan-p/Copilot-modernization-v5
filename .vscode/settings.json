@@ -10,8 +10,82 @@
     "**/*": false
   },
 
-  // Ask before every terminal command (only the Scaffolder has a terminal).
-  "chat.tools.terminal.enableAutoApprove": false,
+  // Terminal commands (the Scaffolder and the Mentor have a terminal). Routine work runs
+  // without asking: build, test and run, tool checks, project generators, file search and
+  // navigation (with VS Code's built-in read-only rules: cd, ls, Get-ChildItem,
+  // Select-String, git status/diff/log…). Git changes, publishing and cloud always ask: a
+  // false rule beats every true rule and "Allow in this session", and
+  // .github/hooks/command-guard.ps1 asks for the same commands even under Allow all. Keep
+  // the two lists in step. Any other command (a new package, for example) asks.
+  "chat.tools.terminal.enableAutoApprove": true,
+  // Don't auto-run every package.json script (a "deploy" script, for example).
+  "chat.tools.terminal.autoApproveWorkspaceNpmScripts": false,
+  "chat.tools.terminal.autoApprove": {
+    // Runs without asking: build, test and run
+    "dotnet restore": true,
+    "dotnet build": true,
+    "dotnet test": true,
+    "dotnet run": true,
+    "dotnet tool restore": true,
+    "npm test": true,
+    "npm start": true,
+    "npm run build": true,
+    "npm run test": true,
+    "pnpm test": true,
+    "pnpm build": true,
+    "yarn test": true,
+    "yarn build": true,
+    "pytest": true,
+    "/^(python3?|py)\\s+-m\\s+pytest\\b/i": true,
+    "/^((python3?|py)\\s+-m\\s+)?pip3?\\s+install\\s+-r\\s+\\S+\\s*$/i": true,
+    "/^(mvn|(\\.[\\\\/])?mvnw(\\.cmd)?)(\\s+(-\\S+|clean))*\\s+(compile|test|verify|package)\\b/i": true,
+    "/^(gradle|(\\.[\\\\/])?gradlew(\\.bat)?)(\\s+(-\\S+|clean))*\\s+(build|test|check|assemble)\\b/i": true,
+
+    // Runs without asking: tool checks
+    "dotnet --list-sdks": true,
+    "dotnet --list-runtimes": true,
+    "dotnet --version": true,
+    "dotnet --info": true,
+    "Get-Command": true,
+    "/^(node|npm|pnpm|yarn|python3?|py|pip3?|java|mvn|gradle|git)(\\.exe)?\\s+(-v|-version|--version)\\s*$/i": true,
+
+    // Runs without asking: project generators
+    "dotnet new": true,
+    "dotnet sln": true,
+    "dotnet list": true,
+    "/^dotnet\\s+add\\s+(\"[^\"]*\"\\s+|\\S+\\s+)?reference\\b/i": true,
+
+    // Runs without asking: file search and navigation, on top of the built-in rules. The git
+    // rule also accepts a quoted -C "<path with spaces>"; -C stays case-sensitive (-c injects
+    // config).
+    "Test-Path": true,
+    "Resolve-Path": true,
+    "Push-Location": true,
+    "Pop-Location": true,
+    "/^git(\\s+(-C\\s+(\"[^\"]*\"|'[^']*'|\\S+)|--no-pager))*\\s+(status|diff|log|show)\\b/": true,
+
+    // Asks: template packages come from NuGet
+    "/^dotnet\\s+new\\s+(install|uninstall|update)\\b/i": false,
+
+    // Always asks: git changes (also git branch <name>, which the built-in rules allow)
+    "/^git(\\.exe)?\\b.*\\s(add|am|apply|branch|checkout|cherry-pick|clean|clone|commit|config|fetch|gc|init|merge|mv|notes|pull|push|rebase|reflog|remote|reset|restore|revert|rm|stash|submodule|switch|tag|update-ref|worktree)\\b/i": false,
+
+    // Always asks: publishing, deploying and cloud
+    "/^(dotnet\\s+nuget|nuget(\\.exe)?)\\s+(push|delete)\\b/i": false,
+    "/^(npm|pnpm|yarn)\\s+(npm\\s+)?(publish|unpublish|deprecate|dist-tag|owner|login|adduser)\\b/i": false,
+    "/^docker\\s+((image|manifest)\\s+)?(push|login)\\b/i": false,
+    "/^docker\\s+buildx\\b.*\\s--push\\b/i": false,
+    "/^(mvn|(\\.[\\\\/])?mvnw(\\.cmd)?)\\b.*\\sdeploy\\b/i": false,
+    "/^(gradle|(\\.[\\\\/])?gradlew(\\.bat)?)\\b.*\\spublish\\w*\\b/i": false,
+    "/^(az|azd|aws|gcloud|gh|terraform|tofu|pulumi|kubectl|helm)(\\.exe|\\.cmd)?(\\s|$)/i": false,
+    "/^func\\s+azure\\b/i": false,
+    "/^twine\\s+upload\\b/i": false,
+    "/^Publish-(Module|Script|PSResource)\\b/i": false
+  },
+
+  // Agent hooks (preview): .github/hooks/command-guard.json. If VS Code shows this as a
+  // user-only setting, set it in your user settings instead.
+  "chat.useHooks": true,
 
   // Never auto-accept pending edits after a countdown, and show which files changed.
   "chat.editing.autoAcceptDelay": 0,

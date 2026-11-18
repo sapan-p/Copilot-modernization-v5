@@ -29,6 +29,23 @@ modernizing it piece by piece.
 | `/mod-answer` | Guide | Answers the question bank, any time. With nothing after it, lists the open questions grouped by who can answer them, ready to answer now or to send on. Give an answer by its ID or in plain words (a pasted e-mail works too): it explains what the answer means, what it changes (rules, plans, tests, built code) and what it suggests, and records it only after you accept |
 | `/mod-compact` | Guide | Keeps `docs/` small as it grows, so every command reads less. It checks the records and proposes what can be condensed: settled history (old notes, rework histories on done steps, superseded decisions, finished improvement plans, answered questions) and the plans of components that are live or kept. Once you accept, it backs up the whole of `docs/` to `.backup/`, then condenses in place, file by file, keeping every ID, heading, path and exact value, and checks each file against the backup. Work in progress is never touched |
 
+## Permissions
+
+Only the **Scaffolder** and the **Mentor** run commands, and only in `modern/`. VS Code
+decides which of them need your approval:
+
+| Approval | Commands |
+|---|---|
+| **Runs without asking** | build, test and run (`dotnet restore/build/test/run`, `npm ci`, `npm test`, `pytest`, `mvn test`, `gradle build`…); tool checks (`dotnet --list-sdks`…); project generators (`dotnet new`, `dotnet sln`, `dotnet add … reference`); file search and navigation (`ls`, `cd`, `Get-ChildItem`, `Select-String`, `git status`, `git diff`, `git log`…) |
+| **Always asks, in every mode** | git changes (`git add`, `commit`, `push`, `pull`, `merge`, `rebase`, `reset`, `checkout`, `stash`, `tag`…); publishing, deploying and cloud (`dotnet nuget push`, `npm publish`, `docker push`, `az`, `azd`, `terraform apply`, `kubectl apply`…) |
+| **Still asks** | every file edit, and any other command, such as adding a new package (`dotnet add package`, `npm install <name>`) |
+
+The rules are in `.vscode/settings.json` (`chat.tools.terminal.autoApprove`). The agent hook
+`.github/hooks/command-guard.ps1` asks for git, publishing and cloud commands in every
+permission mode, including **Allow all** (agent hooks are a VS Code preview; on macOS and
+Linux the hook needs PowerShell 7, `pwsh`). Keep new chats in the default permissions:
+**Allow all** and **Autopilot** skip the prompts for edits and every other command.
+
 ## Start
 
 ```powershell
@@ -67,8 +84,10 @@ accept or change, and the options for the next step.
 
 Then select **Scaffolder** and run `/mod-modern-skeleton`. It settles the names and the
 implementation details with you (it suggests, you choose), shows its plan, and builds the
-skeleton in `modern/` once you choose Run plan. VS Code asks you to approve every command
-and edit. Choose **Accept and record** and it writes `docs/skeleton.md`.
+skeleton in `modern/` once you choose Run plan. Its generators and its restore, build and
+test commands run without asking; VS Code asks you to approve every edit and any other
+command (see [Permissions](#permissions)). Choose **Accept and record** and it writes
+`docs/skeleton.md`.
 
 Then plan each component with `/mod-deepdive <component>`. It maps the component, decides how
 each file moves (ported, rebuilt through a flow, or a rebuilt screen) and the order of work,
@@ -143,7 +162,7 @@ example VBA modules and queries) anywhere under `legacy/`, then run `/mod-discov
 
 ```text
 <project>-workspace/
-├── .github/      4 agents · skills (/mod-… commands) · instructions
+├── .github/      4 agents · skills (/mod-… commands) · instructions · hooks (command guard)
 ├── docs/         system.md · questions.md · target.md · skeleton.md · modern.md · reports/ ·
 │                 components/<component>/ (component.md · deepdive.md · port.md · flows/ · screens/) ·
 │                 improvements/ (one plan per improvement)

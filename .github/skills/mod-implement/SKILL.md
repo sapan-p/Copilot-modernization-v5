@@ -13,7 +13,8 @@ The plan decides what to build and in what order; the developer decides, step by
 it's right. Every step, whatever its kind, goes through the same loop: plan → **Run plan** →
 build → review → **Accept and record**. **Nothing is recorded before the developer accepts
 it,** and what they accept you record in `docs/` yourself, at once (§ 6). VS Code asks before
-every edit and command. Build only this component; another component is reached the way the
+every edit and any command beyond routine restore, build, test, run and generators; git
+changes always ask. Build only this component; another component is reached the way the
 plan says. A developer who wants to build a step themselves, guided, uses the Mentor's
 [/mod-implement-manual](../mod-implement-manual/SKILL.md) on the same plan and records: the
 two can take turns on one component.
